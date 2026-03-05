@@ -1,139 +1,58 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import {
-  Truck,
-  Package,
-  Shield,
-  MapPin,
-  Users,
-  ArrowRight,
-  CheckCircle2,
-  BarChart3,
-  Globe,
-  Zap,
-  ChevronRight,
-  Phone,
-  Mail,
-} from "lucide-react";
+import { MapPin, Calendar, Phone, Mail } from "lucide-react";
+import Image from "next/image";
 
-const stats = [
-  { label: "Transporteurs inscrits", value: "120+", icon: Truck },
-  { label: "Clients", value: "400+", icon: Users },
-  { label: "Livraisons effectuées", value: "1 800+", icon: Package },
-  { label: "Villes desservies", value: "10+", icon: MapPin },
-];
-
-const features = [
-  {
-    icon: Zap,
-    title: "Trouvez un transporteur vite",
-    description:
-      "Plus besoin de passer des heures à appeler. En quelques clics, vous voyez les trajets disponibles et vous réservez.",
-    color: "text-amber-500",
-    bg: "bg-amber-50",
-  },
-  {
-    icon: Shield,
-    title: "Paiements en toute confiance",
-    description:
-      "Le paiement ne part que quand la livraison est confirmée. Pas de stress, pas de mauvaises surprises.",
-    color: "text-blue-500",
-    bg: "bg-blue-50",
-  },
-  {
-    icon: BarChart3,
-    title: "Gardez un œil sur vos colis",
-    description:
-      "Date de départ, statut de la réservation, historique — tout est dans votre tableau de bord, accessible où vous êtes.",
-    color: "text-emerald-500",
-    bg: "bg-emerald-50",
-  },
-  {
-    icon: Globe,
-    title: "Trajets partout à Madagascar",
-    description:
-      "Antananarivo, Toamasina, Mahajanga, Fianarantsoa… les transporteurs couvrent les grands axes comme les régions.",
-    color: "text-violet-500",
-    bg: "bg-violet-50",
-  },
-];
-
-const clientSteps = [
-  {
-    step: "01",
-    title: "Créez votre compte",
-    desc: "Ça prend deux minutes. Nom, email, mot de passe — c'est tout pour commencer.",
-  },
-  {
-    step: "02",
-    title: "Parcourez les annonces",
-    desc: "Filtrez par ville de départ ou de destination, comparez les prix et les capacités disponibles.",
-  },
-  {
-    step: "03",
-    title: "Réservez un trajet",
-    desc: "Indiquez le poids, la nature et les détails de votre marchandise, puis confirmez la réservation.",
-  },
-  {
-    step: "04",
-    title: "Suivez et payez",
-    desc: "Restez au courant de l'avancement et réglez directement depuis votre espace client.",
-  },
-];
-
-const transporteurSteps = [
-  {
-    step: "01",
-    title: "Créez votre profil",
-    desc: "Enregistrez vos informations, ajoutez votre ou vos véhicules avec les photos et l'immatriculation.",
-  },
-  {
-    step: "02",
-    title: "Publiez vos annonces",
-    desc: "Pour chaque trajet prévu, indiquez le départ, la destination, la capacité disponible et votre tarif au kilo.",
-  },
-  {
-    step: "03",
-    title: "Recevez des demandes",
-    desc: "Dès qu'un client réserve sur une de vos annonces, vous êtes notifié et vous pouvez confirmer.",
-  },
-  {
-    step: "04",
-    title: "Effectuez le transport",
-    desc: "Livrez la marchandise et clôturez la réservation. Le paiement est enregistré dans votre espace.",
-  },
+const VILLES = [
+  "Antananarivo",
+  "Toamasina",
+  "Mahajanga",
+  "Fianarantsoa",
+  "Toliara",
+  "Antsiranana",
+  "Antsirabe",
+  "Morondava",
+  "Ambositra",
+  "Nosy Be",
 ];
 
 export default function HomePage() {
+  const router = useRouter();
+  const [depart, setDepart] = useState("");
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/auth/login");
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#eff1f6]">
       {/* ── Navbar ── */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-blue-600 rounded-lg p-1.5">
-              <Truck className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-slate-900">Covam</span>
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center">
+            <Image
+              src="/img/covam.png"
+              alt="Covam"
+              width={130}
+              height={40}
+              className="h-16 w-auto object-contain"
+            />
           </div>
           <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
             <a
-              href="#fonctionnalites"
-              className="hover:text-blue-600 transition-colors"
-            >
-              Fonctionnalités
-            </a>
-            <a
               href="#comment-ca-marche"
-              className="hover:text-blue-600 transition-colors"
+              className="hover:text-primary transition-colors"
             >
               Comment ça marche
             </a>
-            <a
-              href="#contact"
-              className="hover:text-blue-600 transition-colors"
-            >
+            <a href="#contact" className="hover:text-primary transition-colors">
               Contact
             </a>
           </nav>
@@ -143,256 +62,138 @@ export default function HomePage() {
             </Button>
             <Button
               asChild
-              className="bg-blue-600 hover:bg-blue-700 text-white"
+              className="bg-primary hover:bg-primary/90 text-white"
             >
-              <Link href="/auth/register">
-                S&apos;inscrire <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
+              <Link href="/auth/register">S&apos;inscrire</Link>
             </Button>
           </div>
         </div>
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative pt-16 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-blue-950 to-indigo-950" />
-        <div
-          className="absolute inset-0 opacity-[0.07]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
-          }}
-        />
-        <div className="absolute top-24 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl" />
+      <main className="flex flex-col items-center justify-center px-4 pt-20 pb-12">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.8rem] font-extrabold text-[#0D1B3E] text-center tracking-wide uppercase leading-tight mb-3">
+          Bienvenue sur notre plateforme de transport
+        </h1>
+        <p className="text-2xl sm:text-3xl font-extrabold text-primary text-center uppercase tracking-wider mb-4">
+          Simplifions vos expéditions
+        </p>
+        <p className="text-slate-500 text-center max-w-xl mb-10 text-sm leading-relaxed">
+          Votre partenaire fiable pour tous vos besoins en transport à
+          Madagascar. Découvrez notre service de mise en relation efficace et
+          sécurisé.
+        </p>
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <Badge className="mb-6 bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30 text-sm px-4 py-1">
-            🇲🇬 Plateforme malgache de transport de marchandises
-          </Badge>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">
-            Vous avez une
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">
-              marchandise à envoyer ?
-            </span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
-            Covam met en relation des{" "}
-            <strong className="text-white">expéditeurs</strong> et des{" "}
-            <strong className="text-white">transporteurs</strong> à travers
-            Madagascar. Que ce soit une caisse, des sacs de riz ou du matériel,
-            trouvez le bon transport au bon prix.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-500/30 px-8 text-base"
+        {/* Search bar */}
+        <form
+          onSubmit={handleSearch}
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-white rounded-xl shadow-md px-4 py-3 w-full max-w-3xl"
+        >
+          <div className="flex items-center gap-2 flex-1 min-w-0 sm:border-r border-slate-200 sm:pr-3">
+            <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
+            <select
+              className="flex-1 text-sm text-slate-700 bg-transparent border-none outline-none py-1 cursor-pointer"
+              value={depart}
+              onChange={(e) => setDepart(e.target.value)}
             >
-              <Link href="/auth/register">
-                Commencer gratuitement <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-white/20 text-white bg-white/5 hover:bg-white/15 px-8 text-base"
+              <option value="">Départ</option>
+              {VILLES.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-2 flex-1 min-w-0 sm:border-r border-slate-200 sm:pr-3">
+            <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
+            <select
+              className="flex-1 text-sm text-slate-700 bg-transparent border-none outline-none py-1 cursor-pointer"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
             >
-              <Link href="/auth/login">Se connecter</Link>
-            </Button>
+              <option value="">Destination</option>
+              {VILLES.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
           </div>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-slate-400 text-sm">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              Inscription gratuite
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              Aucune commission cachée
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              Réseau de transporteurs vérifiés
-            </span>
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            <Calendar className="h-4 w-4 text-slate-400 shrink-0" />
+            <input
+              type="date"
+              className="flex-1 text-sm text-slate-700 bg-transparent border-none outline-none py-1"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
           </div>
-        </div>
-      </section>
+          <Button
+            type="submit"
+            className="bg-primary hover:bg-primary/90 text-white font-bold px-8 uppercase tracking-wide shrink-0"
+          >
+            Rechercher
+          </Button>
+        </form>
 
-      {/* ── Stats ── */}
-      <section className="py-14 bg-white border-b border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map(({ label, value, icon: Icon }) => (
-              <div key={label} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-50 rounded-xl mb-3">
-                  <Icon className="h-6 w-6 text-blue-600" />
-                </div>
-                <div className="text-3xl font-extrabold text-slate-900 mb-1">
-                  {value}
-                </div>
-                <div className="text-sm text-slate-500">{label}</div>
-              </div>
-            ))}
-          </div>
+        {/* Truck illustrations */}
+        <div className="mt-14 flex items-end gap-8 sm:gap-16">
+          <Image src="/img/camion.png" alt="Camion" width={500} height={500} />
         </div>
-      </section>
-
-      {/* ── Features ── */}
-      <section id="fonctionnalites" className="py-24 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200">
-              Ce que vous y trouvez
-            </Badge>
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              Simple, pas compliqué
-            </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              On a conçu Covam pour que quelqu&apos;un qui n&apos;a jamais
-              utilisé ce genre d&apos;application puisse s&apos;y retrouver dès
-              la première fois.
-            </p>
-          </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map(({ icon: Icon, title, description, color, bg }) => (
-              <div
-                key={title}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
-              >
-                <div
-                  className={`inline-flex items-center justify-center w-12 h-12 ${bg} rounded-xl mb-4`}
-                >
-                  <Icon className={`h-6 w-6 ${color}`} />
-                </div>
-                <h3 className="text-base font-semibold text-slate-900 mb-2">
-                  {title}
-                </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  {description}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+      </main>
 
       {/* ── How it works ── */}
-      <section id="comment-ca-marche" className="py-24 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200">
-              Comment ça marche
-            </Badge>
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
-              En quatre étapes chrono
-            </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              Que vous envoyiez un colis ou que vous proposiez vos services de
-              transport, le parcours est le même : court et clair.
-            </p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-16">
-            {/* Client steps */}
-            <div className="bg-slate-50 rounded-3xl p-8">
-              <div className="inline-flex items-center gap-2 bg-blue-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8">
-                <Users className="h-4 w-4" />
-                Pour les clients
-              </div>
-              <div className="space-y-6">
-                {clientSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs">
-                      {step}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-slate-900 mb-1">
-                        {title}
-                      </h4>
-                      <p className="text-sm text-slate-500">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <Button
-                asChild
-                className="mt-8 bg-blue-600 hover:bg-blue-700 text-white"
-              >
-                <Link href="/auth/register">
-                  Je suis client <ChevronRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-
-            {/* Transporteur steps */}
-            <div className="bg-indigo-50 rounded-3xl p-8">
-              <div className="inline-flex items-center gap-2 bg-indigo-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8">
-                <Truck className="h-4 w-4" />
-                Pour les transporteurs
-              </div>
-              <div className="space-y-6">
-                {transporteurSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-bold text-xs">
-                      {step}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-slate-900 mb-1">
-                        {title}
-                      </h4>
-                      <p className="text-sm text-slate-500">{desc}</p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-              <Button
-                asChild
-                className="mt-8 bg-indigo-600 hover:bg-indigo-700 text-white"
-              >
-                <Link href="/auth/register">
-                  Je suis transporteur <ChevronRight className="ml-1 h-4 w-4" />
-                </Link>
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* ── CTA ── */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-blue-700 to-indigo-800" />
-        <div
-          className="absolute inset-0 opacity-10"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle at 25% 50%, white 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
-          }}
-        />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
-            Prêt à essayer ?
+      <section id="comment-ca-marche" className="bg-white py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-extrabold text-[#0D1B3E] uppercase tracking-wide mb-2">
+            Comment ça marche
           </h2>
-          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
-            L&apos;inscription ne prend pas plus de deux minutes. Pas de carte
-            bancaire, pas d&apos;engagement — vous pouvez supprimer votre compte
-            à tout moment.
+          <p className="text-primary font-semibold mb-12 uppercase tracking-wider text-sm">
+            En quatre étapes simples
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                n: "01",
+                title: "Créez un compte",
+                desc: "Inscrivez-vous gratuitement en tant que client ou transporteur.",
+              },
+              {
+                n: "02",
+                title: "Trouvez un trajet",
+                desc: "Parcourez les annonces disponibles et choisissez selon vos besoins.",
+              },
+              {
+                n: "03",
+                title: "Réservez",
+                desc: "Indiquez vos marchandises et confirmez la réservation en ligne.",
+              },
+              {
+                n: "04",
+                title: "Suivez et payez",
+                desc: "Suivez l'avancement et réglez directement depuis votre tableau de bord.",
+              },
+            ].map(({ n, title, desc }) => (
+              <div key={n} className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm mb-3">
+                  {n}
+                </div>
+                <h3 className="font-semibold text-[#0D1B3E] mb-1">{title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
-              size="lg"
-              className="bg-white text-blue-700 hover:bg-blue-50 shadow-xl font-semibold px-8 text-base"
+              className="bg-primary hover:bg-primary/90 text-white px-8"
             >
-              <Link href="/auth/register">Créer un compte gratuit</Link>
+              <Link href="/auth/register">Je démarre maintenant</Link>
             </Button>
             <Button
               asChild
-              size="lg"
               variant="outline"
-              className="border-white/30 text-white bg-white/10 hover:bg-white/20 px-8 text-base"
+              className="border-primary text-primary hover:bg-primary/5 px-8"
             >
               <Link href="/auth/login">Se connecter</Link>
             </Button>
@@ -401,80 +202,92 @@ export default function HomePage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer id="contact" className="bg-slate-950 text-slate-400 py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
-            <div className="max-w-xs">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="bg-blue-600 rounded-lg p-1.5">
-                  <Truck className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">Covam</span>
-              </div>
-              <p className="text-sm leading-relaxed">
-                Covam est né d&apos;un constat simple : trouver un transporteur
+      <footer id="contact" className="bg-[#0D1B3E] text-white/70">
+        {/* orange accent bar */}
+        <div className="h-1 w-full bg-linear-to-r from-secondary/80 via-secondary to-secondary/40" />
+
+        <div className="max-w-5xl mx-auto px-4 pt-14 pb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
+            {/* Brand */}
+            <div>
+              <Image
+                src="/img/covam.png"
+                alt="Covam"
+                width={120}
+                height={38}
+                className="h-12 w-auto object-contain brightness-0 invert mb-5"
+              />
+              <p className="text-sm leading-relaxed text-white/55 max-w-xs">
+                COVAM est né d&apos;un constat simple : trouver un transporteur
                 fiable à Madagascar prend trop de temps. On a voulu changer ça.
               </p>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                <span className="text-xs text-white/40 uppercase tracking-widest">
+                  Madagascar
+                </span>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-10">
-              <div>
-                <h4 className="text-white font-semibold mb-4 text-sm">
-                  Plateforme
-                </h4>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <Link
-                      href="/auth/register"
-                      className="hover:text-white transition-colors"
-                    >
-                      S&apos;inscrire
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/auth/login"
-                      className="hover:text-white transition-colors"
-                    >
-                      Se connecter
-                    </Link>
-                  </li>
-                  <li>
+
+            {/* Liens */}
+            <div>
+              <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+                <span className="w-5 h-0.5 bg-secondary rounded-full inline-block" />
+                Liens rapides
+              </h4>
+              <ul className="space-y-3 text-sm">
+                {[
+                  { href: "/auth/register", label: "S\u2019inscrire" },
+                  { href: "/auth/login", label: "Se connecter" },
+                  {
+                    href: "#comment-ca-marche",
+                    label: "Comment \u00e7a marche",
+                  },
+                ].map(({ href, label }) => (
+                  <li key={href}>
                     <a
-                      href="#fonctionnalites"
-                      className="hover:text-white transition-colors"
+                      href={href}
+                      className="flex items-center gap-2 text-white/55 hover:text-white hover:translate-x-1 transition-all duration-200 group"
                     >
-                      Fonctionnalités
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary/60 group-hover:bg-secondary transition-colors shrink-0" />
+                      {label}
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="#comment-ca-marche"
-                      className="hover:text-white transition-colors"
-                    >
-                      Comment ça marche
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-4 text-sm">
-                  Contact
-                </h4>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-center gap-2">
-                    <Mail className="h-3.5 w-3.5 shrink-0" />
-                    contact@covam.com
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Phone className="h-3.5 w-3.5 shrink-0" />
-                    +261 XX XX XXX XX
-                  </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+                <span className="w-5 h-0.5 bg-secondary rounded-full inline-block" />
+                Nous contacter
+              </h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <Mail className="h-3.5 w-3.5 text-white/80" />
+                  </div>
+                  <span className="text-white/60">contact@covam.mg</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <Phone className="h-3.5 w-3.5 text-white/80" />
+                  </div>
+                  <span className="text-white/60">+261 XX XX XXX XX</span>
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 pt-6 text-sm text-center">
-            © {new Date().getFullYear()} Covam. Tous droits réservés.
+
+          {/* Bottom bar */}
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35">
+            <span>
+              © {new Date().getFullYear()} Covam. Tous droits réservés.
+            </span>
+            <span className="uppercase tracking-widest">
+              Plateforme de transport · Madagascar
+            </span>
           </div>
         </div>
       </footer>

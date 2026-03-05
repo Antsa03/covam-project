@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
 import { cn } from "@/lib/utils";
@@ -187,15 +188,15 @@ const NAV: Record<string, NavGroup[]> = {
 const ROLE_META: Record<string, { label: string; color: string }> = {
   ADMIN: {
     label: "Administrateur",
-    color: "bg-rose-500/20 text-rose-300 border-rose-500/20",
+    color: "bg-rose-50 text-rose-600 border-rose-200",
   },
   TRANSPORTEUR: {
     label: "Transporteur",
-    color: "bg-cyan-500/20 text-cyan-300 border-cyan-500/20",
+    color: "bg-primary/10 text-primary border-primary/20",
   },
   CLIENT: {
     label: "Client",
-    color: "bg-emerald-500/20 text-emerald-300 border-emerald-500/20",
+    color: "bg-emerald-50 text-emerald-700 border-emerald-200",
   },
 };
 
@@ -222,23 +223,23 @@ export function AppSidebar({ children }: AppSidebarProps) {
       <div className="flex min-h-screen w-full">
         <Sidebar collapsible="icon">
           {/* ── Header ─────────────────────────────── */}
-          <SidebarHeader className="pb-4 pt-5 px-3 border-b border-white/8">
+          <SidebarHeader className="pb-4 pt-5 px-3 border-b border-sidebar-border">
             {/* Logo row */}
-            <div className="flex items-center gap-3 px-1">
-              <div className="relative shrink-0">
-                <div className="bg-blue-600 rounded-xl p-2 shadow-lg shadow-blue-900/50">
-                  <Truck className="h-5 w-5 text-white" />
-                </div>
-                <div className="absolute inset-0 bg-blue-500/40 rounded-xl blur-md -z-10" />
-              </div>
-              <div className="group-data-[collapsible=icon]:hidden min-w-0">
-                <p className="font-bold text-[15px] text-white leading-tight tracking-wide">
-                  Covam
-                </p>
-                <p className="text-[10px] text-sidebar-foreground/40 leading-tight">
-                  Plateforme de Transport
-                </p>
-              </div>
+            <div className="flex items-center px-1">
+              <Image
+                src="/img/covam.png"
+                alt="Covam"
+                width={120}
+                height={36}
+                className="h-20 w-auto object-contain group-data-[collapsible=icon]:hidden"
+              />
+              <Image
+                src="/img/covam.png"
+                alt="Covam"
+                width={32}
+                height={32}
+                className="h-8 w-8 object-contain hidden group-data-[collapsible=icon]:block"
+              />
             </div>
             {/* Role chip */}
             <div
@@ -267,26 +268,27 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       <SidebarMenuItem key={item.href} className="relative">
                         {/* Active left indicator */}
                         {active && (
-                          <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.75 rounded-r-full bg-blue-400 group-data-[collapsible=icon]:hidden" />
+                          <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.75 rounded-r-full bg-sidebar-primary group-data-[collapsible=icon]:hidden" />
                         )}
                         <SidebarMenuButton
                           asChild
                           isActive={active}
                           tooltip={item.label}
                           className={cn(
-                            "rounded-lg h-9 transition-all duration-150",
+                            "rounded-lg h-9 transition-all duration-150 group-data-[collapsible=icon]:justify-center",
                             active
-                              ? "bg-blue-500/15 text-blue-100 hover:bg-blue-500/20 data-[active=true]:bg-blue-500/15 data-[active=true]:text-blue-100"
-                              : "text-sidebar-foreground/55 hover:text-sidebar-foreground/90 hover:bg-white/6",
+                              ? "bg-sidebar-primary/15 text-sidebar-primary hover:bg-sidebar-primary/20 data-[active=true]:bg-sidebar-primary/15 data-[active=true]:text-sidebar-primary"
+                              : "text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent",
                           )}
                         >
                           <Link href={item.href}>
                             <span
                               className={cn(
                                 "flex items-center justify-center h-6 w-6 rounded-md shrink-0 transition-colors",
+                                "group-data-[collapsible=icon]:h-4 group-data-[collapsible=icon]:w-4 group-data-[collapsible=icon]:rounded-none group-data-[collapsible=icon]:bg-transparent!",
                                 active
-                                  ? "bg-blue-500/25 text-blue-300"
-                                  : "text-sidebar-foreground/40 group-hover:text-sidebar-foreground/70",
+                                  ? "bg-sidebar-primary/15 text-sidebar-primary"
+                                  : "text-sidebar-foreground/50 group-hover:text-sidebar-foreground/80",
                               )}
                             >
                               {item.icon}
@@ -305,9 +307,9 @@ export function AppSidebar({ children }: AppSidebarProps) {
           </SidebarContent>
 
           {/* ── Footer ──────────────────────────────── */}
-          <SidebarFooter className="p-3 border-t border-white/8">
+          <SidebarFooter className="p-3 border-t border-sidebar-border">
             {/* Profile card */}
-            <div className="flex items-center gap-2.5 rounded-xl bg-white/5 border border-white/8 px-3 py-2.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2">
+            <div className="flex items-center gap-2.5 rounded-xl bg-sidebar-accent/60 border border-sidebar-border px-3 py-2.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2">
               <div className="relative shrink-0">
                 <Avatar className="h-8 w-8">
                   <AvatarImage
@@ -315,7 +317,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                     alt={session?.user?.name ?? ""}
                     className="object-cover"
                   />
-                  <AvatarFallback className="text-xs bg-blue-600 text-white font-bold">
+                  <AvatarFallback className="text-xs bg-sidebar-primary text-white font-bold">
                     {initials}
                   </AvatarFallback>
                 </Avatar>
@@ -333,7 +335,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
             {/* Logout */}
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
-              className="mt-1.5 flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs font-medium text-sidebar-foreground/40 hover:text-rose-400 hover:bg-rose-500/10 transition-colors group-data-[collapsible=icon]:justify-center"
+              className="mt-1.5 flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs font-medium text-sidebar-foreground/50 hover:text-rose-500 hover:bg-rose-50 transition-colors group-data-[collapsible=icon]:justify-center"
             >
               <LogOut className="h-3.5 w-3.5 shrink-0" />
               <span className="group-data-[collapsible=icon]:hidden">
@@ -365,7 +367,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   alt={session?.user?.name ?? ""}
                   className="object-cover"
                 />
-                <AvatarFallback className="text-xs bg-blue-100 text-blue-700 font-bold">
+                <AvatarFallback className="text-xs bg-primary/10 text-primary font-bold">
                   {initials}
                 </AvatarFallback>
               </Avatar>

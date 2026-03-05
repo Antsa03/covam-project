@@ -83,30 +83,39 @@ export function BookModal({
       description={`${annonce.depart} → ${annonce.destination} • ${annonce.prix_par_kilo} Ar/kg`}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="label"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Référence (nom colis)</FormLabel>
+                <FormLabel>
+                  Référence (nom colis){" "}
+                  <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Ex: Télévision 55 pouces" {...field} />
+                  <Input
+                    className="h-10"
+                    placeholder="Ex : Télévision 55 pouces"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="date_depart"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date départ</FormLabel>
+                  <FormLabel>
+                    Date départ <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input type="date" className="h-10" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -117,7 +126,9 @@ export function BookModal({
               name="category"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Catégorie</FormLabel>
+                  <FormLabel>
+                    Catégorie <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -141,15 +152,22 @@ export function BookModal({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="poids"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Poids (kg)</FormLabel>
+                  <FormLabel>
+                    Poids (kg) <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.1" {...field} />
+                    <Input
+                      type="number"
+                      step="0.1"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -160,9 +178,17 @@ export function BookModal({
               name="dimension"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Dimension (m³)</FormLabel>
+                  <FormLabel>
+                    Dimension (m³){" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.01" {...field} />
+                    <Input
+                      type="number"
+                      step="0.01"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -188,15 +214,22 @@ export function BookModal({
             )}
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="nom_recepteur"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Nom du récepteur</FormLabel>
+                  <FormLabel>
+                    Nom du récepteur{" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Mohamed Diallo" {...field} />
+                    <Input
+                      className="h-10"
+                      placeholder="Ravo Rakoto"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -207,9 +240,16 @@ export function BookModal({
               name="tel_recepteur"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Tél. récepteur</FormLabel>
+                  <FormLabel>
+                    Tél. récepteur{" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="+221 77 xxx xx xx" {...field} />
+                    <Input
+                      className="h-10"
+                      placeholder="+261 34 XX XXX XX"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -217,15 +257,20 @@ export function BookModal({
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Confirmer la réservation
             </Button>

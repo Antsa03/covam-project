@@ -56,15 +56,18 @@ export function PaiementFormModal({
       open={open}
       onOpenChange={onOpenChange}
       title="Effectuer un paiement"
+      size="sm"
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="reservation_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Réservation</FormLabel>
+                <FormLabel>
+                  Réservation <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
                   <select
                     className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm focus:outline-none focus:ring-1 focus:ring-ring"
@@ -91,9 +94,16 @@ export function PaiementFormModal({
             name="prix"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Montant (Ar)</FormLabel>
+                <FormLabel>
+                  Montant (Ar) <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input type="number" step="0.01" {...field} />
+                  <Input
+                    type="number"
+                    step="0.01"
+                    className="h-10"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -105,24 +115,36 @@ export function PaiementFormModal({
             name="num_telephone"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>N° téléphone paiement</FormLabel>
+                <FormLabel>
+                  N° téléphone paiement{" "}
+                  <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="+221 77 xxx xx xx" {...field} />
+                  <Input
+                    className="h-10"
+                    placeholder="+261 34 XX XXX XX"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Payer
             </Button>

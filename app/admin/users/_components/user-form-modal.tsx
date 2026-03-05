@@ -108,65 +108,94 @@ export function UserFormModal({
           ? "Modifiez les informations de l'utilisateur."
           : "Créez un nouvel utilisateur sur la plateforme."
       }
+      size="lg"
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="prenom"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Prénom</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="nom"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nom</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          {/* Identité */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Identité
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="prenom"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Prénom <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input className="h-10" placeholder="Jean" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="nom"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Nom <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input className="h-10" placeholder="Rakoto" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="cin"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>CIN</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="phone"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Téléphone</FormLabel>
-                  <FormControl>
-                    <Input {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          {/* Contact */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Coordonnées
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="cin"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      CIN <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-10"
+                        placeholder="101 234 567 890"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Téléphone <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-10"
+                        placeholder="+261 34 XX XXX XX"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
           <FormField
@@ -174,24 +203,36 @@ export function UserFormModal({
             name="adresse"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Adresse</FormLabel>
+                <FormLabel>
+                  Adresse <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input {...field} />
+                  <Input
+                    className="h-10"
+                    placeholder="Lot II B 34, Antananarivo"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Ville</FormLabel>
+                  <FormLabel>
+                    Ville <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input {...field} />
+                    <Input
+                      className="h-10"
+                      placeholder="Antananarivo"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -202,9 +243,12 @@ export function UserFormModal({
               name="date_naissance"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Date naissance</FormLabel>
+                  <FormLabel>
+                    Date naissance{" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="date" {...field} />
+                    <Input type="date" className="h-10" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -212,78 +256,103 @@ export function UserFormModal({
             />
           </div>
 
-          <FormField
-            control={form.control}
-            name="email"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Email</FormLabel>
-                <FormControl>
-                  <Input type="email" {...field} />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {/* Compte */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Compte
+            </p>
 
-          <FormField
-            control={form.control}
-            name="mot_de_passe"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>
-                  {isEdit ? "Nouveau mot de passe (optionnel)" : "Mot de passe"}
-                </FormLabel>
-                <FormControl>
-                  <Input
-                    type="password"
-                    placeholder={
-                      isEdit
-                        ? "Laisser vide pour ne pas changer"
-                        : "8 caractères minimum"
-                    }
-                    {...field}
-                  />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
-
-          <FormField
-            control={form.control}
-            name="role"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel>Rôle</FormLabel>
-                <Select
-                  onValueChange={field.onChange}
-                  defaultValue={field.value}
-                >
+            <FormField
+              control={form.control}
+              name="email"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Email <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
+                    <Input
+                      type="email"
+                      className="h-10"
+                      placeholder="jean@covam.mg"
+                      {...field}
+                    />
                   </FormControl>
-                  <SelectContent>
-                    <SelectItem value="CLIENT">Client</SelectItem>
-                    <SelectItem value="TRANSPORTEUR">Transporteur</SelectItem>
-                  </SelectContent>
-                </Select>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
 
-          <div className="flex justify-end gap-2 pt-2">
+            <FormField
+              control={form.control}
+              name="mot_de_passe"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    {isEdit
+                      ? "Nouveau mot de passe (optionnel)"
+                      : "Mot de passe"}
+                    {!isEdit && <span className="text-red-500 ml-0.5">*</span>}
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="password"
+                      className="h-10"
+                      placeholder={
+                        isEdit
+                          ? "Laisser vide pour ne pas changer"
+                          : "8 caractères minimum"
+                      }
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="role"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>
+                    Rôle <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="CLIENT">Client</SelectItem>
+                      <SelectItem value="TRANSPORTEUR">Transporteur</SelectItem>
+                    </SelectContent>
+                  </Select>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+          </div>
+
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isEdit ? "Mettre à jour" : "Créer"}
             </Button>

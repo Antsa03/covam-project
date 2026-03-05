@@ -30,9 +30,9 @@ const CONFIG: Record<
   },
   CONFIRMED: {
     label: "Confirmé",
-    dot: "bg-blue-500",
-    bg: "bg-blue-50",
-    text: "text-blue-700",
+    dot: "bg-primary",
+    bg: "bg-primary/10",
+    text: "text-primary",
   },
   CANCELLED: {
     label: "Annulé",

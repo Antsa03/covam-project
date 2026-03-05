@@ -26,7 +26,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 const schema = z.object({
   email: z.string().min(1, "Identifiant requis"),
@@ -38,6 +38,7 @@ type FormData = z.infer<typeof schema>;
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -74,39 +75,32 @@ export default function LoginPage() {
   }
 
   return (
-    <Card className="w-full max-w-md shadow-lg border-0 bg-white">
-      <CardHeader className="pb-4">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white text-xs font-bold">C</span>
-          </div>
-          <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
-            Covam
-          </span>
-        </div>
-        <CardTitle className="text-2xl font-bold text-slate-900">
+    <Card className="w-full max-w-lg shadow-xl border-0 bg-white">
+      <CardHeader className="pb-5 pt-8 px-8">
+        <CardTitle className="text-3xl font-bold text-slate-900">
           Bon retour !
         </CardTitle>
-        <CardDescription className="text-slate-500">
+        <CardDescription className="text-base text-slate-500 mt-1">
           Entrez votre email (ou nom d&apos;utilisateur admin) pour vous
           connecter.
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="px-8">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
-                    Email / Nom d&apos;utilisateur
+                  <FormLabel className="text-sm font-semibold text-slate-700">
+                    Email / Nom d&apos;utilisateur{" "}
+                    <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="exemple@covam.com"
-                      className="h-11 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-12 text-base bg-slate-50 border-slate-200 focus:bg-white transition-colors"
                       {...field}
                     />
                   </FormControl>
@@ -119,14 +113,35 @@ export default function LoginPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Mot de passe</FormLabel>
+                  <FormLabel className="text-sm font-semibold text-slate-700">
+                    Mot de passe <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="••••••••"
-                      className="h-11 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                      {...field}
-                    />
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="••••••••"
+                        className="h-12 text-base bg-slate-50 border-slate-200 focus:bg-white transition-colors pr-10"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-600 transition-colors"
+                        tabIndex={-1}
+                        aria-label={
+                          showPassword
+                            ? "Cacher le mot de passe"
+                            : "Montrer le mot de passe"
+                        }
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -134,7 +149,7 @@ export default function LoginPage() {
             />
             <Button
               type="submit"
-              className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-semibold mt-2"
+              className="w-full h-12 text-base bg-primary hover:bg-primary/90 text-white font-semibold mt-2"
               disabled={loading}
             >
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -143,11 +158,11 @@ export default function LoginPage() {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="justify-center text-sm pt-0 pb-6">
+      <CardFooter className="justify-center text-sm pt-2 pb-8 px-8">
         <span className="text-slate-500">Pas encore de compte ?&nbsp;</span>
         <Link
           href="/auth/register"
-          className="font-semibold text-blue-600 hover:text-blue-700 underline-offset-4 hover:underline"
+          className="font-semibold text-primary hover:text-primary/80 underline-offset-4 hover:underline"
         >
           Créer un compte
         </Link>

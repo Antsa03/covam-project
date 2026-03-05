@@ -15,7 +15,7 @@ export function PageHeader({ title, description, action }: PageHeaderProps) {
   return (
     <div className="flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-between pb-5 mb-2 border-b border-slate-100">
       <div className="flex items-start gap-3">
-        <div className="mt-0.5 h-8 w-1 rounded-full bg-blue-600 shrink-0" />
+        <div className="mt-0.5 h-8 w-1 rounded-full bg-primary shrink-0" />
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
             {title}
@@ -28,7 +28,7 @@ export function PageHeader({ title, description, action }: PageHeaderProps) {
       {action && (
         <Button
           onClick={action.onClick}
-          className="mt-3 sm:mt-0 self-start sm:self-auto bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
+          className="mt-3 sm:mt-0 self-start sm:self-auto bg-primary hover:bg-primary/90 text-white shadow-sm"
         >
           {action.icon ?? <Plus className="mr-2 h-4 w-4" />}
           {action.label}

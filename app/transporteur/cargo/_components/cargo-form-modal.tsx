@@ -56,15 +56,19 @@ export function CargoFormModal({
       onOpenChange={onOpenChange}
       title="Nouvelle cargo réservation"
       description="Créez une réservation cargo pour une réservation transport confirmée."
+      size="sm"
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="reservation_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Réservation transport</FormLabel>
+                <FormLabel>
+                  Réservation transport{" "}
+                  <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
                   <select
                     className="flex h-9 w-full rounded-md border border-input bg-transparent px-3 py-1 text-sm shadow-sm transition-colors focus:outline-none focus:ring-1 focus:ring-ring"
@@ -94,11 +98,14 @@ export function CargoFormModal({
             name="prix"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Prix (Ar)</FormLabel>
+                <FormLabel>
+                  Prix (Ar) <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
                   <Input
                     type="number"
                     step="0.01"
+                    className="h-10"
                     placeholder="0.00"
                     {...field}
                   />
@@ -108,15 +115,20 @@ export function CargoFormModal({
             )}
           />
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               Créer
             </Button>

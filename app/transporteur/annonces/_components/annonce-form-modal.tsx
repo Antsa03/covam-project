@@ -83,13 +83,15 @@ export function AnnonceFormModal({
       title={isEdit ? "Modifier l'annonce" : "Nouvelle annonce de transport"}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="transport_id"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Transport</FormLabel>
+                <FormLabel>
+                  Véhicule <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <Select
                   onValueChange={(v) => field.onChange(Number(v))}
                   defaultValue={field.value ? String(field.value) : undefined}
@@ -115,15 +117,21 @@ export function AnnonceFormModal({
             )}
           />
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="depart"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Départ</FormLabel>
+                  <FormLabel>
+                    Départ <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Dakar" {...field} />
+                    <Input
+                      className="h-10"
+                      placeholder="Antananarivo"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -134,9 +142,15 @@ export function AnnonceFormModal({
               name="destination"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Destination</FormLabel>
+                  <FormLabel>
+                    Destination <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Thiès" {...field} />
+                    <Input
+                      className="h-10"
+                      placeholder="Toamasina"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -144,15 +158,22 @@ export function AnnonceFormModal({
             />
           </div>
 
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <FormField
               control={form.control}
               name="capacite_transport"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Capacité (kg)</FormLabel>
+                  <FormLabel>
+                    Capacité (kg) <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.1" {...field} />
+                    <Input
+                      type="number"
+                      step="0.1"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -163,9 +184,16 @@ export function AnnonceFormModal({
               name="prix_par_kilo"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Prix/kg</FormLabel>
+                  <FormLabel>
+                    Prix/kg (Ar) <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.01" {...field} />
+                    <Input
+                      type="number"
+                      step="0.01"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -176,9 +204,17 @@ export function AnnonceFormModal({
               name="prix_fragile_par_kilo"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Prix fragile/kg</FormLabel>
+                  <FormLabel>
+                    Prix fragile/kg (Ar){" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.01" {...field} />
+                    <Input
+                      type="number"
+                      step="0.01"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -191,7 +227,9 @@ export function AnnonceFormModal({
             name="status"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Statut</FormLabel>
+                <FormLabel>
+                  Statut <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <Select
                   onValueChange={field.onChange}
                   defaultValue={field.value}
@@ -212,15 +250,20 @@ export function AnnonceFormModal({
             )}
           />
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isEdit ? "Mettre à jour" : "Créer"}
             </Button>

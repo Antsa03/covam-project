@@ -61,7 +61,18 @@ export default async function handler(
             },
           },
           pb_transport: {
-            select: { depart: true, destination: true, prix_par_kilo: true },
+            select: {
+              depart: true,
+              destination: true,
+              prix_par_kilo: true,
+              transport: {
+                select: {
+                  marque: true,
+                  immatriculation: true,
+                  images: true,
+                },
+              },
+            },
           },
           payement: { select: { status: true, prix: true } },
           cargo_reservation: { select: { status: true, prix: true } },

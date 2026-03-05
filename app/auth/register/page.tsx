@@ -34,7 +34,7 @@ import {
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 
 const schema = z.object({
   nom: z.string().min(1, "Nom requis"),
@@ -55,6 +55,7 @@ type FormData = z.infer<typeof schema>;
 export default function RegisterPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   const form = useForm<FormData>({
     resolver: zodResolver(schema),
@@ -88,16 +89,8 @@ export default function RegisterPage() {
   }
 
   return (
-    <Card className="w-full max-w-lg shadow-lg border-0 bg-white my-6">
-      <CardHeader className="pb-4">
-        <div className="flex items-center gap-2 mb-3">
-          <div className="h-8 w-8 bg-blue-600 rounded-lg flex items-center justify-center">
-            <span className="text-white text-xs font-bold">C</span>
-          </div>
-          <span className="text-sm font-semibold text-slate-500 uppercase tracking-wide">
-            Covam
-          </span>
-        </div>
+    <Card className="w-full max-w-2xl shadow-lg border-0 bg-white my-2">
+      <CardHeader className="pb-2 pt-4">
         <CardTitle className="text-2xl font-bold text-slate-900">
           Créer un compte
         </CardTitle>
@@ -107,86 +100,21 @@ export default function RegisterPage() {
       </CardHeader>
       <CardContent>
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="prenom"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-700">Prénom</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="nom"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-700">Nom</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="cin"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-700">CIN</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="phone"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-700">Téléphone</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
+          <form
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="grid grid-cols-1 md:grid-cols-2 gap-x-5 gap-y-3"
+          >
             <FormField
               control={form.control}
-              name="adresse"
+              name="nom"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Adresse</FormLabel>
+                  <FormLabel className="text-slate-700">
+                    Nom <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
                       {...field}
                     />
                   </FormControl>
@@ -194,55 +122,72 @@ export default function RegisterPage() {
                 </FormItem>
               )}
             />
-
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-              <FormField
-                control={form.control}
-                name="city"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-700">Ville</FormLabel>
-                    <FormControl>
-                      <Input
-                        className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="date_naissance"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-slate-700">
-                      Date de naissance
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="date"
-                        className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-
+            <FormField
+              control={form.control}
+              name="prenom"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-slate-700">
+                    Prénom <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="cin"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-slate-700">
+                    CIN <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="phone"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-slate-700">
+                    Téléphone <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Email</FormLabel>
+                  <FormLabel className="text-slate-700">
+                    Email <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
                       type="email"
-                      className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
                       {...field}
                     />
                   </FormControl>
@@ -250,18 +195,52 @@ export default function RegisterPage() {
                 </FormItem>
               )}
             />
-
             <FormField
               control={form.control}
               name="mot_de_passe"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">Mot de passe</FormLabel>
+                  <FormLabel className="text-slate-700">
+                    Mot de passe <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <div className="relative">
+                      <Input
+                        type={showPassword ? "text" : "password"}
+                        placeholder="8 caractères minimum"
+                        className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors pr-10"
+                        {...field}
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword((v) => !v)}
+                        className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-600 transition-colors"
+                        tabIndex={-1}
+                        aria-label={showPassword ? "Cacher" : "Montrer"}
+                      >
+                        {showPassword ? (
+                          <EyeOff className="h-4 w-4" />
+                        ) : (
+                          <Eye className="h-4 w-4" />
+                        )}
+                      </button>
+                    </div>
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="city"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-slate-700">
+                    Ville <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
                     <Input
-                      type="password"
-                      placeholder="8 caractères minimum"
-                      className="h-10 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
                       {...field}
                     />
                   </FormControl>
@@ -269,19 +248,58 @@ export default function RegisterPage() {
                 </FormItem>
               )}
             />
-
+            <FormField
+              control={form.control}
+              name="date_naissance"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="text-slate-700">
+                    Date de naissance{" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      type="date"
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="adresse"
+              render={({ field }) => (
+                <FormItem className="md:col-span-2">
+                  <FormLabel className="text-slate-700">
+                    Adresse <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
+                  <FormControl>
+                    <Input
+                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      {...field}
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
             <FormField
               control={form.control}
               name="role"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-slate-700">Je suis</FormLabel>
+                <FormItem className="md:col-span-2">
+                  <FormLabel className="text-slate-700">
+                    Je suis <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="h-10 bg-slate-50 border-slate-200">
+                      <SelectTrigger className="h-9 bg-slate-50 border-slate-200">
                         <SelectValue placeholder="Choisissez un rôle" />
                       </SelectTrigger>
                     </FormControl>
@@ -294,13 +312,12 @@ export default function RegisterPage() {
                 </FormItem>
               )}
             />
-
             {watchedRole === "CLIENT" && (
               <FormField
                 control={form.control}
                 name="image"
                 render={({ field }) => (
-                  <FormItem>
+                  <FormItem className="md:col-span-2">
                     <FormLabel className="text-slate-700">
                       Photo de profil{" "}
                       <span className="text-slate-400 text-xs">
@@ -320,10 +337,9 @@ export default function RegisterPage() {
                 )}
               />
             )}
-
             <Button
               type="submit"
-              className="w-full h-11 bg-blue-600 hover:bg-blue-700 text-white font-semibold mt-2"
+              className="w-full h-10 bg-primary hover:bg-primary/90 text-white font-semibold mt-1 md:col-span-2"
               disabled={loading}
             >
               {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
@@ -332,11 +348,11 @@ export default function RegisterPage() {
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="justify-center text-sm pt-0 pb-6">
+      <CardFooter className="justify-center text-sm pt-0 pb-4">
         <span className="text-slate-500">Déjà inscrit ?&nbsp;</span>
         <Link
           href="/auth/login"
-          className="font-semibold text-blue-600 hover:text-blue-700 underline-offset-4 hover:underline"
+          className="font-semibold text-primary hover:text-primary/80 underline-offset-4 hover:underline"
         >
           Se connecter
         </Link>
