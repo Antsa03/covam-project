@@ -257,7 +257,7 @@ export function UserFormModal({
           </div>
 
           {/* Compte */}
-          <div>
+          <div className="space-y-4">
             <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
               Compte
             </p>
