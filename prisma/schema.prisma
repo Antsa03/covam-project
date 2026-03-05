@@ -1,0 +1,203 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Enums ───────────────────────────────────────────────
+
+enum StatusPublication {
+  ACTIVE
+  INACTIVE
+  PENDING
+}
+
+enum StatusReservation {
+  PENDING
+  CONFIRMED
+  CANCELLED
+  COMPLETED
+}
+
+enum StatusPayement {
+  PENDING
+  PAID
+  FAILED
+  REFUNDED
+}
+
+enum CargoCategory {
+  STANDARD
+  FRAGILE
+  PERISHABLE
+  HAZARDOUS
+  OVERSIZED
+}
+
+enum RoleUtilisateur {
+  CLIENT
+  TRANSPORTEUR
+}
+
+// ─── Modèle de base ──────────────────────────────────────
+
+model Admin {
+  nom_utilisateur String @id
+  mot_de_passe    String
+}
+
+model Utilisateur {
+  id_utilisateur   Int             @id @default(autoincrement())
+  nom              String
+  prenom           String
+  cin              String          @unique
+  phone            String
+  adresse          String
+  city             String
+  date_naissance   DateTime
+  date_mise_a_jour DateTime        @updatedAt
+  date_creation    DateTime        @default(now())
+  email            String          @unique
+  mot_de_passe     String
+  role             RoleUtilisateur
+
+  // Relations 1-à-1 (héritage)
+  transporteur Transporteur?
+  client       Client?
+}
+
+// ─── Models ──────────────────────────────────────────────
+
+model Transporteur {
+  id_transporteur Int @id @default(autoincrement())
+
+  // Lien vers Utilisateur (héritage)
+  utilisateur_id Int         @unique
+  utilisateur    Utilisateur @relation(fields: [utilisateur_id], references: [id_utilisateur])
+
+  // Attributs spécifiques au Transporteur
+  transports Transport[]
+}
+
+model Client {
+  id_client Int @id @default(autoincrement())
+
+  // Lien vers Utilisateur (héritage)
+  utilisateur_id Int         @unique
+  utilisateur    Utilisateur @relation(fields: [utilisateur_id], references: [id_utilisateur])
+
+  // Attributs spécifiques au Client
+  image String?
+
+  reservations    TransportReservation[]
+  pb_marchandises PbMarchandise[]
+}
+
+model Transport {
+  id_transport    Int    @id @default(autoincrement())
+  description     String
+  marque          String
+  immatriculation String @unique
+  type            String
+  images          String
+
+  transporteur_id Int
+  transporteur    Transporteur @relation(fields: [transporteur_id], references: [id_transporteur])
+
+  pb_transports PbTransport[]
+}
+
+model PbTransport {
+  id_pb_transport       Int               @id @default(autoincrement())
+  depart                String
+  destination           String
+  capacite_transport    Float
+  status                StatusPublication
+  prix_par_kilo         Float
+  prix_fragile_par_kilo Float
+
+  transport_id Int
+  transport    Transport @relation(fields: [transport_id], references: [id_transport])
+
+  reservations TransportReservation[]
+}
+
+model TransportReservation {
+  id_reservation   Int               @id @default(autoincrement())
+  date_reservation DateTime          @default(now())
+  category         CargoCategory
+  fragile          Boolean
+  poids            Float
+  dimension        Float
+  date_depart      DateTime
+  depart           String
+  destination      String
+  nom_recepteur    String
+  tel_recepteur    String
+  label            String
+  status           StatusReservation
+
+  pb_transport_id Int
+  pb_transport    PbTransport @relation(fields: [pb_transport_id], references: [id_pb_transport])
+
+  client_id Int
+  client    Client @relation(fields: [client_id], references: [id_client])
+
+  cargo_reservation CargoReservation?
+  payement          Payement?
+}
+
+model CargoReservation {
+  id_cargo_reservation Int               @id @default(autoincrement())
+  status               StatusReservation
+  date_reservation     DateTime          @default(now())
+  prix                 Float
+
+  reservation_id Int                  @unique
+  reservation    TransportReservation @relation(fields: [reservation_id], references: [id_reservation])
+
+  payement Payement?
+}
+
+model Payement {
+  id_payement   Int            @id @default(autoincrement())
+  date_payement DateTime       @default(now())
+  status        StatusPayement
+  prix          Float
+  num_telephone String
+
+  reservation_id Int?                  @unique
+  reservation    TransportReservation? @relation(fields: [reservation_id], references: [id_reservation])
+
+  cargo_reservation_id Int?              @unique
+  cargo_reservation    CargoReservation? @relation(fields: [cargo_reservation_id], references: [id_cargo_reservation])
+}
+
+model PbMarchandise {
+  id_pb_marchandise Int               @id @default(autoincrement())
+  label             String
+  category          CargoCategory
+  fragile           Boolean
+  poids             Float
+  dimension         Float
+  status            StatusPublication
+  date_depart       DateTime
+  depart            String
+  destination       String
+  nom_recepteur     String
+  tel_recepteur     String
+  date_creation     DateTime          @default(now())
+  date_mise_a_jour  DateTime          @updatedAt
+
+  client_id Int
+  client    Client @relation(fields: [client_id], references: [id_client])
+}

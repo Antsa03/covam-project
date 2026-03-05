@@ -1,0 +1,380 @@
+"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { signOut, useSession } from "next-auth/react";
+import { cn } from "@/lib/utils";
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarGroup,
+  SidebarGroupLabel,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+  SidebarProvider,
+  SidebarTrigger,
+} from "@/components/ui/sidebar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import {
+  Truck,
+  LayoutDashboard,
+  Users,
+  Package,
+  CalendarCheck,
+  LogOut,
+  Megaphone,
+  CreditCard,
+  BoxIcon,
+  Shield,
+  UserCircle,
+} from "lucide-react";
+
+type NavItem = { label: string; href: string; icon: React.ReactNode };
+type NavGroup = { title: string; items: NavItem[] };
+
+const NAV: Record<string, NavGroup[]> = {
+  ADMIN: [
+    {
+      title: "Principal",
+      items: [
+        {
+          label: "Tableau de bord",
+          href: "/admin/dashboard",
+          icon: <LayoutDashboard className="h-4 w-4" />,
+        },
+        {
+          label: "Mon compte",
+          href: "/admin/compte",
+          icon: <UserCircle className="h-4 w-4" />,
+        },
+      ],
+    },
+    {
+      title: "Gestion",
+      items: [
+        {
+          label: "Utilisateurs",
+          href: "/admin/users",
+          icon: <Users className="h-4 w-4" />,
+        },
+        {
+          label: "Transports",
+          href: "/admin/transports",
+          icon: <Truck className="h-4 w-4" />,
+        },
+        {
+          label: "Annonces",
+          href: "/admin/annonces",
+          icon: <Megaphone className="h-4 w-4" />,
+        },
+        {
+          label: "Réservations",
+          href: "/admin/reservations",
+          icon: <CalendarCheck className="h-4 w-4" />,
+        },
+        {
+          label: "Cargo",
+          href: "/admin/cargo",
+          icon: <BoxIcon className="h-4 w-4" />,
+        },
+        {
+          label: "Paiements",
+          href: "/admin/paiements",
+          icon: <CreditCard className="h-4 w-4" />,
+        },
+        {
+          label: "Marchandises",
+          href: "/admin/marchandise",
+          icon: <Package className="h-4 w-4" />,
+        },
+      ],
+    },
+  ],
+  TRANSPORTEUR: [
+    {
+      title: "Principal",
+      items: [
+        {
+          label: "Tableau de bord",
+          href: "/transporteur/dashboard",
+          icon: <LayoutDashboard className="h-4 w-4" />,
+        },
+        {
+          label: "Mon compte",
+          href: "/transporteur/compte",
+          icon: <UserCircle className="h-4 w-4" />,
+        },
+      ],
+    },
+    {
+      title: "Mes services",
+      items: [
+        {
+          label: "Mes transports",
+          href: "/transporteur/transports",
+          icon: <Truck className="h-4 w-4" />,
+        },
+        {
+          label: "Mes annonces",
+          href: "/transporteur/annonces",
+          icon: <Megaphone className="h-4 w-4" />,
+        },
+        {
+          label: "Réservations",
+          href: "/transporteur/reservations",
+          icon: <CalendarCheck className="h-4 w-4" />,
+        },
+        {
+          label: "Cargo",
+          href: "/transporteur/cargo",
+          icon: <BoxIcon className="h-4 w-4" />,
+        },
+      ],
+    },
+  ],
+  CLIENT: [
+    {
+      title: "Principal",
+      items: [
+        {
+          label: "Tableau de bord",
+          href: "/client/dashboard",
+          icon: <LayoutDashboard className="h-4 w-4" />,
+        },
+        {
+          label: "Mon compte",
+          href: "/client/compte",
+          icon: <UserCircle className="h-4 w-4" />,
+        },
+      ],
+    },
+    {
+      title: "Mes services",
+      items: [
+        {
+          label: "Annonces",
+          href: "/client/annonces",
+          icon: <Megaphone className="h-4 w-4" />,
+        },
+        {
+          label: "Mes réservations",
+          href: "/client/reservations",
+          icon: <CalendarCheck className="h-4 w-4" />,
+        },
+        {
+          label: "Mes marchandises",
+          href: "/client/marchandise",
+          icon: <Package className="h-4 w-4" />,
+        },
+        {
+          label: "Mes paiements",
+          href: "/client/paiements",
+          icon: <CreditCard className="h-4 w-4" />,
+        },
+        {
+          label: "Cargo",
+          href: "/client/cargo",
+          icon: <BoxIcon className="h-4 w-4" />,
+        },
+      ],
+    },
+  ],
+};
+
+const ROLE_META: Record<string, { label: string; color: string }> = {
+  ADMIN: {
+    label: "Administrateur",
+    color: "bg-rose-500/20 text-rose-300 border-rose-500/20",
+  },
+  TRANSPORTEUR: {
+    label: "Transporteur",
+    color: "bg-cyan-500/20 text-cyan-300 border-cyan-500/20",
+  },
+  CLIENT: {
+    label: "Client",
+    color: "bg-emerald-500/20 text-emerald-300 border-emerald-500/20",
+  },
+};
+
+interface AppSidebarProps {
+  children: React.ReactNode;
+}
+
+export function AppSidebar({ children }: AppSidebarProps) {
+  const { data: session } = useSession();
+  const pathname = usePathname() ?? "";
+  const role = session?.user?.role ?? "CLIENT";
+  const groups = NAV[role] ?? [];
+  const roleMeta = ROLE_META[role];
+  const initials =
+    session?.user?.name
+      ?.split(" ")
+      .map((n) => n[0])
+      .slice(0, 2)
+      .join("")
+      .toUpperCase() ?? "U";
+
+  return (
+    <SidebarProvider>
+      <div className="flex min-h-screen w-full">
+        <Sidebar collapsible="icon">
+          {/* ── Header ─────────────────────────────── */}
+          <SidebarHeader className="pb-4 pt-5 px-3 border-b border-white/8">
+            {/* Logo row */}
+            <div className="flex items-center gap-3 px-1">
+              <div className="relative shrink-0">
+                <div className="bg-blue-600 rounded-xl p-2 shadow-lg shadow-blue-900/50">
+                  <Truck className="h-5 w-5 text-white" />
+                </div>
+                <div className="absolute inset-0 bg-blue-500/40 rounded-xl blur-md -z-10" />
+              </div>
+              <div className="group-data-[collapsible=icon]:hidden min-w-0">
+                <p className="font-bold text-[15px] text-white leading-tight tracking-wide">
+                  Covam
+                </p>
+                <p className="text-[10px] text-sidebar-foreground/40 leading-tight">
+                  Plateforme de Transport
+                </p>
+              </div>
+            </div>
+            {/* Role chip */}
+            <div
+              className={cn(
+                "mt-3 mx-1 flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold",
+                "border w-fit group-data-[collapsible=icon]:hidden",
+                roleMeta.color,
+              )}
+            >
+              <Shield className="h-3 w-3" />
+              {roleMeta.label}
+            </div>
+          </SidebarHeader>
+
+          {/* ── Nav ─────────────────────────────────── */}
+          <SidebarContent className="px-2 py-3">
+            {groups.map((group, gi) => (
+              <SidebarGroup key={group.title} className={gi > 0 ? "mt-2" : ""}>
+                <SidebarGroupLabel className="text-sidebar-foreground/30 text-[10px] font-bold uppercase tracking-[0.13em] px-2 mb-1 group-data-[collapsible=icon]:hidden">
+                  {group.title}
+                </SidebarGroupLabel>
+                <SidebarMenu className="gap-0.5">
+                  {group.items.map((item) => {
+                    const active = pathname.startsWith(item.href);
+                    return (
+                      <SidebarMenuItem key={item.href} className="relative">
+                        {/* Active left indicator */}
+                        {active && (
+                          <span className="pointer-events-none absolute left-0 top-1/2 -translate-y-1/2 h-5 w-0.75 rounded-r-full bg-blue-400 group-data-[collapsible=icon]:hidden" />
+                        )}
+                        <SidebarMenuButton
+                          asChild
+                          isActive={active}
+                          tooltip={item.label}
+                          className={cn(
+                            "rounded-lg h-9 transition-all duration-150",
+                            active
+                              ? "bg-blue-500/15 text-blue-100 hover:bg-blue-500/20 data-[active=true]:bg-blue-500/15 data-[active=true]:text-blue-100"
+                              : "text-sidebar-foreground/55 hover:text-sidebar-foreground/90 hover:bg-white/6",
+                          )}
+                        >
+                          <Link href={item.href}>
+                            <span
+                              className={cn(
+                                "flex items-center justify-center h-6 w-6 rounded-md shrink-0 transition-colors",
+                                active
+                                  ? "bg-blue-500/25 text-blue-300"
+                                  : "text-sidebar-foreground/40 group-hover:text-sidebar-foreground/70",
+                              )}
+                            >
+                              {item.icon}
+                            </span>
+                            <span className="text-sm font-medium">
+                              {item.label}
+                            </span>
+                          </Link>
+                        </SidebarMenuButton>
+                      </SidebarMenuItem>
+                    );
+                  })}
+                </SidebarMenu>
+              </SidebarGroup>
+            ))}
+          </SidebarContent>
+
+          {/* ── Footer ──────────────────────────────── */}
+          <SidebarFooter className="p-3 border-t border-white/8">
+            {/* Profile card */}
+            <div className="flex items-center gap-2.5 rounded-xl bg-white/5 border border-white/8 px-3 py-2.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2">
+              <div className="relative shrink-0">
+                <Avatar className="h-8 w-8">
+                  <AvatarImage
+                    src={session?.user?.image ?? undefined}
+                    alt={session?.user?.name ?? ""}
+                    className="object-cover"
+                  />
+                  <AvatarFallback className="text-xs bg-blue-600 text-white font-bold">
+                    {initials}
+                  </AvatarFallback>
+                </Avatar>
+                <span className="absolute -bottom-0.5 -right-0.5 h-2.5 w-2.5 rounded-full bg-emerald-400 ring-2 ring-sidebar" />
+              </div>
+              <div className="flex-1 min-w-0 group-data-[collapsible=icon]:hidden">
+                <p className="text-xs font-semibold text-sidebar-foreground truncate leading-tight">
+                  {session?.user?.name}
+                </p>
+                <p className="text-[10px] text-sidebar-foreground/40 truncate leading-tight mt-0.5">
+                  {session?.user?.email}
+                </p>
+              </div>
+            </div>
+            {/* Logout */}
+            <button
+              onClick={() => signOut({ callbackUrl: "/" })}
+              className="mt-1.5 flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs font-medium text-sidebar-foreground/40 hover:text-rose-400 hover:bg-rose-500/10 transition-colors group-data-[collapsible=icon]:justify-center"
+            >
+              <LogOut className="h-3.5 w-3.5 shrink-0" />
+              <span className="group-data-[collapsible=icon]:hidden">
+                Déconnexion
+              </span>
+            </button>
+          </SidebarFooter>
+        </Sidebar>
+
+        {/* ── Main area ───────────────────────────── */}
+        <div className="flex flex-1 flex-col min-w-0">
+          <header className="flex h-14 items-center border-b px-4 gap-3 sticky top-0 bg-background/95 backdrop-blur-sm z-10 shadow-sm">
+            <SidebarTrigger className="text-muted-foreground hover:text-foreground transition-colors" />
+            <div className="h-5 w-px bg-border" />
+            <div className="flex flex-1 items-center gap-2 min-w-0">
+              <span className="text-sm font-semibold text-foreground/80">
+                {role === "ADMIN"
+                  ? "Administration"
+                  : role === "TRANSPORTEUR"
+                    ? "Espace Transporteur"
+                    : "Espace Client"}
+              </span>
+            </div>
+            {/* Avatar shortcut top-right */}
+            <div className="relative shrink-0">
+              <Avatar className="h-8 w-8 cursor-default">
+                <AvatarImage
+                  src={session?.user?.image ?? undefined}
+                  alt={session?.user?.name ?? ""}
+                  className="object-cover"
+                />
+                <AvatarFallback className="text-xs bg-blue-100 text-blue-700 font-bold">
+                  {initials}
+                </AvatarFallback>
+              </Avatar>
+              <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-background" />
+            </div>
+          </header>
+          <main className="flex-1 p-4 sm:p-6 overflow-auto">{children}</main>
+        </div>
+      </div>
+    </SidebarProvider>
+  );
+}
