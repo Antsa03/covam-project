@@ -16,6 +16,7 @@ import {
   Phone,
   Mail,
   Star,
+  Sparkles,
 } from "lucide-react";
 
 const stats = [
@@ -114,8 +115,22 @@ export default function LandingPage() {
 
       {/* ── Hero ── */}
       <section className="flex flex-col items-center justify-center px-4 pt-36 pb-16 bg-linear-to-b from-white to-slate-50">
-        <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase mb-8 bg-linear-to-r from-slate-900 via-slate-800 to-slate-900 text-white/80 shadow-sm border border-white/10">
-          <span className="w-1.5 h-1.5 rounded-full bg-blue-400 animate-pulse" />
+        <span className="relative inline-flex items-center gap-2 rounded-full px-5 py-1.5 text-xs font-semibold tracking-widest uppercase mb-8 text-white/90 overflow-hidden"
+          style={{
+            background: "linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%)",
+            boxShadow: "0 0 0 1px rgba(255,255,255,0.08), 0 2px 12px rgba(0,0,0,0.3)",
+          }}
+        >
+          {/* dust layer */}
+          <span
+            aria-hidden
+            className="pointer-events-none absolute inset-0 opacity-30"
+            style={{
+              backgroundImage:
+                "radial-gradient(circle at 20% 30%, rgba(99,102,241,0.35) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(59,130,246,0.25) 0%, transparent 50%), radial-gradient(circle at 55% 10%, rgba(255,255,255,0.06) 0%, transparent 40%)",
+            }}
+          />
+          <Sparkles className="h-3 w-3 text-blue-400 shrink-0" />
           Plateforme de transport · Madagascar
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-900 text-center tracking-tight leading-tight mb-6 max-w-3xl">
