@@ -20,7 +20,7 @@ export function LandingNavbar() {
       className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ${
         scrolled
           ? "bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm"
-          : "bg-transparent"
+          : "bg-white/60 backdrop-blur-sm"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
@@ -28,42 +28,19 @@ export function LandingNavbar() {
           <div className="bg-blue-600 rounded-lg p-1.5">
             <Truck className="h-5 w-5 text-white" />
           </div>
-          <span
-            className={`text-xl font-bold transition-colors duration-300 ${
-              scrolled ? "text-slate-900" : "text-white"
-            }`}
-          >
+          <span className="text-xl font-bold text-slate-900">
             Covam
           </span>
         </div>
 
-        <nav
-          className={`hidden md:flex items-center gap-8 text-sm font-medium transition-colors duration-300 ${
-            scrolled ? "text-slate-600" : "text-white/80"
-          }`}
-        >
-          <a
-            href="#fonctionnalites"
-            className={`transition-colors ${
-              scrolled ? "hover:text-blue-600" : "hover:text-white"
-            }`}
-          >
+        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+          <a href="#fonctionnalites" className="hover:text-blue-600 transition-colors">
             Fonctionnalités
           </a>
-          <a
-            href="#comment-ca-marche"
-            className={`transition-colors ${
-              scrolled ? "hover:text-blue-600" : "hover:text-white"
-            }`}
-          >
+          <a href="#comment-ca-marche" className="hover:text-blue-600 transition-colors">
             Comment ça marche
           </a>
-          <a
-            href="#contact"
-            className={`transition-colors ${
-              scrolled ? "hover:text-blue-600" : "hover:text-white"
-            }`}
-          >
+          <a href="#contact" className="hover:text-blue-600 transition-colors">
             Contact
           </a>
         </nav>
@@ -72,17 +49,13 @@ export function LandingNavbar() {
           <Button
             variant="ghost"
             asChild
-            className={`hidden sm:flex transition-colors duration-300 ${
-              scrolled
-                ? "text-slate-700 hover:text-slate-900 hover:bg-slate-100"
-                : "text-white/90 hover:text-white hover:bg-white/10"
-            }`}
+            className="hidden sm:flex text-slate-700 hover:text-slate-900 hover:bg-slate-100"
           >
             <Link href="/auth/login">Se connecter</Link>
           </Button>
           <Button
             asChild
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-600/30"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-500/25"
           >
             <Link href="/auth/register">
               S&apos;inscrire <ArrowRight className="ml-1.5 h-4 w-4" />
