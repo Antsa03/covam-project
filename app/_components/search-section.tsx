@@ -1,8 +1,21 @@
 "use client";
 
-import { useState, useCallback, useEffect, useRef } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
 import {
   MapPin,
   Search,
@@ -16,7 +29,7 @@ import {
   PackageSearch,
   Banknote,
   CalendarDays,
-  X,
+  Check,
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -90,7 +103,6 @@ function avatarHue(seed: string): number {
 // ─── Ville Combobox ───────────────────────────────────────────────────────────
 
 function VilleCombobox({
-  label,
   value,
   onChange,
   placeholder = "Toutes les villes",
@@ -101,120 +113,62 @@ function VilleCombobox({
   placeholder?: string;
 }) {
   const [open, setOpen] = useState(false);
-  const [query, setQuery] = useState("");
-  const ref = useRef<HTMLDivElement>(null);
-  const inputRef = useRef<HTMLInputElement>(null);
-
-  const filtered = query.trim()
-    ? VILLES.filter((v) => v.toLowerCase().includes(query.toLowerCase()))
-    : VILLES;
-
-  // Close on outside click
-  useEffect(() => {
-    function handleClick(e: MouseEvent) {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        setOpen(false);
-        setQuery("");
-      }
-    }
-    document.addEventListener("mousedown", handleClick);
-    return () => document.removeEventListener("mousedown", handleClick);
-  }, []);
-
-  function select(v: string) {
-    onChange(v);
-    setOpen(false);
-    setQuery("");
-  }
 
   return (
-    <div ref={ref} className="relative w-full">
-      {/* Trigger */}
-      <button
-        type="button"
-        onClick={() => {
-          setOpen((o) => !o);
-          setTimeout(() => inputRef.current?.focus(), 50);
-        }}
-        className="w-full flex items-center justify-between gap-1 text-sm bg-transparent outline-none cursor-pointer"
-      >
-        <span className={value ? "text-slate-800 font-medium" : "text-slate-400"}>
-          {value || placeholder}
-        </span>
-        <div className="flex items-center gap-1 shrink-0">
-          {value && (
-            <span
-              role="button"
-              tabIndex={0}
-              onClick={(e) => { e.stopPropagation(); onChange(""); }}
-              onKeyDown={(e) => e.key === "Enter" && (e.stopPropagation(), onChange(""))}
-              className="text-slate-300 hover:text-slate-500 transition-colors"
-            >
-              <X className="h-3 w-3" />
-            </span>
-          )}
-          <ChevronDown className={`h-3.5 w-3.5 text-slate-400 transition-transform duration-200 ${open ? "rotate-180" : ""}`} />
-        </div>
-      </button>
-
-      {/* Dropdown panel */}
-      {open && (
-        <div className="absolute left-0 top-full mt-2 z-50 w-56 bg-white border border-slate-200 rounded-xl shadow-lg shadow-slate-200/60 overflow-hidden">
-          {/* Search input */}
-          <div className="flex items-center gap-2 px-3 py-2.5 border-b border-slate-100">
-            <Search className="h-3.5 w-3.5 text-slate-400 shrink-0" />
-            <input
-              ref={inputRef}
-              type="text"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Rechercher…"
-              className="flex-1 text-sm text-slate-800 bg-transparent outline-none placeholder:text-slate-300"
-            />
-            {query && (
-              <button type="button" onClick={() => setQuery("")} className="text-slate-300 hover:text-slate-500">
-                <X className="h-3 w-3" />
-              </button>
-            )}
-          </div>
-
-          {/* Options */}
-          <div className="max-h-52 overflow-y-auto py-1">
-            {/* "All" option */}
-            <button
-              type="button"
-              onClick={() => select("")}
-              className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                value === ""
-                  ? "bg-blue-50 text-blue-700 font-semibold"
-                  : "text-slate-400 hover:bg-slate-50"
-              }`}
-            >
-              {placeholder}
-            </button>
-
-            {filtered.length === 0 ? (
-              <p className="px-4 py-3 text-xs text-slate-400 text-center">Aucun résultat</p>
-            ) : (
-              filtered.map((v) => (
-                <button
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <button
+          type="button"
+          role="combobox"
+          aria-expanded={open}
+          className="w-full flex items-center justify-between gap-2 text-sm bg-transparent outline-none cursor-pointer"
+        >
+          <span className={value ? "text-slate-800 font-medium" : "text-slate-400"}>
+            {value || placeholder}
+          </span>
+          <ChevronDown
+            className={`h-3.5 w-3.5 text-slate-400 shrink-0 transition-transform duration-200 ${
+              open ? "rotate-180" : ""
+            }`}
+          />
+        </button>
+      </PopoverTrigger>
+      <PopoverContent className="w-56 p-0 rounded-xl border border-slate-200 shadow-lg shadow-slate-200/60" align="start">
+        <Command>
+          <CommandInput placeholder="Rechercher…" className="h-9 text-sm" />
+          <CommandList>
+            <CommandEmpty className="text-xs text-slate-400 py-4 text-center">
+              Aucun résultat
+            </CommandEmpty>
+            <CommandGroup>
+              {/* “All cities” reset option */}
+              <CommandItem
+                value="__all__"
+                onSelect={() => { onChange(""); setOpen(false); }}
+                className="text-slate-400 text-sm"
+              >
+                <Check className={`mr-2 h-4 w-4 ${value === "" ? "opacity-100 text-blue-600" : "opacity-0"}`} />
+                {placeholder}
+              </CommandItem>
+              {VILLES.map((v) => (
+                <CommandItem
                   key={v}
-                  type="button"
-                  onClick={() => select(v)}
-                  className={`w-full text-left px-4 py-2 text-sm transition-colors ${
-                    value === v
-                      ? "bg-blue-50 text-blue-700 font-semibold"
-                      : "text-slate-700 hover:bg-slate-50"
-                  }`}
+                  value={v}
+                  onSelect={(current) => {
+                    onChange(current === value ? "" : current);
+                    setOpen(false);
+                  }}
+                  className="text-sm"
                 >
+                  <Check className={`mr-2 h-4 w-4 ${value === v ? "opacity-100 text-blue-600" : "opacity-0"}`} />
                   {v}
-                </button>
-              ))
-            )}
-          </div>
-        </div>
-      )}
-    </div>
+                </CommandItem>
+              ))}
+            </CommandGroup>
+          </CommandList>
+        </Command>
+      </PopoverContent>
+    </Popover>
   );
 }
 
