@@ -181,13 +181,13 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
             {/* Stats */}
             <div className="flex sm:flex-col gap-5 sm:gap-4">
               <div>
-                <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-1">
+                <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-2">
                   <Weight className="h-3 w-3" /> Poids dispo
                 </span>
-                <p className="text-xl font-extrabold text-slate-900 leading-none">
-                  {annonce.capacite_transport}
-                  <span className="text-sm font-medium text-slate-400 ml-1">t</span>
-                </p>
+                <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1 text-sm font-bold">
+                  <Weight className="h-3.5 w-3.5 text-emerald-500" />
+                  {annonce.capacite_transport} t
+                </span>
               </div>
               <div>
                 <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-1">
