@@ -185,6 +185,103 @@ async function main() {
   ]);
   console.log("✅ 3 Transports créés.");
 
+  // ─── Transporteurs supplémentaires pour enrichir les annonces ─────────────
+  const extraUsers = await Promise.all([
+    prisma.utilisateur.create({
+      data: {
+        nom: "Andriamampionona",
+        prenom: "Solo",
+        cin: "MG-T-003",
+        phone: "+261 34 00 777 88",
+        adresse: "Quartier Ambalavao",
+        city: "Fianarantsoa",
+        date_naissance: new Date("1979-04-12"),
+        email: "solo.andria@transport.mg",
+        mot_de_passe: passwordHash,
+        role: "TRANSPORTEUR",
+      },
+    }),
+    prisma.utilisateur.create({
+      data: {
+        nom: "Ratsiraka",
+        prenom: "Lova",
+        cin: "MG-T-004",
+        phone: "+261 33 00 888 11",
+        adresse: "Route Nationale 4, Mahajanga",
+        city: "Mahajanga",
+        date_naissance: new Date("1985-08-22"),
+        email: "lova.ratsiraka@transport.mg",
+        mot_de_passe: passwordHash,
+        role: "TRANSPORTEUR",
+      },
+    }),
+    prisma.utilisateur.create({
+      data: {
+        nom: "Rabemananjara",
+        prenom: "Fara",
+        cin: "MG-T-005",
+        phone: "+261 32 00 999 44",
+        adresse: "Rue du Commerce, Toamasina",
+        city: "Toamasina",
+        date_naissance: new Date("1991-01-30"),
+        email: "fara.rabe@transport.mg",
+        mot_de_passe: passwordHash,
+        role: "TRANSPORTEUR",
+      },
+    }),
+  ]);
+
+  const [transporteur3, transporteur4, transporteur5] = await Promise.all(
+    extraUsers.map((u) =>
+      prisma.transporteur.create({ data: { utilisateur_id: u.id_utilisateur } }),
+    ),
+  );
+
+  const extraTransports = await Promise.all([
+    prisma.transport.create({
+      data: {
+        description: "Semi-remorque 30 tonnes, long courrier nationaux",
+        marque: "Scania",
+        immatriculation: "MG-FN-1100",
+        type: "Semi-remorque",
+        images: "/uploads/transports/semi1.jpg",
+        transporteur_id: transporteur3.id_transporteur,
+      },
+    }),
+    prisma.transport.create({
+      data: {
+        description: "Camion pick-up 4x4, routes difficiles acceptées",
+        marque: "Mitsubishi",
+        immatriculation: "MG-MJ-2200",
+        type: "Pick-up",
+        images: "/uploads/transports/pickup1.jpg",
+        transporteur_id: transporteur4.id_transporteur,
+      },
+    }),
+    prisma.transport.create({
+      data: {
+        description: "Camion porteur 10 tonnes, côte est desservie",
+        marque: "Isuzu",
+        immatriculation: "MG-TM-3300",
+        type: "Porteur",
+        images: "/uploads/transports/porteur1.jpg",
+        transporteur_id: transporteur5.id_transporteur,
+      },
+    }),
+    prisma.transport.create({
+      data: {
+        description: "Fourgon frigorifique compact, livraisons express",
+        marque: "Ford",
+        immatriculation: "MG-AA-4400",
+        type: "Fourgon frigo",
+        images: "/uploads/transports/fourgon2.jpg",
+        transporteur_id: transporteur3.id_transporteur,
+      },
+    }),
+  ]);
+
+  console.log("✅ 3 transporteurs supplémentaires + 4 transports créés.");
+
   // ─── PbTransports (Annonces) ───────────────────────────────────────────────
   const [pb1, pb2, pb3, pb4, pb5] = await Promise.all([
     prisma.pbTransport.create({
@@ -243,7 +340,143 @@ async function main() {
       },
     }),
   ]);
-  console.log("✅ 5 PbTransports (annonces) créés.");
+
+  // Annonces supplémentaires pour alimenter la recherche
+  await Promise.all([
+    prisma.pbTransport.create({
+      data: {
+        depart: "Antananarivo",
+        destination: "Toliara",
+        capacite_transport: 20.0,
+        status: "ACTIVE",
+        prix_par_kilo: 1100.0,
+        prix_fragile_par_kilo: 1900.0,
+        transport_id: extraTransports[0].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Antananarivo",
+        destination: "Antsiranana",
+        capacite_transport: 25.0,
+        status: "ACTIVE",
+        prix_par_kilo: 1300.0,
+        prix_fragile_par_kilo: 2200.0,
+        transport_id: extraTransports[0].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Mahajanga",
+        destination: "Antananarivo",
+        capacite_transport: 6.0,
+        status: "ACTIVE",
+        prix_par_kilo: 950.0,
+        prix_fragile_par_kilo: 1600.0,
+        transport_id: extraTransports[1].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Toamasina",
+        destination: "Antananarivo",
+        capacite_transport: 9.0,
+        status: "ACTIVE",
+        prix_par_kilo: 820.0,
+        prix_fragile_par_kilo: 1450.0,
+        transport_id: extraTransports[2].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Toamasina",
+        destination: "Fianarantsoa",
+        capacite_transport: 7.0,
+        status: "ACTIVE",
+        prix_par_kilo: 900.0,
+        prix_fragile_par_kilo: 1550.0,
+        transport_id: extraTransports[2].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Fianarantsoa",
+        destination: "Toliara",
+        capacite_transport: 8.0,
+        status: "ACTIVE",
+        prix_par_kilo: 650.0,
+        prix_fragile_par_kilo: 1100.0,
+        transport_id: extraTransports[0].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Antsirabe",
+        destination: "Antananarivo",
+        capacite_transport: 4.0,
+        status: "ACTIVE",
+        prix_par_kilo: 450.0,
+        prix_fragile_par_kilo: 800.0,
+        transport_id: extraTransports[3].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Morondava",
+        destination: "Antananarivo",
+        capacite_transport: 10.0,
+        status: "ACTIVE",
+        prix_par_kilo: 1050.0,
+        prix_fragile_par_kilo: 1750.0,
+        transport_id: extraTransports[1].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Antananarivo",
+        destination: "Morondava",
+        capacite_transport: 11.0,
+        status: "ACTIVE",
+        prix_par_kilo: 1050.0,
+        prix_fragile_par_kilo: 1750.0,
+        transport_id: extraTransports[1].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Antananarivo",
+        destination: "Antsirabe",
+        capacite_transport: 8.0,
+        status: "ACTIVE",
+        prix_par_kilo: 420.0,
+        prix_fragile_par_kilo: 750.0,
+        transport_id: transport3.id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Nosy Be",
+        destination: "Antananarivo",
+        capacite_transport: 3.0,
+        status: "ACTIVE",
+        prix_par_kilo: 1500.0,
+        prix_fragile_par_kilo: 2500.0,
+        transport_id: extraTransports[3].id_transport,
+      },
+    }),
+    prisma.pbTransport.create({
+      data: {
+        depart: "Antsiranana",
+        destination: "Mahajanga",
+        capacite_transport: 12.0,
+        status: "ACTIVE",
+        prix_par_kilo: 1100.0,
+        prix_fragile_par_kilo: 1900.0,
+        transport_id: extraTransports[0].id_transport,
+      },
+    }),
+  ]);
+  console.log("✅ 17 PbTransports (annonces) créés.");
 
   // ─── PbMarchandises (Annonces Clients) ────────────────────────────────────
   await Promise.all([
