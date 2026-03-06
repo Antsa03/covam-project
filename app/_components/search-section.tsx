@@ -374,45 +374,52 @@ function PaginationBar({
   );
 
   return (
-    <div className="flex items-center justify-center gap-1 mt-8">
+    <div className="flex items-center justify-center gap-1.5 mt-10">
+      {/* Prev */}
       <button
         onClick={() => onPage(page - 1)}
         disabled={page <= 1 || loading}
-        className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-slate-200 text-slate-500 text-sm font-medium hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150"
       >
-        <ChevronLeft className="h-4 w-4" />
+        <ChevronLeft className="h-3.5 w-3.5" />
+        <span className="hidden sm:inline">Précédent</span>
       </button>
 
-      {visible.map((item, i) =>
-        item === "…" ? (
-          <span
-            key={`ellipsis-${i}`}
-            className="w-8 h-8 flex items-center justify-center text-slate-400 text-sm select-none"
-          >
-            …
-          </span>
-        ) : (
-          <button
-            key={item}
-            onClick={() => onPage(item as number)}
-            disabled={loading}
-            className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors disabled:cursor-not-allowed ${
-              item === page
-                ? "bg-blue-600 text-white shadow-sm"
-                : "border border-slate-200 text-slate-600 hover:bg-slate-50"
-            }`}
-          >
-            {item}
-          </button>
-        ),
-      )}
+      {/* Pages */}
+      <div className="flex items-center gap-1">
+        {visible.map((item, i) =>
+          item === "…" ? (
+            <span
+              key={`ellipsis-${i}`}
+              className="w-9 h-9 flex items-center justify-center text-slate-400 text-sm select-none"
+            >
+              ···
+            </span>
+          ) : (
+            <button
+              key={item}
+              onClick={() => onPage(item as number)}
+              disabled={loading}
+              className={`w-9 h-9 flex items-center justify-center rounded-xl text-sm font-semibold transition-all duration-150 disabled:cursor-not-allowed ${
+                item === page
+                  ? "bg-slate-900 text-white shadow-md shadow-slate-900/20 scale-105"
+                  : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
+              }`}
+            >
+              {item}
+            </button>
+          ),
+        )}
+      </div>
 
+      {/* Next */}
       <button
         onClick={() => onPage(page + 1)}
         disabled={page >= totalPages || loading}
-        className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+        className="flex items-center gap-1.5 px-3 h-9 rounded-xl border border-slate-200 text-slate-500 text-sm font-medium hover:border-slate-300 hover:bg-slate-50 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-150"
       >
-        <ChevronRight className="h-4 w-4" />
+        <span className="hidden sm:inline">Suivant</span>
+        <ChevronRight className="h-3.5 w-3.5" />
       </button>
     </div>
   );
