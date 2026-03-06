@@ -33,7 +33,7 @@ export function LandingNavbar() {
           </span>
         </div>
 
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+        <nav className="hidden md:flex items-center gap-8 text-[0.92rem] font-semibold text-slate-800 tracking-tight">
           <a href="#fonctionnalites" className="hover:text-blue-600 transition-colors">
             Fonctionnalités
           </a>
@@ -49,7 +49,7 @@ export function LandingNavbar() {
           <Button
             variant="ghost"
             asChild
-            className="hidden sm:flex text-slate-700 hover:text-slate-900 hover:bg-slate-100"
+            className="hidden sm:flex text-slate-800 font-semibold tracking-tight hover:text-blue-600 hover:bg-blue-50/50"
           >
             <Link href="/auth/login">Se connecter</Link>
           </Button>
