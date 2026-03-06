@@ -133,7 +133,9 @@ export default function LandingPage() {
           <Sparkles className="h-3 w-3 text-blue-400 shrink-0" />
           Plateforme de transport · Madagascar
         </span>
-        <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-900 text-center tracking-tight leading-tight mb-6 max-w-3xl">
+        <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-center tracking-tight leading-tight mb-6 max-w-3xl"
+          style={{ color: "#2d3748" }}
+        >
           Expédiez vos marchandises en toute{" "}
           <span className="text-blue-600">simplicité</span>
         </h1>
