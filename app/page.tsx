@@ -1,4 +1,4 @@
-﻿import Link from "next/link";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { LandingNavbar } from "@/components/shared/landing-navbar";
 import { SearchSection } from "./_components/search-section";
@@ -21,7 +21,7 @@ import {
 const stats = [
   { label: "Transporteurs inscrits", value: "120+", icon: Truck },
   { label: "Clients", value: "400+", icon: Users },
-  { label: "Livraisons effectuÃ©es", value: "1 800+", icon: Package },
+  { label: "Livraisons effectuées", value: "1 800+", icon: Package },
   { label: "Villes desservies", value: "10+", icon: MapPin },
 ];
 
@@ -30,7 +30,7 @@ const features = [
     icon: Zap,
     title: "Trouvez un transporteur vite",
     description:
-      "Plus besoin de passer des heures Ã  appeler. En quelques clics, vous voyez les trajets disponibles et vous rÃ©servez.",
+      "Plus besoin de passer des heures à appeler. En quelques clics, vous voyez les trajets disponibles et vous réservez.",
     color: "text-amber-500",
     bg: "bg-amber-50",
   },
@@ -38,23 +38,23 @@ const features = [
     icon: Shield,
     title: "Paiements en toute confiance",
     description:
-      "Le paiement ne part que quand la livraison est confirmÃ©e. Pas de stress, pas de mauvaises surprises.",
+      "Le paiement ne part que quand la livraison est confirmée. Pas de stress, pas de mauvaises surprises.",
     color: "text-blue-500",
     bg: "bg-blue-50",
   },
   {
     icon: BarChart3,
-    title: "Gardez un Å“il sur vos colis",
+    title: "Gardez un œil sur vos colis",
     description:
-      "Date de dÃ©part, statut de la rÃ©servation, historique â€” tout est dans votre tableau de bord, accessible oÃ¹ vous Ãªtes.",
+      "Date de départ, statut de la réservation, historique — tout est dans votre tableau de bord, accessible où vous êtes.",
     color: "text-emerald-500",
     bg: "bg-emerald-50",
   },
   {
     icon: Globe,
-    title: "Trajets partout Ã  Madagascar",
+    title: "Trajets partout à Madagascar",
     description:
-      "Antananarivo, Toamasina, Mahajanga, Fianarantsoaâ€¦ les transporteurs couvrent les grands axes comme les rÃ©gions.",
+      "Antananarivo, Toamasina, Mahajanga, Fianarantsoa… les transporteurs couvrent les grands axes comme les régions.",
     color: "text-violet-500",
     bg: "bg-violet-50",
   },
@@ -63,41 +63,41 @@ const features = [
 const clientSteps = [
   {
     step: "01",
-    title: "CrÃ©ez votre compte",
-    desc: "Ã‡a prend deux minutes. Nom, email, mot de passe â€” c'est tout pour commencer.",
+    title: "Créez votre compte",
+    desc: "Ça prend deux minutes. Nom, email, mot de passe — c'est tout pour commencer.",
   },
   {
     step: "02",
     title: "Parcourez les annonces",
-    desc: "Filtrez par ville de dÃ©part ou de destination, comparez les prix et les capacitÃ©s disponibles.",
+    desc: "Filtrez par ville de départ ou de destination, comparez les prix et les capacités disponibles.",
   },
   {
     step: "03",
-    title: "RÃ©servez un trajet",
-    desc: "Indiquez le poids, la nature et les dÃ©tails de votre marchandise, puis confirmez la rÃ©servation.",
+    title: "Réservez un trajet",
+    desc: "Indiquez le poids, la nature et les détails de votre marchandise, puis confirmez la réservation.",
   },
   {
     step: "04",
     title: "Suivez et payez",
-    desc: "Restez au courant de l'avancement et rÃ©glez directement depuis votre espace client.",
+    desc: "Restez au courant de l'avancement et réglez directement depuis votre espace client.",
   },
 ];
 
 const transporteurSteps = [
   {
     step: "01",
-    title: "CrÃ©ez votre profil",
-    desc: "Enregistrez vos informations, ajoutez votre ou vos vÃ©hicules avec les photos et l'immatriculation.",
+    title: "Créez votre profil",
+    desc: "Enregistrez vos informations, ajoutez votre ou vos véhicules avec les photos et l'immatriculation.",
   },
   {
     step: "02",
     title: "Publiez vos annonces",
-    desc: "Pour chaque trajet prÃ©vu, indiquez le dÃ©part, la destination, la capacitÃ© disponible et votre tarif au kilo.",
+    desc: "Pour chaque trajet prévu, indiquez le départ, la destination, la capacité disponible et votre tarif au kilo.",
   },
   {
     step: "03",
     title: "Recevez des demandes",
-    desc: "Les clients trouvent votre annonce, rÃ©servent et vous Ãªtes notifiÃ© par la plateforme.",
+    desc: "Les clients trouvent votre annonce, réservent et vous êtes notifié par la plateforme.",
   },
   {
     step: "04",
@@ -109,21 +109,21 @@ const transporteurSteps = [
 export default function LandingPage() {
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col">
-      {/* â”€â”€ Navbar â”€â”€ */}
+      {/* ── Navbar ── */}
       <LandingNavbar />
 
-      {/* â”€â”€ Hero â”€â”€ */}
+      {/* ── Hero ── */}
       <section className="flex flex-col items-center justify-center px-4 pt-20 pb-8 bg-linear-to-b from-white to-slate-50">
         <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-5">
-          Plateforme de transport Â· Madagascar
+          Plateforme de transport · Madagascar
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-900 text-center tracking-tight leading-tight mb-4 max-w-3xl">
-          ExpÃ©diez vos marchandises en toute{" "}
-          <span className="text-blue-600">simplicitÃ©</span>
+          Expédiez vos marchandises en toute{" "}
+          <span className="text-blue-600">simplicité</span>
         </h1>
         <p className="text-slate-500 text-center max-w-xl mb-10 text-base leading-relaxed">
           Trouvez un transporteur fiable sur les grands axes malgaches. Comparez
-          les trajets, rÃ©servez en ligne et suivez vos colis en temps rÃ©el.
+          les trajets, réservez en ligne et suivez vos colis en temps réel.
         </p>
 
         {/* Functional search + results */}
@@ -137,16 +137,16 @@ export default function LandingPage() {
           </span>
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-            Aucune commission cachÃ©e
+            Aucune commission cachée
           </span>
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-            Transporteurs vÃ©rifiÃ©s
+            Transporteurs vérifiés
           </span>
         </div>
       </section>
 
-      {/* â”€â”€ Stats â”€â”€ */}
+      {/* ── Stats ── */}
       <section className="py-16 bg-white border-t border-b border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
@@ -165,7 +165,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* â”€â”€ Features â”€â”€ */}
+      {/* ── Features ── */}
       <section id="fonctionnalites" className="py-28 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -173,11 +173,11 @@ export default function LandingPage() {
               Ce que vous y trouvez
             </span>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
-              Simple, pas compliquÃ©
+              Simple, pas compliqué
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
-              On a conÃ§u Covam pour que n&apos;importe qui puisse s&apos;y
-              retrouver dÃ¨s la premiÃ¨re utilisation.
+              On a conçu Covam pour que n&apos;importe qui puisse s&apos;y
+              retrouver dès la première utilisation.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -203,15 +203,15 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* â”€â”€ How it works â”€â”€ */}
+      {/* ── How it works ── */}
       <section id="comment-ca-marche" className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
-              Comment Ã§a marche
+              Comment ça marche
             </span>
             <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
-              En quatre Ã©tapes chrono
+              En quatre étapes chrono
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
               Que vous envoyiez un colis ou que vous proposiez vos services, le
@@ -285,7 +285,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* â”€â”€ Testimonials â”€â”€ */}
+      {/* ── Testimonials ── */}
       <section className="py-28 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
@@ -300,23 +300,23 @@ export default function LandingPage() {
             {[
               {
                 name: "Harisoa R.",
-                role: "CommerÃ§ante, Antananarivo",
+                role: "Commerçante, Antananarivo",
                 quote:
-                  "J'envoie des marchandises chaque semaine Ã  Toamasina. Avant Covam, je passais des heures Ã  trouver un camion. Maintenant c'est rÃ©glÃ© en 5 minutes.",
+                  "J'envoie des marchandises chaque semaine à Toamasina. Avant Covam, je passais des heures à trouver un camion. Maintenant c'est réglé en 5 minutes.",
                 stars: 5,
               },
               {
                 name: "Jean-Pierre M.",
                 role: "Transporteur, Fianarantsoa",
                 quote:
-                  "La plateforme m'a permis de remplir mes camions mÃªme pour les petits trajets. Mon chiffre d'affaires a grimpÃ© de 40% en trois mois.",
+                  "La plateforme m'a permis de remplir mes camions même pour les petits trajets. Mon chiffre d'affaires a grimpé de 40% en trois mois.",
                 stars: 5,
               },
               {
                 name: "Voahangy T.",
                 role: "Importatrice, Mahajanga",
                 quote:
-                  "Le suivi des rÃ©servations et le paiement sÃ©curisÃ©, c'est exactement ce dont on avait besoin. Je ne peux plus m'en passer.",
+                  "Le suivi des réservations et le paiement sécurisé, c'est exactement ce dont on avait besoin. Je ne peux plus m'en passer.",
                 stars: 5,
               },
             ].map(({ name, role, quote, stars }) => (
@@ -350,7 +350,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* â”€â”€ CTA â”€â”€ */}
+      {/* ── CTA ── */}
       <section className="py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-blue-700 to-indigo-800" />
         <div
@@ -365,7 +365,7 @@ export default function LandingPage() {
         <div className="absolute -bottom-10 right-1/3 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
         <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 tracking-tight">
-            PrÃªt Ã  essayer ?
+            Prêt à essayer ?
           </h2>
           <p className="text-lg text-blue-100 mb-10 max-w-xl mx-auto leading-relaxed">
             L&apos;inscription ne prend pas plus de deux minutes. Pas de carte
@@ -377,7 +377,7 @@ export default function LandingPage() {
               size="lg"
               className="bg-white text-blue-700 hover:bg-blue-50 shadow-2xl font-bold px-9 text-base rounded-xl"
             >
-              <Link href="/auth/register">Je dÃ©marre maintenant</Link>
+              <Link href="/auth/register">Je démarre maintenant</Link>
             </Button>
             <Button
               asChild
@@ -390,7 +390,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* â”€â”€ Footer â”€â”€ */}
+      {/* ── Footer ── */}
       <footer id="contact" className="bg-[#0D1B3E] text-white/70">
         <div className="h-1 w-full bg-linear-to-r from-blue-500/80 via-blue-500 to-blue-500/40" />
 
@@ -402,8 +402,8 @@ export default function LandingPage() {
                 COVAM
               </p>
               <p className="text-sm leading-relaxed text-white/55 max-w-xs">
-                COVAM est nÃ© d&apos;un constat simple : trouver un transporteur
-                fiable Ã  Madagascar prend trop de temps. On a voulu changer Ã§a.
+                COVAM est né d&apos;un constat simple : trouver un transporteur
+                fiable à Madagascar prend trop de temps. On a voulu changer ça.
               </p>
               <div className="mt-6 flex items-center gap-2">
                 <span className="inline-block w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
@@ -465,10 +465,10 @@ export default function LandingPage() {
           {/* Bottom bar */}
           <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35">
             <span>
-              Â© {new Date().getFullYear()} Covam. Tous droits rÃ©servÃ©s.
+              © {new Date().getFullYear()} Covam. Tous droits réservés.
             </span>
             <span className="uppercase tracking-widest">
-              Plateforme de transport Â· Madagascar
+              Plateforme de transport · Madagascar
             </span>
           </div>
         </div>
