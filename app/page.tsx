@@ -20,10 +20,10 @@ import {
 } from "lucide-react";
 
 const stats = [
-  { label: "Transporteurs inscrits", value: "120+", icon: Truck },
-  { label: "Clients", value: "400+", icon: Users },
-  { label: "Livraisons effectuées", value: "1 800+", icon: Package },
-  { label: "Villes desservies", value: "10+", icon: MapPin },
+  { label: "Transporteurs inscrits", value: "120+", icon: Truck, desc: "sur tout Madagascar" },
+  { label: "Clients satisfaits", value: "400+", icon: Users, desc: "expéditeurs actifs" },
+  { label: "Livraisons effectuées", value: "1 800+", icon: Package, desc: "en toute sécurité" },
+  { label: "Villes desservies", value: "10+", icon: MapPin, desc: "grands axes couverts" },
 ];
 
 const features = [
@@ -165,18 +165,46 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-16 bg-white border-t border-b border-slate-100">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-            {stats.map(({ label, value, icon: Icon }) => (
-              <div key={label} className="text-center group">
-                <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 group-hover:bg-blue-100 rounded-2xl mb-3 transition-colors">
-                  <Icon className="h-7 w-7 text-blue-600" />
+      <section className="py-20 relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%)" }}
+      >
+        {/* ambient dust */}
+        <div aria-hidden className="pointer-events-none absolute inset-0">
+          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl" />
+        </div>
+
+        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-3xl overflow-hidden border border-white/8 shadow-2xl">
+            {stats.map(({ label, value, icon: Icon, desc }, i) => (
+              <div
+                key={label}
+                className={`group flex flex-col items-center text-center px-6 py-10 bg-white/[0.03] hover:bg-white/[0.07] transition-colors duration-300 ${
+                  i < stats.length - 1 ? "" : ""
+                }`}
+              >
+                {/* icon */}
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 bg-white/5 border border-white/8 group-hover:border-blue-500/40 group-hover:bg-blue-500/10 transition-all duration-300">
+                  <Icon className="h-5 w-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
                 </div>
-                <div className="text-4xl font-extrabold text-slate-900 mb-1 tracking-tight">
+
+                {/* value */}
+                <div
+                  className="text-4xl font-extrabold tracking-tight mb-1"
+                  style={{
+                    background: "linear-gradient(135deg, #fff 30%, #94a3b8 100%)",
+                    WebkitBackgroundClip: "text",
+                    WebkitTextFillColor: "transparent",
+                  }}
+                >
                   {value}
                 </div>
-                <div className="text-sm text-slate-500 font-medium">{label}</div>
+
+                {/* label */}
+                <p className="text-sm font-semibold text-slate-300 mb-1">{label}</p>
+
+                {/* desc */}
+                <p className="text-xs text-slate-500">{desc}</p>
               </div>
             ))}
           </div>
