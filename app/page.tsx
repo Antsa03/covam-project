@@ -148,19 +148,20 @@ export default function LandingPage() {
         <SearchSection />
 
         {/* Trust markers */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400 text-sm">
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-            Inscription gratuite
-          </span>
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-            Aucune commission cachée
-          </span>
-          <span className="flex items-center gap-1.5">
-            <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
-            Transporteurs vérifiés
-          </span>
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
+          {[
+            "Inscription gratuite",
+            "Aucune commission cachée",
+            "Transporteurs vérifiés",
+          ].map((text) => (
+            <span
+              key={text}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white border border-slate-200 shadow-sm text-slate-700 text-sm font-medium"
+            >
+              <CheckCircle2 className="h-4 w-4 text-emerald-500 shrink-0" />
+              {text}
+            </span>
+          ))}
         </div>
       </section>
 
