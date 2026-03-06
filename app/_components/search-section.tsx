@@ -10,6 +10,8 @@ import {
   Weight,
   ArrowRight,
   ChevronDown,
+  ChevronLeft,
+  ChevronRight,
   Loader2,
   PackageSearch,
   Banknote,
@@ -258,7 +260,77 @@ function SkeletonCard() {
     </div>
   );
 }
+// ─── Pagination Bar ────────────────────────────────────────────────────────────────────
 
+function PaginationBar({
+  page,
+  totalPages,
+  onPage,
+  loading = false,
+}: {
+  page: number;
+  totalPages: number;
+  onPage: (p: number) => void;
+  loading?: boolean;
+}) {
+  if (totalPages <= 1) return null;
+
+  const items: (number | "…")[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+      items.push(i);
+    } else if (i === page - 2 || i === page + 2) {
+      items.push("…");
+    }
+  }
+  const visible = items.filter(
+    (item, i) => !(item === "…" && items[i - 1] === "…"),
+  );
+
+  return (
+    <div className="flex items-center justify-center gap-1 mt-8">
+      <button
+        onClick={() => onPage(page - 1)}
+        disabled={page <= 1 || loading}
+        className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+
+      {visible.map((item, i) =>
+        item === "…" ? (
+          <span
+            key={`ellipsis-${i}`}
+            className="w-8 h-8 flex items-center justify-center text-slate-400 text-sm select-none"
+          >
+            …
+          </span>
+        ) : (
+          <button
+            key={item}
+            onClick={() => onPage(item as number)}
+            disabled={loading}
+            className={`w-8 h-8 flex items-center justify-center rounded-lg text-sm font-medium transition-colors disabled:cursor-not-allowed ${
+              item === page
+                ? "bg-blue-600 text-white shadow-sm"
+                : "border border-slate-200 text-slate-600 hover:bg-slate-50"
+            }`}
+          >
+            {item}
+          </button>
+        ),
+      )}
+
+      <button
+        onClick={() => onPage(page + 1)}
+        disabled={page >= totalPages || loading}
+        className="w-8 h-8 flex items-center justify-center rounded-lg border border-slate-200 text-slate-500 hover:bg-slate-50 disabled:opacity-40 disabled:cursor-not-allowed transition-colors"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+    </div>
+  );
+}
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export function SearchSection() {
@@ -266,29 +338,33 @@ export function SearchSection() {
   const [destination, setDestination] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [total, setTotal] = useState(0);
-  const [hasMore, setHasMore] = useState(false);
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
-  const [loadingMore, setLoadingMore] = useState(false);
   const [searched, setSearched] = useState(false);
   const [preview, setPreview] = useState<SearchResult[]>([]);
   const [previewLoading, setPreviewLoading] = useState(true);
+  const [previewPage, setPreviewPage] = useState(1);
+  const [previewTotal, setPreviewTotal] = useState(0);
 
-  // Auto-load a preview of live trips on mount
+  // Load preview trips — refetches whenever previewPage changes
   useEffect(() => {
+    setPreviewLoading(true);
     (async () => {
       try {
-        const res = await fetch(`/api/search?page=1&limit=${PREVIEW_LIMIT}`);
+        const res = await fetch(
+          `/api/search?page=${previewPage}&limit=${PREVIEW_LIMIT}`,
+        );
         if (!res.ok) return;
         const json: SearchResponse = await res.json();
         setPreview(json.data);
+        setPreviewTotal(json.total);
       } catch {
         // silently ignore
       } finally {
         setPreviewLoading(false);
       }
     })();
-  }, []);
+  }, [previewPage]);
 
   const buildUrl = (p: number) => {
     const params = new URLSearchParams({ page: String(p), limit: String(LIMIT) });
@@ -309,12 +385,9 @@ export function SearchSection() {
         const json: SearchResponse = await res.json();
         setResults(json.data);
         setTotal(json.total);
-        setHasMore(json.hasMore);
-        setPage(1);
       } catch {
         setResults([]);
         setTotal(0);
-        setHasMore(false);
       } finally {
         setLoading(false);
       }
@@ -323,20 +396,21 @@ export function SearchSection() {
     [depart, destination],
   );
 
-  const handleLoadMore = async () => {
-    const nextPage = page + 1;
-    setLoadingMore(true);
+  const goToPage = async (p: number) => {
+    if (p === page) return;
+    setPage(p);
+    setLoading(true);
     try {
-      const res = await fetch(buildUrl(nextPage));
+      const res = await fetch(buildUrl(p));
       if (!res.ok) throw new Error("Erreur du serveur");
       const json: SearchResponse = await res.json();
-      setResults((prev) => [...prev, ...json.data]);
-      setHasMore(json.hasMore);
-      setPage(nextPage);
+      setResults(json.data);
+      setTotal(json.total);
     } catch {
-      // silently ignore
+      setResults([]);
+      setTotal(0);
     } finally {
-      setLoadingMore(false);
+      setLoading(false);
     }
   };
 
@@ -419,10 +493,17 @@ export function SearchSection() {
 
       {/* ── Preview — shown before any search ── */}
       {!searched && (
-        <div className="w-full max-w-3xl mt-8">
-          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-4">
-            Trajets disponibles en ce moment
-          </p>
+        <div className="w-full max-w-3xl mt-16">
+          <div className="flex items-center justify-between mb-4">
+            <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
+              Trajets disponibles en ce moment
+            </p>
+            {!previewLoading && previewTotal > 0 && (
+              <span className="text-xs text-slate-400">
+                {previewTotal} trajet{previewTotal > 1 ? "s" : ""}
+              </span>
+            )}
+          </div>
           <div className="flex flex-col gap-4">
             {previewLoading
               ? [...Array(PREVIEW_LIMIT)].map((_, i) => <SkeletonCard key={i} />)
@@ -432,6 +513,12 @@ export function SearchSection() {
                   ))
                 : null}
           </div>
+          <PaginationBar
+            page={previewPage}
+            totalPages={Math.ceil(previewTotal / PREVIEW_LIMIT)}
+            onPage={setPreviewPage}
+            loading={previewLoading}
+          />
         </div>
       )}
 
@@ -498,29 +585,14 @@ export function SearchSection() {
             </div>
           )}
 
-          {/* Load more */}
-          {!loading && hasMore && (
-            <div className="flex justify-center mt-8">
-              <Button
-                variant="outline"
-                size="sm"
-                disabled={loadingMore}
-                onClick={handleLoadMore}
-                className="border-slate-200 text-slate-500 hover:bg-slate-50 rounded-xl px-8 py-5 text-sm font-medium"
-              >
-                {loadingMore ? (
-                  <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
-                    Chargement…
-                  </>
-                ) : (
-                  <>
-                    Voir plus de trajets
-                    <ChevronDown className="ml-2 h-4 w-4" />
-                  </>
-                )}
-              </Button>
-            </div>
+          {/* Pagination */}
+          {total > 0 && (
+            <PaginationBar
+              page={page}
+              totalPages={Math.ceil(total / LIMIT)}
+              onPage={goToPage}
+              loading={loading}
+            />
           )}
         </section>
       )}
