@@ -120,23 +120,27 @@ export default function LandingPage() {
 
       {/* ── Hero ── */}
       <section className="flex flex-col items-center justify-center px-4 pt-36 pb-16 bg-linear-to-b from-white to-slate-50">
-        <span className="relative inline-flex items-center gap-2 rounded-full px-5 py-1.5 text-xs font-semibold tracking-widest uppercase mb-8 text-white/90 overflow-hidden"
+        <span 
+          className="relative inline-flex items-center gap-2.5 rounded-full px-6 py-1.5 text-[0.65rem] sm:text-xs font-bold tracking-[0.2em] uppercase mb-8 transition-transform hover:scale-105 duration-300 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] group cursor-default"
           style={{
-            background: "linear-gradient(135deg, #0f172a 0%, #1e293b 40%, #0f172a 100%)",
-            boxShadow: "0 0 0 1px rgba(255,255,255,0.08), 0 2px 12px rgba(0,0,0,0.3)",
+            background: "linear-gradient(145deg, #1e1b4b 0%, #312e81 100%)",
+            boxShadow: "inset 0 1px 1px rgba(255,255,255,0.2), 0 4px 24px -6px rgba(49, 46, 129, 0.6)",
+            border: "1px solid rgba(255, 255, 255, 0.12)",
           }}
         >
-          {/* dust layer */}
+          {/* Dust & light effects */}
           <span
             aria-hidden
-            className="pointer-events-none absolute inset-0 opacity-30"
+            className="pointer-events-none absolute inset-0 opacity-50 mix-blend-overlay rounded-full overflow-hidden"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 20% 30%, rgba(99,102,241,0.35) 0%, transparent 55%), radial-gradient(circle at 80% 70%, rgba(59,130,246,0.25) 0%, transparent 50%), radial-gradient(circle at 55% 10%, rgba(255,255,255,0.06) 0%, transparent 40%)",
+                "radial-gradient(circle at 50% 0%, rgba(129,140,248,0.8) 0%, transparent 60%)",
             }}
           />
-          <Sparkles className="h-3 w-3 text-blue-400 shrink-0" />
-          Plateforme de transport · Madagascar
+          <MapPin className="relative z-10 h-3.5 w-3.5 text-indigo-300 drop-shadow-[0_0_8px_rgba(165,180,252,0.8)] shrink-0 animate-bounce" />
+          <span className="relative z-10 text-indigo-50 drop-shadow-sm font-semibold">
+            Plateforme de transport <span className="text-indigo-400 font-black px-1">·</span> Madagascar
+          </span>
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-center tracking-tight leading-tight mb-6 max-w-3xl"
           style={{ color: "#2d3748" }}
