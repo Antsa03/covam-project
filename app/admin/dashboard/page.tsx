@@ -26,13 +26,21 @@ type StatColor =
 
 const colorMap: Record<StatColor, { bg: string; icon: string; ring: string }> =
   {
-    blue: { bg: "bg-blue-50", icon: "text-blue-600", ring: "ring-blue-100" },
-    indigo: {
-      bg: "bg-indigo-50",
-      icon: "text-indigo-600",
-      ring: "ring-indigo-100",
+    blue: {
+      bg: "bg-primary/10",
+      icon: "text-primary",
+      ring: "ring-primary/20",
     },
-    cyan: { bg: "bg-cyan-50", icon: "text-cyan-600", ring: "ring-cyan-100" },
+    indigo: {
+      bg: "bg-primary/10",
+      icon: "text-primary",
+      ring: "ring-primary/20",
+    },
+    cyan: {
+      bg: "bg-primary/10",
+      icon: "text-primary",
+      ring: "ring-primary/20",
+    },
     emerald: {
       bg: "bg-emerald-50",
       icon: "text-emerald-600",
@@ -104,7 +112,7 @@ export default function AdminDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-start gap-3 pb-5 border-b border-slate-100">
-        <div className="mt-0.5 h-8 w-1 rounded-full bg-blue-600 shrink-0" />
+        <div className="mt-0.5 h-8 w-1 rounded-full bg-primary shrink-0" />
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
             Tableau de bord
@@ -200,8 +208,8 @@ export default function AdminDashboard() {
       <Card className="border-0 shadow-sm bg-white">
         <CardHeader className="pb-3 border-b border-slate-100">
           <CardTitle className="text-sm font-semibold text-slate-700 flex items-center gap-2">
-            <div className="w-7 h-7 rounded-lg bg-blue-50 ring-1 ring-blue-100 flex items-center justify-center">
-              <CreditCard className="h-3.5 w-3.5 text-blue-600" />
+            <div className="w-7 h-7 rounded-lg bg-primary/10 ring-1 ring-primary/20 flex items-center justify-center">
+              <CreditCard className="h-3.5 w-3.5 text-primary" />
             </div>
             Résumé des paiements
           </CardTitle>

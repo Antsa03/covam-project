@@ -89,75 +89,103 @@ export function MarchandiseFormModal({
       onOpenChange={onOpenChange}
       title={isEdit ? "Modifier la marchandise" : "Publier une marchandise"}
       description="Publiez une demande de transport pour votre marchandise."
+      size="lg"
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
           <FormField
             control={form.control}
             name="label"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description / label</FormLabel>
+                <FormLabel>
+                  Description / label{" "}
+                  <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="Ex: Télé 42 pouces" {...field} />
+                  <Input
+                    className="h-10"
+                    placeholder="Ex : Télé 42 pouces"
+                    {...field}
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
             )}
           />
 
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="category"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Catégorie</FormLabel>
-                  <Select
-                    onValueChange={field.onChange}
-                    defaultValue={field.value}
-                  >
+          {/* Caractéristiques */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Caractéristiques
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="category"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Catégorie <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <Select
+                      onValueChange={field.onChange}
+                      defaultValue={field.value}
+                    >
+                      <FormControl>
+                        <SelectTrigger>
+                          <SelectValue placeholder="Catégorie" />
+                        </SelectTrigger>
+                      </FormControl>
+                      <SelectContent>
+                        <SelectItem value="ELECTRONIQUE">
+                          Électronique
+                        </SelectItem>
+                        <SelectItem value="ALIMENTAIRE">Alimentaire</SelectItem>
+                        <SelectItem value="VETEMENT">Vêtement</SelectItem>
+                        <SelectItem value="MOBILIER">Mobilier</SelectItem>
+                        <SelectItem value="AUTRE">Autre</SelectItem>
+                      </SelectContent>
+                    </Select>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="date_depart"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Date souhaitée{" "}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
                     <FormControl>
-                      <SelectTrigger>
-                        <SelectValue placeholder="Catégorie" />
-                      </SelectTrigger>
+                      <Input type="date" className="h-10" {...field} />
                     </FormControl>
-                    <SelectContent>
-                      <SelectItem value="ELECTRONIQUE">Électronique</SelectItem>
-                      <SelectItem value="ALIMENTAIRE">Alimentaire</SelectItem>
-                      <SelectItem value="VETEMENT">Vêtement</SelectItem>
-                      <SelectItem value="MOBILIER">Mobilier</SelectItem>
-                      <SelectItem value="AUTRE">Autre</SelectItem>
-                    </SelectContent>
-                  </Select>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="date_depart"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Date souhaitée</FormLabel>
-                  <FormControl>
-                    <Input type="date" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="poids"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Poids (kg)</FormLabel>
+                  <FormLabel>
+                    Poids (kg) <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.1" {...field} />
+                    <Input
+                      type="number"
+                      step="0.1"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -168,9 +196,17 @@ export function MarchandiseFormModal({
               name="dimension"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Dimension (m³)</FormLabel>
+                  <FormLabel>
+                    Dimension (m³){" "}
+                    <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input type="number" step="0.01" {...field} />
+                    <Input
+                      type="number"
+                      step="0.01"
+                      className="h-10"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -178,62 +214,101 @@ export function MarchandiseFormModal({
             />
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="depart"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Ville départ</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Dakar" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="destination"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Destination</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Thiès" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          {/* Trajet */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Trajet
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="depart"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Ville départ{" "}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-10"
+                        placeholder="Antananarivo"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="destination"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Destination <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-10"
+                        placeholder="Toamasina"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <FormField
-              control={form.control}
-              name="nom_recepteur"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Nom récepteur</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Mohamed Diallo" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            <FormField
-              control={form.control}
-              name="tel_recepteur"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Tél. récepteur</FormLabel>
-                  <FormControl>
-                    <Input placeholder="+221 77 xxx xx xx" {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+          {/* Récepteur */}
+          <div>
+            <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide mb-3">
+              Récepteur
+            </p>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <FormField
+                control={form.control}
+                name="nom_recepteur"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Nom récepteur{" "}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-10"
+                        placeholder="Ravo Rakoto"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="tel_recepteur"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>
+                      Tél. récepteur{" "}
+                      <span className="text-red-500 ml-0.5">*</span>
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        className="h-10"
+                        placeholder="+261 34 XX XXX XX"
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </div>
           </div>
 
           <div className="flex items-center gap-6">
@@ -259,7 +334,9 @@ export function MarchandiseFormModal({
               name="status"
               render={({ field }) => (
                 <FormItem className="flex-1">
-                  <FormLabel>Statut</FormLabel>
+                  <FormLabel>
+                    Statut <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
@@ -281,15 +358,20 @@ export function MarchandiseFormModal({
             />
           </div>
 
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isEdit ? "Mettre à jour" : "Ajouter"}
             </Button>

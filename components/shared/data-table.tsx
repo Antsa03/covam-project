@@ -80,7 +80,7 @@ export function DataTable<T>({
                 data.map((row, i) => (
                   <TableRow
                     key={i}
-                    className={`border-b border-slate-100 transition-colors hover:bg-blue-50/40 ${
+                    className={`border-b border-slate-100 transition-colors hover:bg-primary/5 ${
                       i % 2 === 1 ? "bg-slate-50/50" : "bg-white"
                     }`}
                   >
@@ -127,7 +127,7 @@ export function DataTable<T>({
                   size="icon"
                   className={`h-8 w-8 rounded-lg text-xs ${
                     p === page
-                      ? "bg-blue-600 hover:bg-blue-700 border-blue-600"
+                      ? "bg-primary hover:bg-primary/90 border-primary"
                       : "border-slate-200 hover:bg-slate-100"
                   }`}
                   onClick={() => onPageChange(p)}

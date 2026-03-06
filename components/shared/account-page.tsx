@@ -258,7 +258,7 @@ export function AccountPage() {
     <div className="space-y-6">
       {/* Page header */}
       <div className="flex items-start gap-3 pb-5 border-b border-slate-100">
-        <div className="mt-0.5 h-8 w-1 rounded-full bg-blue-600 shrink-0" />
+        <div className="mt-0.5 h-8 w-1 rounded-full bg-primary shrink-0" />
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
             Mon compte
@@ -271,7 +271,7 @@ export function AccountPage() {
 
       {/* Profile hero card */}
       <Card className="border-0 shadow-sm bg-white overflow-hidden">
-        <div className="h-20 bg-linear-to-r from-blue-600 to-indigo-600" />
+        <div className="h-20 bg-linear-to-r from-primary to-primary/80" />
         <CardContent className="px-6 pb-6">
           <div className="flex flex-col sm:flex-row sm:items-end gap-4 -mt-10">
             {/* Avatar */}
@@ -289,7 +289,7 @@ export function AccountPage() {
                     alt="Photo de profil"
                     className="object-cover"
                   />
-                  <AvatarFallback className="text-2xl font-bold bg-blue-600 text-white">
+                  <AvatarFallback className="text-2xl font-bold bg-primary text-white">
                     {initials}
                   </AvatarFallback>
                 </Avatar>
@@ -392,8 +392,8 @@ export function AccountPage() {
           <Card className="border-0 shadow-sm bg-white">
             <CardHeader className="pb-3 border-b border-slate-100">
               <CardTitle className="text-base font-semibold text-slate-800 flex items-center gap-2">
-                <div className="w-7 h-7 rounded-lg bg-blue-50 flex items-center justify-center">
-                  <User className="h-3.5 w-3.5 text-blue-600" />
+                <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                  <User className="h-3.5 w-3.5 text-primary" />
                 </div>
                 Informations personnelles
               </CardTitle>
@@ -537,7 +537,7 @@ export function AccountPage() {
                   <Button
                     type="submit"
                     disabled={isPending}
-                    className="w-full bg-blue-600 hover:bg-blue-700 text-white h-10 font-semibold"
+                    className="w-full bg-primary hover:bg-primary/90 text-white h-10 font-semibold"
                   >
                     {isPending
                       ? "Enregistrement…"
@@ -649,8 +649,8 @@ export function AccountPage() {
             <Card className="border-0 shadow-sm bg-white lg:col-span-2">
               <CardHeader className="pb-3 border-b border-slate-100">
                 <CardTitle className="text-base font-semibold text-slate-800 flex items-center gap-2">
-                  <div className="w-7 h-7 rounded-lg bg-cyan-50 flex items-center justify-center">
-                    <Truck className="h-3.5 w-3.5 text-cyan-600" />
+                  <div className="w-7 h-7 rounded-lg bg-primary/10 flex items-center justify-center">
+                    <Truck className="h-3.5 w-3.5 text-primary" />
                   </div>
                   Mes transports enregistrés
                 </CardTitle>
@@ -677,8 +677,8 @@ export function AccountPage() {
                           key={String(t.id_transport)}
                           className="flex items-center gap-3 rounded-xl border border-slate-200 bg-slate-50 px-4 py-3"
                         >
-                          <div className="w-9 h-9 rounded-lg bg-cyan-100 flex items-center justify-center shrink-0">
-                            <Truck className="h-4 w-4 text-cyan-600" />
+                          <div className="w-9 h-9 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                            <Truck className="h-4 w-4 text-primary" />
                           </div>
                           <div className="min-w-0">
                             <p className="text-sm font-semibold text-slate-800 truncate">

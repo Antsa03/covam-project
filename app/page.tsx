@@ -1,5 +1,10 @@
+"use client";
+
+import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
+<<<<<<< HEAD
 import { LandingNavbar } from "@/components/shared/landing-navbar";
 import {
   Truck,
@@ -18,99 +23,39 @@ import {
   CalendarDays,
   Star,
 } from "lucide-react";
+=======
+import { MapPin, Calendar, Phone, Mail } from "lucide-react";
+import Image from "next/image";
+>>>>>>> d3d7c4609e23314e54ab3d6ecd32b4e12b6f3987
 
-const stats = [
-  { label: "Transporteurs inscrits", value: "120+", icon: Truck },
-  { label: "Clients", value: "400+", icon: Users },
-  { label: "Livraisons effectuées", value: "1 800+", icon: Package },
-  { label: "Villes desservies", value: "10+", icon: MapPin },
-];
-
-const features = [
-  {
-    icon: Zap,
-    title: "Trouvez un transporteur vite",
-    description:
-      "Plus besoin de passer des heures à appeler. En quelques clics, vous voyez les trajets disponibles et vous réservez.",
-    color: "text-amber-500",
-    bg: "bg-amber-50",
-  },
-  {
-    icon: Shield,
-    title: "Paiements en toute confiance",
-    description:
-      "Le paiement ne part que quand la livraison est confirmée. Pas de stress, pas de mauvaises surprises.",
-    color: "text-blue-500",
-    bg: "bg-blue-50",
-  },
-  {
-    icon: BarChart3,
-    title: "Gardez un œil sur vos colis",
-    description:
-      "Date de départ, statut de la réservation, historique — tout est dans votre tableau de bord, accessible où vous êtes.",
-    color: "text-emerald-500",
-    bg: "bg-emerald-50",
-  },
-  {
-    icon: Globe,
-    title: "Trajets partout à Madagascar",
-    description:
-      "Antananarivo, Toamasina, Mahajanga, Fianarantsoa… les transporteurs couvrent les grands axes comme les régions.",
-    color: "text-violet-500",
-    bg: "bg-violet-50",
-  },
-];
-
-const clientSteps = [
-  {
-    step: "01",
-    title: "Créez votre compte",
-    desc: "Ça prend deux minutes. Nom, email, mot de passe — c'est tout pour commencer.",
-  },
-  {
-    step: "02",
-    title: "Parcourez les annonces",
-    desc: "Filtrez par ville de départ ou de destination, comparez les prix et les capacités disponibles.",
-  },
-  {
-    step: "03",
-    title: "Réservez un trajet",
-    desc: "Indiquez le poids, la nature et les détails de votre marchandise, puis confirmez la réservation.",
-  },
-  {
-    step: "04",
-    title: "Suivez et payez",
-    desc: "Restez au courant de l'avancement et réglez directement depuis votre espace client.",
-  },
-];
-
-const transporteurSteps = [
-  {
-    step: "01",
-    title: "Créez votre profil",
-    desc: "Enregistrez vos informations, ajoutez votre ou vos véhicules avec les photos et l'immatriculation.",
-  },
-  {
-    step: "02",
-    title: "Publiez vos annonces",
-    desc: "Pour chaque trajet prévu, indiquez le départ, la destination, la capacité disponible et votre tarif au kilo.",
-  },
-  {
-    step: "03",
-    title: "Recevez des demandes",
-    desc: "Dès qu'un client réserve sur une de vos annonces, vous êtes notifié et vous pouvez confirmer.",
-  },
-  {
-    step: "04",
-    title: "Effectuez le transport",
-    desc: "Livrez la marchandise et clôturez la réservation. Le paiement est enregistré dans votre espace.",
-  },
+const VILLES = [
+  "Antananarivo",
+  "Toamasina",
+  "Mahajanga",
+  "Fianarantsoa",
+  "Toliara",
+  "Antsiranana",
+  "Antsirabe",
+  "Morondava",
+  "Ambositra",
+  "Nosy Be",
 ];
 
 export default function HomePage() {
+  const router = useRouter();
+  const [depart, setDepart] = useState("");
+  const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
+
+  const handleSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/auth/login");
+  };
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-[#eff1f6]">
       {/* ── Navbar ── */}
+<<<<<<< HEAD
       <LandingNavbar />
 
       {/* ── Hero ── */}
@@ -206,10 +151,111 @@ export default function HomePage() {
                 Transporteurs vérifiés
               </span>
             </div>
+=======
+      <header className="bg-white shadow-sm sticky top-0 z-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center">
+            <Image
+              src="/img/covam.png"
+              alt="Covam"
+              width={130}
+              height={40}
+              className="h-16 w-auto object-contain"
+            />
+          </div>
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
+            <a
+              href="#comment-ca-marche"
+              className="hover:text-primary transition-colors"
+            >
+              Comment ça marche
+            </a>
+            <a href="#contact" className="hover:text-primary transition-colors">
+              Contact
+            </a>
+          </nav>
+          <div className="flex items-center gap-3">
+            <Button variant="ghost" asChild className="hidden sm:flex">
+              <Link href="/auth/login">Se connecter</Link>
+            </Button>
+            <Button
+              asChild
+              className="bg-primary hover:bg-primary/90 text-white"
+            >
+              <Link href="/auth/register">S&apos;inscrire</Link>
+            </Button>
           </div>
         </div>
-      </section>
+      </header>
 
+      {/* ── Hero ── */}
+      <main className="flex flex-col items-center justify-center px-4 pt-20 pb-12">
+        <h1 className="text-3xl sm:text-4xl lg:text-[2.8rem] font-extrabold text-[#0D1B3E] text-center tracking-wide uppercase leading-tight mb-3">
+          Bienvenue sur notre plateforme de transport
+        </h1>
+        <p className="text-2xl sm:text-3xl font-extrabold text-primary text-center uppercase tracking-wider mb-4">
+          Simplifions vos expéditions
+        </p>
+        <p className="text-slate-500 text-center max-w-xl mb-10 text-sm leading-relaxed">
+          Votre partenaire fiable pour tous vos besoins en transport à
+          Madagascar. Découvrez notre service de mise en relation efficace et
+          sécurisé.
+        </p>
+
+        {/* Search bar */}
+        <form
+          onSubmit={handleSearch}
+          className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 bg-white rounded-xl shadow-md px-4 py-3 w-full max-w-3xl"
+        >
+          <div className="flex items-center gap-2 flex-1 min-w-0 sm:border-r border-slate-200 sm:pr-3">
+            <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
+            <select
+              className="flex-1 text-sm text-slate-700 bg-transparent border-none outline-none py-1 cursor-pointer"
+              value={depart}
+              onChange={(e) => setDepart(e.target.value)}
+            >
+              <option value="">Départ</option>
+              {VILLES.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-2 flex-1 min-w-0 sm:border-r border-slate-200 sm:pr-3">
+            <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
+            <select
+              className="flex-1 text-sm text-slate-700 bg-transparent border-none outline-none py-1 cursor-pointer"
+              value={destination}
+              onChange={(e) => setDestination(e.target.value)}
+            >
+              <option value="">Destination</option>
+              {VILLES.map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="flex items-center gap-2 flex-1 min-w-0">
+            <Calendar className="h-4 w-4 text-slate-400 shrink-0" />
+            <input
+              type="date"
+              className="flex-1 text-sm text-slate-700 bg-transparent border-none outline-none py-1"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+            />
+>>>>>>> d3d7c4609e23314e54ab3d6ecd32b4e12b6f3987
+          </div>
+          <Button
+            type="submit"
+            className="bg-primary hover:bg-primary/90 text-white font-bold px-8 uppercase tracking-wide shrink-0"
+          >
+            Rechercher
+          </Button>
+        </form>
+
+<<<<<<< HEAD
       {/* ── Stats ── */}
       <section className="py-16 bg-white border-b border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -422,20 +468,75 @@ export default function HomePage() {
           </h2>
           <p className="text-lg text-blue-100 mb-10 max-w-xl mx-auto leading-relaxed">
             L&apos;inscription ne prend pas plus de deux minutes. Pas de carte bancaire, pas d&apos;engagement.
+=======
+        {/* Truck illustrations */}
+        <div className="mt-14 flex items-end gap-8 sm:gap-16">
+          <Image src="/img/camion.png" alt="Camion" width={500} height={500} />
+        </div>
+      </main>
+
+      {/* ── How it works ── */}
+      <section id="comment-ca-marche" className="bg-white py-20 px-4">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-2xl font-extrabold text-[#0D1B3E] uppercase tracking-wide mb-2">
+            Comment ça marche
+          </h2>
+          <p className="text-primary font-semibold mb-12 uppercase tracking-wider text-sm">
+            En quatre étapes simples
+>>>>>>> d3d7c4609e23314e54ab3d6ecd32b4e12b6f3987
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+            {[
+              {
+                n: "01",
+                title: "Créez un compte",
+                desc: "Inscrivez-vous gratuitement en tant que client ou transporteur.",
+              },
+              {
+                n: "02",
+                title: "Trouvez un trajet",
+                desc: "Parcourez les annonces disponibles et choisissez selon vos besoins.",
+              },
+              {
+                n: "03",
+                title: "Réservez",
+                desc: "Indiquez vos marchandises et confirmez la réservation en ligne.",
+              },
+              {
+                n: "04",
+                title: "Suivez et payez",
+                desc: "Suivez l'avancement et réglez directement depuis votre tableau de bord.",
+              },
+            ].map(({ n, title, desc }) => (
+              <div key={n} className="flex flex-col items-center text-center">
+                <div className="w-12 h-12 rounded-full bg-primary flex items-center justify-center text-white font-bold text-sm mb-3">
+                  {n}
+                </div>
+                <h3 className="font-semibold text-[#0D1B3E] mb-1">{title}</h3>
+                <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
+              </div>
+            ))}
+          </div>
+          <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
+<<<<<<< HEAD
               size="lg"
               className="bg-white text-blue-700 hover:bg-blue-50 shadow-2xl font-bold px-9 text-base rounded-xl"
+=======
+              className="bg-primary hover:bg-primary/90 text-white px-8"
+>>>>>>> d3d7c4609e23314e54ab3d6ecd32b4e12b6f3987
             >
-              <Link href="/auth/register">Créer un compte gratuit</Link>
+              <Link href="/auth/register">Je démarre maintenant</Link>
             </Button>
             <Button
               asChild
-              size="lg"
               variant="outline"
+<<<<<<< HEAD
               className="border-white/30 text-white bg-white/10 hover:bg-white/20 px-9 text-base rounded-xl backdrop-blur-sm"
+=======
+              className="border-primary text-primary hover:bg-primary/5 px-8"
+>>>>>>> d3d7c4609e23314e54ab3d6ecd32b4e12b6f3987
             >
               <Link href="/auth/login">Se connecter</Link>
             </Button>
@@ -444,80 +545,92 @@ export default function HomePage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer id="contact" className="bg-slate-950 text-slate-400 py-14">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col md:flex-row justify-between gap-10 mb-10">
-            <div className="max-w-xs">
-              <div className="flex items-center gap-2 mb-4">
-                <div className="bg-blue-600 rounded-lg p-1.5">
-                  <Truck className="h-5 w-5 text-white" />
-                </div>
-                <span className="text-xl font-bold text-white">Covam</span>
-              </div>
-              <p className="text-sm leading-relaxed">
-                Covam est né d&apos;un constat simple : trouver un transporteur
+      <footer id="contact" className="bg-[#0D1B3E] text-white/70">
+        {/* orange accent bar */}
+        <div className="h-1 w-full bg-linear-to-r from-secondary/80 via-secondary to-secondary/40" />
+
+        <div className="max-w-5xl mx-auto px-4 pt-14 pb-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
+            {/* Brand */}
+            <div>
+              <Image
+                src="/img/covam.png"
+                alt="Covam"
+                width={120}
+                height={38}
+                className="h-12 w-auto object-contain brightness-0 invert mb-5"
+              />
+              <p className="text-sm leading-relaxed text-white/55 max-w-xs">
+                COVAM est né d&apos;un constat simple : trouver un transporteur
                 fiable à Madagascar prend trop de temps. On a voulu changer ça.
               </p>
+              <div className="mt-6 flex items-center gap-2">
+                <span className="inline-block w-2 h-2 rounded-full bg-secondary animate-pulse" />
+                <span className="text-xs text-white/40 uppercase tracking-widest">
+                  Madagascar
+                </span>
+              </div>
             </div>
-            <div className="grid grid-cols-2 gap-10">
-              <div>
-                <h4 className="text-white font-semibold mb-4 text-sm">
-                  Plateforme
-                </h4>
-                <ul className="space-y-2 text-sm">
-                  <li>
-                    <Link
-                      href="/auth/register"
-                      className="hover:text-white transition-colors"
-                    >
-                      S&apos;inscrire
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      href="/auth/login"
-                      className="hover:text-white transition-colors"
-                    >
-                      Se connecter
-                    </Link>
-                  </li>
-                  <li>
+
+            {/* Liens */}
+            <div>
+              <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+                <span className="w-5 h-0.5 bg-secondary rounded-full inline-block" />
+                Liens rapides
+              </h4>
+              <ul className="space-y-3 text-sm">
+                {[
+                  { href: "/auth/register", label: "S\u2019inscrire" },
+                  { href: "/auth/login", label: "Se connecter" },
+                  {
+                    href: "#comment-ca-marche",
+                    label: "Comment \u00e7a marche",
+                  },
+                ].map(({ href, label }) => (
+                  <li key={href}>
                     <a
-                      href="#fonctionnalites"
-                      className="hover:text-white transition-colors"
+                      href={href}
+                      className="flex items-center gap-2 text-white/55 hover:text-white hover:translate-x-1 transition-all duration-200 group"
                     >
-                      Fonctionnalités
+                      <span className="w-1.5 h-1.5 rounded-full bg-secondary/60 group-hover:bg-secondary transition-colors shrink-0" />
+                      {label}
                     </a>
                   </li>
-                  <li>
-                    <a
-                      href="#comment-ca-marche"
-                      className="hover:text-white transition-colors"
-                    >
-                      Comment ça marche
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div>
-                <h4 className="text-white font-semibold mb-4 text-sm">
-                  Contact
-                </h4>
-                <ul className="space-y-3 text-sm">
-                  <li className="flex items-center gap-2">
-                    <Mail className="h-3.5 w-3.5 shrink-0" />
-                    contact@covam.com
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <Phone className="h-3.5 w-3.5 shrink-0" />
-                    +261 XX XX XXX XX
-                  </li>
-                </ul>
-              </div>
+                ))}
+              </ul>
+            </div>
+
+            {/* Contact */}
+            <div>
+              <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-6 flex items-center gap-2">
+                <span className="w-5 h-0.5 bg-secondary rounded-full inline-block" />
+                Nous contacter
+              </h4>
+              <ul className="space-y-4 text-sm">
+                <li className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <Mail className="h-3.5 w-3.5 text-white/80" />
+                  </div>
+                  <span className="text-white/60">contact@covam.mg</span>
+                </li>
+                <li className="flex items-center gap-3">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
+                    <Phone className="h-3.5 w-3.5 text-white/80" />
+                  </div>
+                  <span className="text-white/60">+261 XX XX XXX XX</span>
+                </li>
+              </ul>
             </div>
           </div>
-          <div className="border-t border-slate-800 pt-6 text-sm text-center">
-            © {new Date().getFullYear()} Covam. Tous droits réservés.
+
+          {/* Bottom bar */}
+          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35">
+            <span>
+              © {new Date().getFullYear()} Covam. Tous droits réservés.
+            </span>
+            <span className="uppercase tracking-widest">
+              Plateforme de transport · Madagascar
+            </span>
           </div>
         </div>
       </footer>

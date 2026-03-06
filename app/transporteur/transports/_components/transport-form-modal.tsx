@@ -72,16 +72,18 @@ export function TransportFormModal({
       title={isEdit ? "Modifier le transport" : "Nouveau transport"}
     >
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-4">
-          <div className="grid grid-cols-2 gap-4">
+        <form onSubmit={form.handleSubmit(handleSubmit)} className="space-y-5">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <FormField
               control={form.control}
               name="marque"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Marque</FormLabel>
+                  <FormLabel>
+                    Marque <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Mercedes" {...field} />
+                    <Input className="h-10" placeholder="Mercedes" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -92,9 +94,15 @@ export function TransportFormModal({
               name="type"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Type</FormLabel>
+                  <FormLabel>
+                    Type <span className="text-red-500 ml-0.5">*</span>
+                  </FormLabel>
                   <FormControl>
-                    <Input placeholder="Camion, Van…" {...field} />
+                    <Input
+                      className="h-10"
+                      placeholder="Camion, Van…"
+                      {...field}
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -106,9 +114,11 @@ export function TransportFormModal({
             name="immatriculation"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Immatriculation</FormLabel>
+                <FormLabel>
+                  Immatriculation <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
-                  <Input placeholder="AB-1234-CD" {...field} />
+                  <Input className="h-10" placeholder="AB-1234-CD" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -119,7 +129,9 @@ export function TransportFormModal({
             name="description"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Description</FormLabel>
+                <FormLabel>
+                  Description <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
                   <Textarea rows={3} {...field} />
                 </FormControl>
@@ -132,7 +144,10 @@ export function TransportFormModal({
             name="images"
             render={({ field }) => (
               <FormItem>
-                <FormLabel>Photo du véhicule</FormLabel>
+                <FormLabel>
+                  Photo du véhicule{" "}
+                  <span className="text-red-500 ml-0.5">*</span>
+                </FormLabel>
                 <FormControl>
                   <ImageUpload
                     value={field.value}
@@ -145,15 +160,20 @@ export function TransportFormModal({
               </FormItem>
             )}
           />
-          <div className="flex justify-end gap-2 pt-2">
+          <div className="flex flex-col-reverse sm:flex-row sm:justify-end gap-3 pt-4 mt-2 border-t">
             <Button
               type="button"
               variant="outline"
+              className="w-full sm:w-auto"
               onClick={() => onOpenChange(false)}
             >
               Annuler
             </Button>
-            <Button type="submit" disabled={isLoading}>
+            <Button
+              type="submit"
+              disabled={isLoading}
+              className="w-full sm:w-auto bg-primary hover:bg-primary/90"
+            >
               {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
               {isEdit ? "Mettre à jour" : "Créer"}
             </Button>

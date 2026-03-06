@@ -67,7 +67,23 @@ export default async function handler(
               destination: true,
               prix_par_kilo: true,
               transport: {
-                select: { marque: true, immatriculation: true },
+                select: {
+                  marque: true,
+                  immatriculation: true,
+                  images: true,
+                  transporteur: {
+                    select: {
+                      utilisateur: {
+                        select: {
+                          nom: true,
+                          prenom: true,
+                          phone: true,
+                          email: true,
+                        },
+                      },
+                    },
+                  },
+                },
               },
             },
           },

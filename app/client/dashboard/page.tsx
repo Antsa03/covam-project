@@ -11,7 +11,11 @@ import { CalendarCheck, CreditCard, BoxIcon, MapPin } from "lucide-react";
 type StatColor = "blue" | "amber" | "emerald";
 const colorMap: Record<StatColor, { bg: string; icon: string; ring: string }> =
   {
-    blue: { bg: "bg-blue-50", icon: "text-blue-600", ring: "ring-blue-100" },
+    blue: {
+      bg: "bg-primary/10",
+      icon: "text-primary",
+      ring: "ring-primary/20",
+    },
     amber: {
       bg: "bg-amber-50",
       icon: "text-amber-600",
@@ -75,7 +79,7 @@ export default function ClientDashboard() {
     <div className="space-y-6">
       {/* Header */}
       <div className="flex items-start gap-3 pb-5 border-b border-slate-100">
-        <div className="mt-0.5 h-8 w-1 rounded-full bg-blue-600 shrink-0" />
+        <div className="mt-0.5 h-8 w-1 rounded-full bg-primary shrink-0" />
         <div>
           <h1 className="text-2xl font-bold tracking-tight text-slate-900">
             Mon espace
@@ -119,13 +123,13 @@ export default function ClientDashboard() {
             {reservations.data.slice(0, 5).map((r, i, arr) => (
               <div
                 key={r.id_reservation}
-                className={`flex items-center justify-between px-4 py-3.5 hover:bg-blue-50/40 transition-colors ${
+                className={`flex items-center justify-between px-4 py-3.5 hover:bg-primary/5 transition-colors ${
                   i < arr.length - 1 ? "border-b border-slate-100" : ""
                 }`}
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                    <MapPin className="h-3.5 w-3.5 text-blue-600" />
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
+                    <MapPin className="h-3.5 w-3.5 text-primary" />
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-semibold text-slate-800 truncate">

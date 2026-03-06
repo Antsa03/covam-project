@@ -1,5 +1,6 @@
 import Link from "next/link";
-import { Truck, CheckCircle2 } from "lucide-react";
+import Image from "next/image";
+import { CheckCircle2 } from "lucide-react";
 
 const benefits = [
   "Mise en relation rapide avec des transporteurs fiables",
@@ -17,7 +18,7 @@ export default function AuthLayout({
     <div className="min-h-screen flex">
       {/* Left — branding panel (hidden on mobile) */}
       <div className="hidden lg:flex lg:w-[45%] relative overflow-hidden flex-col justify-between p-12">
-        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-blue-950 to-indigo-950" />
+        <div className="absolute inset-0 bg-linear-to-br from-primary via-primary/90 to-primary/70" />
         <div
           className="absolute inset-0 opacity-[0.07]"
           style={{
@@ -26,33 +27,36 @@ export default function AuthLayout({
             backgroundSize: "60px 60px",
           }}
         />
-        <div className="absolute top-20 right-0 w-72 h-72 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-56 h-56 bg-indigo-500/20 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-0 w-72 h-72 bg-white/15 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-56 h-56 bg-white/10 rounded-full blur-3xl" />
 
         {/* Logo */}
-        <Link href="/" className="relative flex items-center gap-3 w-fit">
-          <div className="bg-blue-600 rounded-xl p-2">
-            <Truck className="h-6 w-6 text-white" />
-          </div>
-          <span className="text-2xl font-bold text-white">Covam</span>
+        <Link href="/" className="relative w-fit">
+          <Image
+            src="/img/covam.png"
+            alt="Covam"
+            width={140}
+            height={44}
+            className="h-28 w-auto object-contain brightness-0 invert"
+          />
         </Link>
 
         {/* Main content */}
         <div className="relative z-10">
           <h2 className="text-3xl font-bold text-white mb-3 leading-tight">
             La plateforme qui simplifie
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">
+            <span className="block text-transparent bg-clip-text bg-linear-to-r from-white to-white/70">
               le transport de marchandises
             </span>
           </h2>
-          <p className="text-slate-400 mb-8 leading-relaxed">
+          <p className="text-white/70 mb-8 leading-relaxed">
             Connectez-vous avec des transporteurs fiables ou proposez vos
             services de transport sur toute la plateforme nationale.
           </p>
           <ul className="space-y-3">
             {benefits.map((b) => (
-              <li key={b} className="flex items-start gap-3 text-slate-300">
-                <CheckCircle2 className="h-5 w-5 text-emerald-400 shrink-0 mt-0.5" />
+              <li key={b} className="flex items-start gap-3 text-white/80">
+                <CheckCircle2 className="h-5 w-5 text-white/90 shrink-0 mt-0.5" />
                 <span className="text-sm">{b}</span>
               </li>
             ))}
@@ -60,19 +64,22 @@ export default function AuthLayout({
         </div>
 
         {/* Footer */}
-        <p className="relative text-xs text-slate-500">
+        <p className="relative text-xs text-white/50">
           © {new Date().getFullYear()} Covam. Tous droits réservés.
         </p>
       </div>
 
       {/* Right — form panel */}
-      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-slate-50 overflow-y-auto">
+      <div className="flex-1 flex flex-col items-center justify-center p-6 bg-background overflow-y-auto">
         {/* Mobile logo */}
-        <Link href="/" className="flex items-center gap-2 mb-8 lg:hidden">
-          <div className="bg-blue-600 rounded-lg p-1.5">
-            <Truck className="h-5 w-5 text-white" />
-          </div>
-          <span className="text-xl font-bold text-slate-900">Covam</span>
+        <Link href="/" className="mb-8 lg:hidden">
+          <Image
+            src="/img/covam.png"
+            alt="Covam"
+            width={120}
+            height={40}
+            className="h-10 w-auto object-contain"
+          />
         </Link>
         {children}
       </div>
