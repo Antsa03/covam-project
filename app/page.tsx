@@ -114,29 +114,31 @@ export default function HomePage() {
       <LandingNavbar />
 
       {/* ── Hero ── */}
-      <section className="relative pt-16 min-h-[92vh] flex items-center overflow-hidden">
-        {/* Background layers */}
-        <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-[#0a1628] to-[#0d1f3c]" />
+      <section className="relative pt-16 min-h-[92vh] flex items-center overflow-hidden bg-white">
+        {/* Background tint */}
+        <div className="absolute inset-0 bg-linear-to-b from-blue-50/80 via-white to-white" />
+        {/* Accent line at top */}
+        <div className="absolute top-0 inset-x-0 h-0.75 bg-linear-to-r from-blue-500 via-violet-500 to-cyan-400" />
         {/* Glow orbs */}
-        <div className="absolute -top-10 left-1/4 w-150 h-150 bg-blue-600/25 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-indigo-500/20 rounded-full blur-[100px]" />
-        <div className="absolute top-40 right-10 w-70 h-70 bg-cyan-400/10 rounded-full blur-[80px]" />
+        <div className="absolute -top-20 left-1/3 w-150 h-150 bg-blue-200/40 rounded-full blur-[100px]" />
+        <div className="absolute top-32 right-10 w-80 h-80 bg-violet-200/30 rounded-full blur-[80px]" />
+        <div className="absolute bottom-10 left-10 w-70 h-70 bg-cyan-200/20 rounded-full blur-[80px]" />
 
         <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 text-center">
           {/* Pill badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm text-blue-200 mb-8 backdrop-blur-sm">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+          <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-100 px-4 py-1.5 text-sm text-blue-700 font-medium mb-8">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
             🇲🇬 Plateforme malgache de transport de marchandises
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-[72px] font-extrabold text-white leading-[1.08] tracking-tight mb-6">
+          <h1 className="text-5xl sm:text-6xl lg:text-[72px] font-extrabold text-slate-900 leading-[1.08] tracking-tight mb-6">
             Envoyez votre marchandise
-            <span className="block mt-1 text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-300 to-sky-400">
+            <span className="block mt-2 text-transparent bg-clip-text bg-linear-to-r from-blue-600 via-violet-500 to-cyan-500">
               partout à Madagascar
             </span>
           </h1>
-          <p className="max-w-2xl mx-auto text-lg text-slate-300/90 mb-12 leading-relaxed">
+          <p className="max-w-2xl mx-auto text-lg text-slate-500 mb-12 leading-relaxed">
             Trouvez un transporteur de confiance en quelques clics. Comparez les trajets, réservez et suivez votre colis en temps réel.
           </p>
 
@@ -193,7 +195,7 @@ export default function HomePage() {
                   <Button
                     asChild
                     size="lg"
-                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold px-7 py-6 rounded-xl shadow-lg shadow-blue-600/40 transition-all duration-200 hover:shadow-blue-500/50 hover:-translate-y-px"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold px-7 py-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-200 hover:shadow-blue-500/50 hover:-translate-y-px"
                   >
                     <Link href="/auth/register" className="flex items-center gap-2">
                       <Search className="h-5 w-5" />
@@ -205,17 +207,17 @@ export default function HomePage() {
             </div>
 
             {/* Trust markers */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 text-slate-400 text-sm">
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 text-slate-500 text-sm">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 Inscription gratuite
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 Aucune commission cachée
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
                 Transporteurs vérifiés
               </span>
             </div>
