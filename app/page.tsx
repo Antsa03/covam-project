@@ -165,50 +165,29 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-20 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #09090b 0%, #111117 50%, #09090b 100%)" }}
-      >
-        {/* ambient dust */}
-        <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)" }} />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(234,179,8,0.07) 0%, transparent 70%)" }} />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 rounded-full blur-3xl" style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%)" }} />
-        </div>
-
-        <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-3xl overflow-hidden shadow-2xl"
-            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
-          >
+      <section className="py-20 bg-zinc-950">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-3xl overflow-hidden border border-white/[0.06] shadow-xl">
             {stats.map(({ label, value, icon: Icon, desc }) => (
               <div
                 key={label}
-                className="group flex flex-col items-center text-center px-6 py-10 bg-white/[0.025] hover:bg-white/[0.055] transition-colors duration-300"
+                className="group flex flex-col items-center text-center px-6 py-10 bg-zinc-950 hover:bg-zinc-900 transition-colors duration-300"
               >
                 {/* icon */}
-                <div
-                  className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 transition-all duration-300"
-                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
-                >
-                  <Icon className="h-5 w-5 text-indigo-400 group-hover:text-indigo-300 transition-colors" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 bg-white/[0.04] border border-white/[0.07] transition-all duration-300">
+                  <Icon className="h-5 w-5 text-indigo-400" />
                 </div>
 
                 {/* value */}
-                <div
-                  className="text-4xl font-extrabold tracking-tight mb-1"
-                  style={{
-                    background: "linear-gradient(135deg, #ffffff 20%, #a1a1aa 100%)",
-                    WebkitBackgroundClip: "text",
-                    WebkitTextFillColor: "transparent",
-                  }}
-                >
+                <div className="text-4xl font-extrabold tracking-tight mb-1 text-white">
                   {value}
                 </div>
 
                 {/* label */}
-                <p className="text-sm font-semibold mb-1" style={{ color: "#d4d4d8" }}>{label}</p>
+                <p className="text-sm font-semibold text-zinc-300 mb-1">{label}</p>
 
                 {/* desc */}
-                <p className="text-xs" style={{ color: "#52525b" }}>{desc}</p>
+                <p className="text-xs text-zinc-600">{desc}</p>
               </div>
             ))}
           </div>
