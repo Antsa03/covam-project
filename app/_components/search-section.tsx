@@ -419,11 +419,11 @@ export function SearchSection() {
       {/* ── Search bar ── */}
       <form
         onSubmit={handleSearch}
-        className="w-full max-w-3xl bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden"
+        className="w-full max-w-5xl bg-white rounded-2xl shadow-xl shadow-slate-200/60 border border-slate-100 overflow-hidden"
       >
         <div className="flex flex-col sm:flex-row">
           {/* Départ */}
-          <div className="flex-1 flex items-center gap-3 px-5 py-4 sm:border-r border-slate-100">
+          <div className="flex-1 flex items-center gap-3 px-7 py-5 sm:border-r border-slate-100">
             <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
             <div className="flex flex-col w-full">
               <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
@@ -448,7 +448,7 @@ export function SearchSection() {
           </div>
 
           {/* Destination */}
-          <div className="flex-1 flex items-center gap-3 px-5 py-4 sm:border-r border-slate-100">
+          <div className="flex-1 flex items-center gap-3 px-7 py-5 sm:border-r border-slate-100">
             <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
             <div className="flex flex-col w-full">
               <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
@@ -493,7 +493,7 @@ export function SearchSection() {
 
       {/* ── Preview — shown before any search ── */}
       {!searched && (
-        <div className="w-full max-w-3xl mt-16">
+        <div className="w-full max-w-5xl mt-16">
           <div className="flex items-center justify-between mb-4">
             <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest">
               Trajets disponibles en ce moment
@@ -524,7 +524,7 @@ export function SearchSection() {
 
       {/* ── Search Results ── */}
       {searched && (
-        <section className="w-full max-w-3xl mt-8">
+        <section className="w-full max-w-5xl mt-8">
           {/* Header */}
           <div className="flex items-center justify-between mb-6">
             <div>
