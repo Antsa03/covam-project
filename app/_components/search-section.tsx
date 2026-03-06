@@ -15,6 +15,7 @@ import {
   Loader2,
   PackageSearch,
   Banknote,
+  CalendarDays,
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -336,6 +337,7 @@ function PaginationBar({
 export function SearchSection() {
   const [depart, setDepart] = useState("");
   const [destination, setDestination] = useState("");
+  const [date, setDate] = useState("");
   const [results, setResults] = useState<SearchResult[]>([]);
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
@@ -370,6 +372,7 @@ export function SearchSection() {
     const params = new URLSearchParams({ page: String(p), limit: String(LIMIT) });
     if (depart) params.set("depart", depart);
     if (destination) params.set("destination", destination);
+    if (date) params.set("date", date);
     return `/api/search?${params.toString()}`;
   };
 
@@ -393,7 +396,7 @@ export function SearchSection() {
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [depart, destination],
+    [depart, destination, date],
   );
 
   const goToPage = async (p: number) => {
@@ -472,20 +475,40 @@ export function SearchSection() {
             </div>
           </div>
 
+          {/* Date */}
+          <div className="flex items-center gap-3 px-7 py-5 sm:border-r border-slate-100 sm:w-52 shrink-0">
+            <CalendarDays className="h-4 w-4 text-slate-400 shrink-0" />
+            <div className="flex flex-col w-full">
+              <label
+                htmlFor="search-date"
+                className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5"
+              >
+                Date
+              </label>
+              <input
+                id="search-date"
+                type="date"
+                value={date}
+                onChange={(e) => setDate(e.target.value)}
+                className="w-full text-sm text-slate-800 bg-transparent outline-none cursor-pointer"
+              />
+            </div>
+          </div>
+
           {/* CTA */}
-          <div className="flex items-center p-2 sm:p-3">
+          <div className="flex items-center px-3 py-3">
             <Button
               type="submit"
               disabled={loading}
-              size="lg"
-              className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-7 py-5 rounded-xl disabled:opacity-70"
+              size="default"
+              className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-5 rounded-xl disabled:opacity-70 gap-2"
             >
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
               ) : (
                 <Search className="h-4 w-4" />
               )}
-              <span className="ml-2">Rechercher</span>
+              <span className="hidden sm:inline">Rechercher</span>
             </Button>
           </div>
         </div>
