@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -12,6 +12,7 @@ import {
   ChevronDown,
   Loader2,
   PackageSearch,
+  Banknote,
 } from "lucide-react";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
@@ -58,6 +59,7 @@ const VILLES = [
 ];
 
 const LIMIT = 6;
+const PREVIEW_LIMIT = 4;
 
 // ─── Result Card ──────────────────────────────────────────────────────────────
 
@@ -65,88 +67,92 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
   const transporteur = annonce.transport?.transporteur?.utilisateur;
 
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col overflow-hidden group">
-      {/* Header gradient */}
-      <div className="h-2 bg-linear-to-r from-blue-500 to-indigo-600" />
-
-      <div className="p-5 flex flex-col gap-4 flex-1">
-        {/* Route */}
-        <div className="flex items-center gap-2">
-          <div className="flex items-center gap-1.5 rounded-full bg-blue-50 px-3 py-1.5">
-            <MapPin className="h-3.5 w-3.5 text-blue-500 shrink-0" />
-            <span className="text-sm font-semibold text-blue-700">
+    <div className="bg-white rounded-xl border border-slate-200 hover:border-blue-200 hover:shadow-sm transition-all duration-200 flex flex-col sm:flex-row sm:items-center">
+      {/* Route + vehicle */}
+      <div className="flex-1 flex flex-col gap-1 px-5 py-4 sm:border-r border-slate-100">
+        <div className="flex items-center gap-2 flex-wrap">
+          <div className="flex items-center gap-1.5">
+            <MapPin className="h-3.5 w-3.5 text-slate-400 shrink-0" />
+            <span className="text-sm font-semibold text-slate-800">
               {annonce.depart}
             </span>
           </div>
-          <ArrowRight className="h-4 w-4 text-slate-300 shrink-0" />
-          <div className="flex items-center gap-1.5 rounded-full bg-indigo-50 px-3 py-1.5">
-            <MapPin className="h-3.5 w-3.5 text-indigo-500 shrink-0" />
-            <span className="text-sm font-semibold text-indigo-700">
+          <ArrowRight className="h-3.5 w-3.5 text-slate-300 shrink-0" />
+          <div className="flex items-center gap-1.5">
+            <MapPin className="h-3.5 w-3.5 text-blue-500 shrink-0" />
+            <span className="text-sm font-semibold text-blue-700">
               {annonce.destination}
             </span>
           </div>
         </div>
-
-        {/* Vehicle info */}
-        <div className="flex items-center gap-2 text-sm text-slate-600">
-          <Truck className="h-4 w-4 text-slate-400 shrink-0" />
-          <span className="font-medium">{annonce.transport.marque}</span>
-          <span className="text-slate-300">·</span>
-          <span className="text-slate-500">{annonce.transport.type}</span>
-        </div>
-
-        {/* Stats grid */}
-        <div className="grid grid-cols-2 gap-3">
-          <div className="bg-slate-50 rounded-xl p-3">
-            <div className="flex items-center gap-1.5 mb-1">
-              <Weight className="h-3.5 w-3.5 text-slate-400" />
-              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
-                Capacité
+        <div className="flex items-center gap-1.5 text-xs text-slate-400">
+          <Truck className="h-3 w-3 shrink-0" />
+          <span>
+            {annonce.transport.marque} · {annonce.transport.type}
+          </span>
+          {transporteur && (
+            <>
+              <span className="text-slate-200">·</span>
+              <span>
+                {transporteur.prenom} {transporteur.nom}
               </span>
-            </div>
-            <p className="text-lg font-extrabold text-slate-800">
-              {annonce.capacite_transport}
-              <span className="text-sm font-medium text-slate-500 ml-1">t</span>
-            </p>
-          </div>
-          <div className="bg-slate-50 rounded-xl p-3">
-            <div className="flex items-center gap-1.5 mb-1">
-              <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider">
-                Prix / kg
-              </span>
-            </div>
-            <p className="text-lg font-extrabold text-slate-800">
-              {annonce.prix_par_kilo.toLocaleString()}
-              <span className="text-xs font-medium text-slate-500 ml-1">Ar</span>
-            </p>
-          </div>
+            </>
+          )}
         </div>
-
-        {/* Transporteur */}
-        {transporteur && (
-          <p className="text-xs text-slate-500 truncate">
-            Par{" "}
-            <span className="font-semibold text-slate-700">
-              {transporteur.prenom} {transporteur.nom}
-            </span>
-            {transporteur.city && (
-              <> · {transporteur.city}</>
-            )}
-          </p>
-        )}
       </div>
 
-      {/* Footer */}
-      <div className="px-5 pb-5">
+      {/* Stats */}
+      <div className="flex items-center gap-5 px-5 py-3 sm:py-4 sm:border-r border-slate-100 shrink-0">
+        <div className="flex flex-col">
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1 mb-0.5">
+            <Weight className="h-3 w-3" /> Poids dispo
+          </span>
+          <span className="text-sm font-bold text-slate-800">
+            {annonce.capacite_transport}{" "}
+            <span className="text-xs font-normal text-slate-500">t</span>
+          </span>
+        </div>
+        <div className="w-px h-7 bg-slate-100" />
+        <div className="flex flex-col">
+          <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-wider flex items-center gap-1 mb-0.5">
+            <Banknote className="h-3 w-3" /> Prix / kg
+          </span>
+          <span className="text-sm font-bold text-slate-800">
+            {annonce.prix_par_kilo.toLocaleString()}{" "}
+            <span className="text-xs font-normal text-slate-500">Ar</span>
+          </span>
+        </div>
+      </div>
+
+      {/* CTA */}
+      <div className="px-4 pb-4 sm:py-4 shrink-0">
         <Button
           asChild
           size="sm"
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white rounded-xl"
+          className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white rounded-lg px-4 text-xs font-semibold"
         >
-          <Link href="/auth/register">
-            Réserver maintenant <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
-          </Link>
+          <Link href="/auth/register">Réserver</Link>
         </Button>
+      </div>
+    </div>
+  );
+}
+
+// ─── Skeleton Row ─────────────────────────────────────────────────────────────
+
+function SkeletonRow() {
+  return (
+    <div className="bg-white rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center animate-pulse">
+      <div className="flex-1 px-5 py-4 sm:border-r border-slate-100 space-y-2">
+        <div className="h-4 w-44 bg-slate-100 rounded" />
+        <div className="h-3 w-28 bg-slate-100 rounded" />
+      </div>
+      <div className="flex items-center gap-5 px-5 py-3 sm:py-4 sm:border-r border-slate-100">
+        <div className="h-9 w-16 bg-slate-100 rounded" />
+        <div className="h-9 w-16 bg-slate-100 rounded" />
+      </div>
+      <div className="px-4 pb-4 sm:py-4">
+        <div className="h-8 w-20 bg-slate-100 rounded-lg" />
       </div>
     </div>
   );
@@ -164,6 +170,24 @@ export function SearchSection() {
   const [loading, setLoading] = useState(false);
   const [loadingMore, setLoadingMore] = useState(false);
   const [searched, setSearched] = useState(false);
+  const [preview, setPreview] = useState<SearchResult[]>([]);
+  const [previewLoading, setPreviewLoading] = useState(true);
+
+  // Auto-load a preview of live trips on mount
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch(`/api/search?page=1&limit=${PREVIEW_LIMIT}`);
+        if (!res.ok) return;
+        const json: SearchResponse = await res.json();
+        setPreview(json.data);
+      } catch {
+        // silently ignore
+      } finally {
+        setPreviewLoading(false);
+      }
+    })();
+  }, []);
 
   const buildUrl = (p: number) => {
     const params = new URLSearchParams({ page: String(p), limit: String(LIMIT) });
@@ -292,13 +316,31 @@ export function SearchSection() {
         </div>
       </form>
 
+      {/* ── Preview — shown before any search ── */}
+      {!searched && (
+        <div className="w-full max-w-3xl mt-6">
+          <p className="text-[11px] font-semibold text-slate-400 uppercase tracking-widest mb-3">
+            Trajets disponibles en ce moment
+          </p>
+          <div className="flex flex-col gap-3">
+            {previewLoading
+              ? [...Array(PREVIEW_LIMIT)].map((_, i) => <SkeletonRow key={i} />)
+              : preview.length > 0
+                ? preview.map((a) => (
+                    <AnnonceCard key={a.id_pb_transport} annonce={a} />
+                  ))
+                : null}
+          </div>
+        </div>
+      )}
+
       {/* ── Search Results ── */}
       {searched && (
-        <section className="w-full max-w-6xl mt-14 px-4">
+        <section className="w-full max-w-3xl mt-8">
           {/* Header */}
-          <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center justify-between mb-4">
             <div>
-              <h2 className="text-xl font-bold text-slate-900">
+              <h2 className="text-base font-bold text-slate-900">
                 {loading
                   ? "Recherche en cours…"
                   : total === 0
@@ -316,7 +358,7 @@ export function SearchSection() {
               )}
             </div>
             {!loading && total > 0 && (
-              <span className="text-sm text-slate-400">
+              <span className="text-xs text-slate-400">
                 {results.length} / {total}
               </span>
             )}
@@ -324,38 +366,23 @@ export function SearchSection() {
 
           {/* Loading skeleton */}
           {loading && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-              {[...Array(6)].map((_, i) => (
-                <div
-                  key={i}
-                  className="bg-white rounded-2xl border border-slate-100 p-5 space-y-3 animate-pulse"
-                >
-                  <div className="h-2 w-full bg-slate-100 rounded-full" />
-                  <div className="flex gap-2">
-                    <div className="h-8 w-28 bg-slate-100 rounded-full" />
-                    <div className="h-8 w-28 bg-slate-100 rounded-full" />
-                  </div>
-                  <div className="h-4 w-40 bg-slate-100 rounded" />
-                  <div className="grid grid-cols-2 gap-2">
-                    <div className="h-16 bg-slate-100 rounded-xl" />
-                    <div className="h-16 bg-slate-100 rounded-xl" />
-                  </div>
-                  <div className="h-9 bg-slate-100 rounded-xl" />
-                </div>
+            <div className="flex flex-col gap-3">
+              {[...Array(4)].map((_, i) => (
+                <SkeletonRow key={i} />
               ))}
             </div>
           )}
 
           {/* Empty state */}
           {!loading && total === 0 && (
-            <div className="flex flex-col items-center justify-center py-20 text-center">
-              <div className="w-16 h-16 rounded-2xl bg-slate-100 flex items-center justify-center mb-4">
-                <PackageSearch className="h-8 w-8 text-slate-400" />
+            <div className="flex flex-col items-center justify-center py-16 text-center">
+              <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center mb-3">
+                <PackageSearch className="h-6 w-6 text-slate-400" />
               </div>
-              <p className="text-slate-600 font-medium mb-1">
+              <p className="text-slate-600 font-medium text-sm mb-1">
                 Aucun trajet trouvé pour cette sélection.
               </p>
-              <p className="text-slate-400 text-sm">
+              <p className="text-slate-400 text-xs">
                 Essayez d&apos;autres villes ou laissez les champs vides pour tout afficher.
               </p>
             </div>
@@ -363,7 +390,7 @@ export function SearchSection() {
 
           {/* Cards */}
           {!loading && results.length > 0 && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            <div className="flex flex-col gap-3">
               {results.map((a) => (
                 <AnnonceCard key={a.id_pb_transport} annonce={a} />
               ))}
@@ -372,23 +399,23 @@ export function SearchSection() {
 
           {/* Load more */}
           {!loading && hasMore && (
-            <div className="flex justify-center mt-8">
+            <div className="flex justify-center mt-6">
               <Button
                 variant="outline"
-                size="lg"
+                size="sm"
                 disabled={loadingMore}
                 onClick={handleLoadMore}
-                className="border-blue-200 text-blue-600 hover:bg-blue-50 hover:border-blue-400 rounded-xl px-8 font-semibold"
+                className="border-slate-200 text-slate-500 hover:bg-slate-50 rounded-lg px-6 text-xs font-medium"
               >
                 {loadingMore ? (
                   <>
-                    <Loader2 className="h-4 w-4 animate-spin mr-2" />
+                    <Loader2 className="h-3.5 w-3.5 animate-spin mr-2" />
                     Chargement…
                   </>
                 ) : (
                   <>
-                    Voir plus de trajets
-                    <ChevronDown className="ml-2 h-4 w-4" />
+                    Voir plus
+                    <ChevronDown className="ml-2 h-3.5 w-3.5" />
                   </>
                 )}
               </Button>
