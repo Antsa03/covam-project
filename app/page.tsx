@@ -166,33 +166,37 @@ export default function LandingPage() {
 
       {/* ── Stats ── */}
       <section className="py-20 relative overflow-hidden"
-        style={{ background: "linear-gradient(135deg, #0f172a 0%, #1e293b 60%, #0f172a 100%)" }}
+        style={{ background: "linear-gradient(135deg, #09090b 0%, #111117 50%, #09090b 100%)" }}
       >
         {/* ambient dust */}
         <div aria-hidden className="pointer-events-none absolute inset-0">
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-600/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-indigo-600/10 rounded-full blur-3xl" />
+          <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(99,102,241,0.12) 0%, transparent 70%)" }} />
+          <div className="absolute bottom-0 right-1/4 w-80 h-80 rounded-full blur-3xl" style={{ background: "radial-gradient(circle, rgba(234,179,8,0.07) 0%, transparent 70%)" }} />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-32 rounded-full blur-3xl" style={{ background: "radial-gradient(ellipse, rgba(255,255,255,0.02) 0%, transparent 70%)" }} />
         </div>
 
         <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-3xl overflow-hidden border border-white/8 shadow-2xl">
-            {stats.map(({ label, value, icon: Icon, desc }, i) => (
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px rounded-3xl overflow-hidden shadow-2xl"
+            style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+          >
+            {stats.map(({ label, value, icon: Icon, desc }) => (
               <div
                 key={label}
-                className={`group flex flex-col items-center text-center px-6 py-10 bg-white/[0.03] hover:bg-white/[0.07] transition-colors duration-300 ${
-                  i < stats.length - 1 ? "" : ""
-                }`}
+                className="group flex flex-col items-center text-center px-6 py-10 bg-white/[0.025] hover:bg-white/[0.055] transition-colors duration-300"
               >
                 {/* icon */}
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 bg-white/5 border border-white/8 group-hover:border-blue-500/40 group-hover:bg-blue-500/10 transition-all duration-300">
-                  <Icon className="h-5 w-5 text-blue-400 group-hover:text-blue-300 transition-colors" />
+                <div
+                  className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 transition-all duration-300"
+                  style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.07)" }}
+                >
+                  <Icon className="h-5 w-5 text-indigo-400 group-hover:text-indigo-300 transition-colors" />
                 </div>
 
                 {/* value */}
                 <div
                   className="text-4xl font-extrabold tracking-tight mb-1"
                   style={{
-                    background: "linear-gradient(135deg, #fff 30%, #94a3b8 100%)",
+                    background: "linear-gradient(135deg, #ffffff 20%, #a1a1aa 100%)",
                     WebkitBackgroundClip: "text",
                     WebkitTextFillColor: "transparent",
                   }}
@@ -201,10 +205,10 @@ export default function LandingPage() {
                 </div>
 
                 {/* label */}
-                <p className="text-sm font-semibold text-slate-300 mb-1">{label}</p>
+                <p className="text-sm font-semibold mb-1" style={{ color: "#d4d4d8" }}>{label}</p>
 
                 {/* desc */}
-                <p className="text-xs text-slate-500">{desc}</p>
+                <p className="text-xs" style={{ color: "#52525b" }}>{desc}</p>
               </div>
             ))}
           </div>
