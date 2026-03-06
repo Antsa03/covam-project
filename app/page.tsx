@@ -114,41 +114,26 @@ export default function HomePage() {
       <LandingNavbar />
 
       {/* ── Hero ── */}
-      <section className="relative pt-16 min-h-[92vh] flex items-center overflow-hidden bg-white">
-        {/* Background tint */}
-        <div className="absolute inset-0 bg-linear-to-b from-blue-50/80 via-white to-white" />
-        {/* Accent line at top */}
-        <div className="absolute top-0 inset-x-0 h-0.75 bg-linear-to-r from-blue-500 via-violet-500 to-cyan-400" />
-        {/* Glow orbs */}
-        <div className="absolute -top-20 left-1/3 w-150 h-150 bg-blue-200/40 rounded-full blur-[100px]" />
-        <div className="absolute top-32 right-10 w-80 h-80 bg-violet-200/30 rounded-full blur-[80px]" />
-        <div className="absolute bottom-10 left-10 w-70 h-70 bg-cyan-200/20 rounded-full blur-[80px]" />
-
-        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 text-center">
-          {/* Pill badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-50 border border-blue-100 px-4 py-1.5 text-sm text-blue-700 font-medium mb-8">
-            <span className="flex h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            🇲🇬 Plateforme malgache de transport de marchandises
-          </div>
+      <section className="relative pt-16 min-h-[88vh] flex items-center bg-white">
+        <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-28 text-center">
 
           {/* Headline */}
-          <h1 className="text-5xl sm:text-6xl lg:text-[72px] font-extrabold text-slate-900 leading-[1.08] tracking-tight mb-6">
-            Envoyez votre marchandise
-            <span className="block mt-2 text-transparent bg-clip-text bg-linear-to-r from-blue-600 via-violet-500 to-cyan-500">
-              partout à Madagascar
-            </span>
+          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 leading-[1.08] tracking-tight mb-5">
+            Envoyez votre colis
+            <span className="block text-blue-600">partout à Madagascar</span>
           </h1>
-          <p className="max-w-2xl mx-auto text-lg text-slate-500 mb-12 leading-relaxed">
-            Trouvez un transporteur de confiance en quelques clics. Comparez les trajets, réservez et suivez votre colis en temps réel.
+          <p className="max-w-xl mx-auto text-lg text-slate-500 mb-10 leading-relaxed">
+            Trouvez un transporteur de confiance, comparez les trajets et réservez en quelques clics.
           </p>
 
           {/* ── Search card ── */}
           <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.45)] p-2 sm:p-2.5">
-              <div className="flex flex-col sm:flex-row items-stretch gap-0 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+            <div className="bg-white rounded-2xl border border-slate-200 shadow-lg p-2">
+              <div className="flex flex-col sm:flex-row items-stretch divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+
                 {/* Départ */}
-                <div className="flex-1 flex items-center gap-3 px-4 py-3.5 group">
-                  <MapPin className="h-5 w-5 text-blue-500 shrink-0" />
+                <div className="flex-1 flex items-center gap-3 px-5 py-4">
+                  <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
                   <div className="flex flex-col items-start w-full">
                     <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
                       Départ
@@ -156,14 +141,14 @@ export default function HomePage() {
                     <input
                       type="text"
                       placeholder="D'où partez-vous ?"
-                      className="w-full text-sm font-medium text-slate-800 placeholder:text-slate-400 bg-transparent outline-none"
+                      className="w-full text-sm text-slate-800 placeholder:text-slate-400 bg-transparent outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Destination */}
-                <div className="flex-1 flex items-center gap-3 px-4 py-3.5 group">
-                  <MapPin className="h-5 w-5 text-indigo-500 shrink-0" />
+                <div className="flex-1 flex items-center gap-3 px-5 py-4">
+                  <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
                   <div className="flex flex-col items-start w-full">
                     <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
                       Destination
@@ -171,34 +156,34 @@ export default function HomePage() {
                     <input
                       type="text"
                       placeholder="Où livrer ?"
-                      className="w-full text-sm font-medium text-slate-800 placeholder:text-slate-400 bg-transparent outline-none"
+                      className="w-full text-sm text-slate-800 placeholder:text-slate-400 bg-transparent outline-none"
                     />
                   </div>
                 </div>
 
                 {/* Date */}
-                <div className="flex-1 flex items-center gap-3 px-4 py-3.5 group">
-                  <CalendarDays className="h-5 w-5 text-blue-400 shrink-0" />
+                <div className="flex-1 flex items-center gap-3 px-5 py-4">
+                  <CalendarDays className="h-4 w-4 text-slate-400 shrink-0" />
                   <div className="flex flex-col items-start w-full">
                     <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
                       Date
                     </label>
                     <input
                       type="date"
-                      className="w-full text-sm font-medium text-slate-800 placeholder:text-slate-400 bg-transparent outline-none scheme-light"
+                      className="w-full text-sm text-slate-800 bg-transparent outline-none scheme-light"
                     />
                   </div>
                 </div>
 
                 {/* CTA */}
-                <div className="flex items-center justify-center p-2 sm:pl-2">
+                <div className="flex items-center p-2">
                   <Button
                     asChild
                     size="lg"
-                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold px-7 py-6 rounded-xl shadow-lg shadow-blue-500/30 transition-all duration-200 hover:shadow-blue-500/50 hover:-translate-y-px"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 text-white font-semibold px-7 py-5 rounded-xl"
                   >
                     <Link href="/auth/register" className="flex items-center gap-2">
-                      <Search className="h-5 w-5" />
+                      <Search className="h-4 w-4" />
                       Rechercher
                     </Link>
                   </Button>
@@ -207,28 +192,21 @@ export default function HomePage() {
             </div>
 
             {/* Trust markers */}
-            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 text-slate-500 text-sm">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-slate-400 text-sm">
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                 Inscription gratuite
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                 Aucune commission cachée
               </span>
               <span className="flex items-center gap-1.5">
-                <CheckCircle2 className="h-4 w-4 text-emerald-500" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
                 Transporteurs vérifiés
               </span>
             </div>
           </div>
-        </div>
-
-        {/* Bottom wave */}
-        <div className="absolute bottom-0 inset-x-0">
-          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-            <path d="M0 60L60 50C120 40 240 20 360 15C480 10 600 20 720 25C840 30 960 30 1080 25C1200 20 1320 10 1380 5L1440 0V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0Z" fill="white"/>
-          </svg>
         </div>
       </section>
 
