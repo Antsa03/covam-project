@@ -113,15 +113,15 @@ export default function LandingPage() {
       <LandingNavbar />
 
       {/* ── Hero ── */}
-      <section className="flex flex-col items-center justify-center px-4 pt-20 pb-8 bg-linear-to-b from-white to-slate-50">
-        <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-5">
+      <section className="flex flex-col items-center justify-center px-4 pt-36 pb-16 bg-linear-to-b from-white to-slate-50">
+        <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-8">
           Plateforme de transport · Madagascar
         </span>
-        <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-900 text-center tracking-tight leading-tight mb-4 max-w-3xl">
+        <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-900 text-center tracking-tight leading-tight mb-6 max-w-3xl">
           Expédiez vos marchandises en toute{" "}
           <span className="text-blue-600">simplicité</span>
         </h1>
-        <p className="text-slate-500 text-center max-w-xl mb-10 text-base leading-relaxed">
+        <p className="text-slate-500 text-center max-w-xl mb-14 text-base leading-relaxed">
           Trouvez un transporteur fiable sur les grands axes malgaches. Comparez
           les trajets, réservez en ligne et suivez vos colis en temps réel.
         </p>
@@ -130,7 +130,7 @@ export default function LandingPage() {
         <SearchSection />
 
         {/* Trust markers */}
-        <div className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-slate-400 text-sm">
+        <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-slate-400 text-sm">
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500" />
             Inscription gratuite
