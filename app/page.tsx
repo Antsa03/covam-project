@@ -296,17 +296,13 @@ export default function LandingPage() {
 
       {/* ── How it works ── */}
       <section id="comment-ca-marche" className="py-24 bg-white relative overflow-hidden">
-        {/* Subtle background decoration */}
-        <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-blue-50/50 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-0 -mb-32 -ml-32 w-96 h-96 bg-indigo-50/50 rounded-full blur-3xl pointer-events-none" />
-
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <span className="inline-block rounded-full bg-blue-50/80 text-blue-600 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4 shadow-xs border border-blue-100/50">
+            <span className="inline-block border border-slate-200 text-slate-600 text-xs font-bold px-4 py-1.5 tracking-[0.2em] uppercase mb-4 shadow-sm bg-white">
               Comment ça marche
             </span>
             <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-5 tracking-tight">
-              En quatre étapes <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">chrono</span>
+              En quatre étapes chrono
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
               Que vous envoyiez un colis ou que vous proposiez vos services, le
@@ -314,83 +310,80 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-8">
-            {/* Client steps */}
-            <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_60px_-15px_rgba(59,130,246,0.1)] transition-all duration-500 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-blue-50 to-transparent rounded-full blur-3xl opacity-50 -z-10 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="inline-flex items-center gap-2.5 bg-blue-50 text-blue-700 rounded-2xl px-5 py-2.5 text-sm font-bold mb-10 border border-blue-100/50">
-                <Users className="h-4.5 w-4.5" />
-                Pour les clients
+          {/* Unified Square Line Layout Container */}
+          <div className="grid lg:grid-cols-2 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+            {/* Client Section */}
+            <div className="bg-white hover:bg-slate-50/50 transition-colors duration-500 flex flex-col">
+              <div className="p-8 sm:p-10 bg-blue-50/30 border-b border-slate-200 flex items-center justify-between">
+                <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3">
+                  <span className="p-2.5 bg-blue-600 text-white rounded-xl shadow-xs"><Users className="h-5 w-5" /></span>
+                  Pour les clients
+                </h3>
+                <span className="text-xs font-bold tracking-widest text-slate-400 uppercase hidden sm:block">Envoyer</span>
               </div>
               
-              <div className="space-y-8 relative">
-                {/* Connecting line */}
-                <div className="absolute left-[1.35rem] top-8 bottom-8 w-px bg-linear-to-b from-blue-100 via-blue-100/50 to-transparent -z-10" />
-                
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-200">
                 {clientSteps.map(({ step, title, desc }, idx) => (
-                  <div key={step} className="flex gap-6 relative group/step">
-                    <div className="shrink-0 w-11 h-11 bg-white border-2 border-blue-100 rounded-2xl flex items-center justify-center text-blue-600 font-extrabold text-sm shadow-sm group-hover/step:border-blue-500 group-hover/step:bg-blue-50 transition-colors duration-300">
+                  <div key={step} className="bg-white p-8 flex flex-col hover:bg-blue-50/30 transition-colors duration-300 group">
+                    <div className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-extrabold text-xs mb-6 shadow-sm group-hover:border-blue-300 group-hover:text-blue-600 group-hover:shadow-blue-100 transition-all">
                       {step}
                     </div>
-                    <div className="pt-2">
-                      <h4 className="text-base font-bold text-slate-900 mb-2 group-hover/step:text-blue-600 transition-colors duration-300">{title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed font-medium">
-                        {desc}
-                      </p>
-                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{title}</h4>
+                    <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                      {desc}
+                    </p>
                   </div>
                 ))}
               </div>
               
-              <Button
-                asChild
-                size="lg"
-                className="mt-12 bg-slate-950 hover:bg-black text-white hover:text-white shadow-xl shadow-slate-900/10 rounded-2xl px-8 w-full sm:w-auto font-semibold hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.4)] transition-all duration-300"
-              >
-                <Link href="/auth/register">
-                  Je suis client <ChevronRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="p-6 sm:p-8 bg-white border-t border-slate-200 mt-auto">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full bg-slate-900 hover:bg-blue-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-blue-600/20 rounded-xl transition-all duration-300"
+                >
+                  <Link href="/auth/register">
+                    Je suis client <ChevronRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
 
-            {/* Transporteur steps */}
-            <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_60px_-15px_rgba(79,70,229,0.1)] transition-all duration-500 relative overflow-hidden group">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-indigo-50 to-transparent rounded-full blur-3xl opacity-50 -z-10 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              <div className="inline-flex items-center gap-2.5 bg-indigo-50 text-indigo-700 rounded-2xl px-5 py-2.5 text-sm font-bold mb-10 border border-indigo-100/50">
-                <Truck className="h-4.5 w-4.5" />
-                Pour les transporteurs
+            {/* Transporteur Section */}
+            <div className="bg-white hover:bg-slate-50/50 transition-colors duration-500 flex flex-col">
+              <div className="p-8 sm:p-10 bg-indigo-50/30 border-b border-slate-200 flex items-center justify-between">
+                <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3">
+                  <span className="p-2.5 bg-indigo-600 text-white rounded-xl shadow-xs"><Truck className="h-5 w-5" /></span>
+                  Pour les transporteurs
+                </h3>
+                <span className="text-xs font-bold tracking-widest text-slate-400 uppercase hidden sm:block">Transporter</span>
               </div>
               
-              <div className="space-y-8 relative">
-                {/* Connecting line */}
-                <div className="absolute left-[1.35rem] top-8 bottom-8 w-px bg-linear-to-b from-indigo-100 via-indigo-100/50 to-transparent -z-10" />
-                
-                {transporteurSteps.map(({ step, title, desc }, idx) => (
-                  <div key={step} className="flex gap-6 relative group/step">
-                    <div className="shrink-0 w-11 h-11 bg-white border-2 border-indigo-100 rounded-2xl flex items-center justify-center text-indigo-600 font-extrabold text-sm shadow-sm group-hover/step:border-indigo-500 group-hover/step:bg-indigo-50 transition-colors duration-300">
+              <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-200">
+                {transporteurSteps.map(({ step, title, desc }) => (
+                  <div key={step} className="bg-white p-8 flex flex-col hover:bg-indigo-50/30 transition-colors duration-300 group">
+                    <div className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-extrabold text-xs mb-6 shadow-sm group-hover:border-indigo-300 group-hover:text-indigo-600 group-hover:shadow-indigo-100 transition-all">
                       {step}
                     </div>
-                    <div className="pt-2">
-                      <h4 className="text-base font-bold text-slate-900 mb-2 group-hover/step:text-indigo-600 transition-colors duration-300">{title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed font-medium">
-                        {desc}
-                      </p>
-                    </div>
+                    <h4 className="text-base font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">{title}</h4>
+                    <p className="text-sm text-slate-500 leading-relaxed font-medium">
+                      {desc}
+                    </p>
                   </div>
                 ))}
               </div>
               
-              <Button
-                asChild
-                size="lg"
-                className="mt-12 bg-slate-950 hover:bg-black text-white hover:text-white shadow-xl shadow-slate-900/10 rounded-2xl px-8 w-full sm:w-auto font-semibold hover:shadow-[0_0_30px_-5px_rgba(79,70,229,0.4)] transition-all duration-300"
-              >
-                <Link href="/auth/register">
-                  Je suis transporteur <ChevronRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
+              <div className="p-6 sm:p-8 bg-white border-t border-slate-200 mt-auto">
+                <Button
+                  asChild
+                  size="lg"
+                  className="w-full bg-slate-900 hover:bg-indigo-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-indigo-600/20 rounded-xl transition-all duration-300"
+                >
+                  <Link href="/auth/register">
+                    Je suis transporteur <ChevronRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -400,14 +393,15 @@ export default function LandingPage() {
       <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <span className="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
+            <span className="inline-block border border-slate-200 text-slate-600 text-xs font-bold px-4 py-1.5 tracking-[0.2em] uppercase mb-4 shadow-sm bg-white">
               Ils nous font confiance
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight">
               Ce qu&apos;ils en disent
             </h2>
           </div>
-          <div className="grid md:grid-cols-3 gap-6">
+          
+          <div className="grid md:grid-cols-3 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
             {[
               {
                 name: "Harisoa R.",
@@ -415,6 +409,7 @@ export default function LandingPage() {
                 quote:
                   "J'envoie des marchandises chaque semaine à Toamasina. Avant Covam, je passais des heures à trouver un camion. Maintenant c'est réglé en 5 minutes.",
                 stars: 5,
+                colorHover: "hover:bg-amber-50/50"
               },
               {
                 name: "Jean-Pierre M.",
@@ -422,6 +417,7 @@ export default function LandingPage() {
                 quote:
                   "La plateforme m'a permis de remplir mes camions même pour les petits trajets. Mon chiffre d'affaires a grimpé de 40% en trois mois.",
                 stars: 5,
+                colorHover: "hover:bg-blue-50/50"
               },
               {
                 name: "Voahangy T.",
@@ -429,30 +425,34 @@ export default function LandingPage() {
                 quote:
                   "Le suivi des réservations et le paiement sécurisé, c'est exactement ce dont on avait besoin. Je ne peux plus m'en passer.",
                 stars: 5,
+                colorHover: "hover:bg-emerald-50/50"
               },
-            ].map(({ name, role, quote, stars }) => (
+            ].map(({ name, role, quote, stars, colorHover }) => (
               <div
                 key={name}
-                className="bg-white rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+                className={`bg-white p-8 sm:p-10 flex flex-col justify-between ${colorHover} transition-colors duration-500 group`}
               >
-                <div className="flex gap-0.5 mb-4">
-                  {Array.from({ length: stars }).map((_, i) => (
-                    <Star
-                      key={i}
-                      className="h-4 w-4 fill-amber-400 text-amber-400"
-                    />
-                  ))}
+                <div>
+                  <div className="flex gap-1 mb-8">
+                    {Array.from({ length: stars }).map((_, i) => (
+                      <Star
+                        key={i}
+                        className="h-4 w-4 fill-slate-300 text-slate-300 group-hover:fill-amber-400 group-hover:text-amber-400 transition-colors duration-300"
+                      />
+                    ))}
+                  </div>
+                  <p className="text-slate-700 text-base leading-relaxed mb-10 font-medium">
+                    &ldquo;{quote}&rdquo;
+                  </p>
                 </div>
-                <p className="text-slate-700 text-sm leading-relaxed mb-6">
-                  &ldquo;{quote}&rdquo;
-                </p>
-                <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm">
+                
+                <div className="flex items-center gap-4 pt-6 border-t border-slate-100">
+                  <div className="w-12 h-12 rounded-xl bg-slate-100 border border-slate-200 flex items-center justify-center text-slate-700 font-bold text-lg group-hover:bg-slate-900 group-hover:border-slate-900 group-hover:text-white transition-all duration-300">
                     {name.charAt(0)}
                   </div>
                   <div>
                     <div className="text-sm font-bold text-slate-900">{name}</div>
-                    <div className="text-xs text-slate-500">{role}</div>
+                    <div className="text-xs text-slate-500 font-medium tracking-wide uppercase mt-0.5">{role}</div>
                   </div>
                 </div>
               </div>
