@@ -26,38 +26,43 @@ const stats = [
   { label: "Villes desservies", value: "10+", icon: MapPin, desc: "grands axes couverts" },
 ];
 
+const featureAccent = {
+  color: "text-blue-400",
+  iconBg: "rgba(96,165,250,0.10)",
+  iconBorder: "rgba(96,165,250,0.18)",
+  lineGradient: "linear-gradient(90deg, transparent 0%, rgba(96,165,250,0.80) 50%, transparent 100%)",
+  cornerGlow: "rgba(96,165,250,0.12)",
+  bottomEdge: "rgba(96,165,250,0.55)",
+};
+
 const features = [
   {
     icon: Zap,
     title: "Trouvez un transporteur vite",
     description:
       "Plus besoin de passer des heures à appeler. En quelques clics, vous voyez les trajets disponibles et vous réservez.",
-    color: "text-amber-500",
-    bg: "bg-amber-50",
+    ...featureAccent,
   },
   {
     icon: Shield,
     title: "Paiements en toute confiance",
     description:
       "Le paiement ne part que quand la livraison est confirmée. Pas de stress, pas de mauvaises surprises.",
-    color: "text-blue-500",
-    bg: "bg-blue-50",
+    ...featureAccent,
   },
   {
     icon: BarChart3,
     title: "Gardez un œil sur vos colis",
     description:
       "Date de départ, statut de la réservation, historique — tout est dans votre tableau de bord, accessible où vous êtes.",
-    color: "text-emerald-500",
-    bg: "bg-emerald-50",
+    ...featureAccent,
   },
   {
     icon: Globe,
     title: "Trajets partout à Madagascar",
     description:
       "Antananarivo, Toamasina, Mahajanga, Fianarantsoa… les transporteurs couvrent les grands axes comme les régions.",
-    color: "text-violet-500",
-    bg: "bg-violet-50",
+    ...featureAccent,
   },
 ];
 
@@ -196,37 +201,89 @@ export default function LandingPage() {
       </section>
 
       {/* ── Features ── */}
-      <section id="fonctionnalites" className="py-28 bg-slate-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="fonctionnalites" className="py-28 bg-zinc-950 relative overflow-hidden">
+        {/* Ambient background glows */}
+        <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
+          <div className="absolute -top-32 left-1/4 w-130 h-105 rounded-full bg-blue-700/10 blur-[110px]" />
+          <div className="absolute bottom-0 right-1/4 w-120 h-100 rounded-full bg-violet-700/10 blur-[110px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-225 h-75 bg-indigo-900/10 blur-[120px]" />
+        </div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+          {/* Section header */}
           <div className="text-center mb-16">
-            <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-500/10 text-blue-400 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-5">
+              <Sparkles className="h-3 w-3" />
               Ce que vous y trouvez
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-5 tracking-tight">
               Simple, pas compliqué
             </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
               On a conçu Covam pour que n&apos;importe qui puisse s&apos;y
               retrouver dès la première utilisation.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {features.map(({ icon: Icon, title, description, color, bg }) => (
+
+          {/* Cards */}
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+            {features.map(({ icon: Icon, title, description, color, iconBg, iconBorder, lineGradient, cornerGlow, bottomEdge }, idx) => (
               <div
                 key={title}
-                className="bg-white rounded-3xl p-7 shadow-sm border border-slate-100/80 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group"
+                className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-500 bg-white/[2.5] hover:bg-white/[4.5] border border-white/7 hover:border-white/[11]"
               >
+                {/* Corner glow on hover */}
                 <div
-                  className={`inline-flex items-center justify-center w-13 h-13 ${bg} rounded-2xl mb-5 group-hover:scale-110 transition-transform duration-300`}
-                >
-                  <Icon className={`h-6 w-6 ${color}`} />
+                  aria-hidden
+                  className="absolute -top-12 -left-12 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
+                  style={{ background: cornerGlow }}
+                />
+
+                {/* Inner content */}
+                <div className="relative flex flex-col flex-1 p-7">
+                  {/* Top: icon + index number */}
+                  <div className="flex items-center justify-between mb-7">
+                    <div
+                      className="flex items-center justify-center w-12 h-12 rounded-xl transition-transform duration-300 group-hover:scale-110"
+                      style={{ background: iconBg, border: `1px solid ${iconBorder}` }}
+                    >
+                      <Icon className={`h-5 w-5 ${color}`} />
+                    </div>
+                    <span
+                      className="text-5xl font-black leading-none tabular-nums select-none"
+                      style={{ color: "rgba(255,255,255,0.05)" }}
+                    >
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                  </div>
+
+                  {/* ── Separator line with animated light sweep ── */}
+                  <div className="relative h-px mb-7 overflow-hidden">
+                    {/* Base line */}
+                    <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.07)" }} />
+                    {/* Animated glow sweep */}
+                    <div
+                      className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700 ease-out"
+                      style={{ background: lineGradient }}
+                    />
+                  </div>
+
+                  {/* Text content */}
+                  <div className="flex-1">
+                    <h3 className="text-[15px] font-bold text-white mb-3 leading-snug">
+                      {title}
+                    </h3>
+                    <p className="text-sm text-zinc-400 leading-relaxed">
+                      {description}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-base font-bold text-slate-900 mb-2.5">
-                  {title}
-                </h3>
-                <p className="text-sm text-slate-500 leading-relaxed">
-                  {description}
-                </p>
+
+                {/* Bottom edge glow on hover */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                  style={{ background: bottomEdge }}
+                />
               </div>
             ))}
           </div>
