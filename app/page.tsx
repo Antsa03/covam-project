@@ -123,9 +123,9 @@ export default function LandingPage() {
         <span 
           className="relative inline-flex items-center gap-2.5 rounded-full px-6 py-1.5 text-[0.65rem] sm:text-xs font-bold tracking-[0.2em] uppercase mb-8 transition-transform hover:scale-105 duration-300 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] group cursor-default"
           style={{
-            background: "linear-gradient(145deg, #1e1b4b 0%, #312e81 100%)",
-            boxShadow: "inset 0 1px 1px rgba(255,255,255,0.2), 0 4px 24px -6px rgba(49, 46, 129, 0.6)",
-            border: "1px solid rgba(255, 255, 255, 0.12)",
+            background: "linear-gradient(145deg, #1e3a8a 0%, #2563eb 100%)",
+            boxShadow: "inset 0 1px 1px rgba(255,255,255,0.3), 0 4px 24px -6px rgba(37, 99, 235, 0.6)",
+            border: "1px solid rgba(255, 255, 255, 0.15)",
           }}
         >
           {/* Dust & light effects */}
@@ -134,12 +134,12 @@ export default function LandingPage() {
             className="pointer-events-none absolute inset-0 opacity-50 mix-blend-overlay rounded-full overflow-hidden"
             style={{
               backgroundImage:
-                "radial-gradient(circle at 50% 0%, rgba(129,140,248,0.8) 0%, transparent 60%)",
+                "radial-gradient(circle at 50% 0%, rgba(147,197,253,0.8) 0%, transparent 60%)",
             }}
           />
-          <MapPin className="relative z-10 h-3.5 w-3.5 text-indigo-300 drop-shadow-[0_0_8px_rgba(165,180,252,0.8)] shrink-0 animate-bounce" />
-          <span className="relative z-10 text-indigo-50 drop-shadow-sm font-semibold">
-            Plateforme de transport <span className="text-indigo-400 font-black px-1">·</span> Madagascar
+          <MapPin className="relative z-10 h-3.5 w-3.5 text-blue-200 drop-shadow-[0_0_8px_rgba(147,197,253,0.8)] shrink-0" />
+          <span className="relative z-10 text-blue-50 drop-shadow-sm font-semibold">
+            Plateforme de transport <span className="text-blue-300 font-black px-1">·</span> Madagascar
           </span>
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-center tracking-tight leading-tight mb-6 max-w-3xl"
