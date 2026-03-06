@@ -185,7 +185,6 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
                   <Weight className="h-3 w-3" /> Poids dispo
                 </span>
                 <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1 text-sm font-bold">
-                  <Weight className="h-3.5 w-3.5 text-emerald-500" />
                   {annonce.capacite_transport} t
                 </span>
               </div>
