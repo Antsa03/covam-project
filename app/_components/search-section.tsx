@@ -7,7 +7,7 @@ import {
   MapPin,
   Search,
   Truck,
-  Weight,
+  Scale,
   ArrowRight,
   ChevronDown,
   ChevronLeft,
@@ -182,7 +182,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
             <div className="flex sm:flex-col gap-5 sm:gap-4">
               <div>
                 <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-2">
-                  <Weight className="h-3 w-3" /> Poids dispo
+                  <Scale className="h-3 w-3" /> Poids dispo
                 </span>
                 <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1 text-sm font-bold">
                   {annonce.capacite_transport} t
