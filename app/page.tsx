@@ -114,7 +114,8 @@ export default function LandingPage() {
 
       {/* ── Hero ── */}
       <section className="flex flex-col items-center justify-center px-4 pt-36 pb-16 bg-linear-to-b from-white to-slate-50">
-        <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-8">
+        <span className="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs font-semibold tracking-widest uppercase mb-8 bg-linear-to-r from-blue-600 to-indigo-500 text-white shadow-md shadow-blue-500/30">
+          <span className="w-1.5 h-1.5 rounded-full bg-white/70 animate-pulse" />
           Plateforme de transport · Madagascar
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-slate-900 text-center tracking-tight leading-tight mb-6 max-w-3xl">
