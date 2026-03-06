@@ -159,15 +159,6 @@ export default function HomePage() {
       <section className="relative pt-16 min-h-[92vh] flex items-center overflow-hidden">
         {/* Background layers */}
         <div className="absolute inset-0 bg-linear-to-br from-[#0f172a] via-[#0d2b5e] to-[#0c1a4e]" />
-        {/* Mesh grid */}
-        <div
-          className="absolute inset-0 opacity-[0.06]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-          }}
-        />
         {/* Glow orbs */}
         <div className="absolute -top-10 left-1/4 w-150 h-150 bg-blue-600/25 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-indigo-500/20 rounded-full blur-[100px]" />
