@@ -1,12 +1,12 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { LandingNavbar } from "@/components/shared/landing-navbar";
 import {
   Truck,
   Package,
   Shield,
   MapPin,
   Users,
-  ArrowRight,
   CheckCircle2,
   BarChart3,
   Globe,
@@ -111,54 +111,12 @@ export default function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* ── Navbar ── */}
-      <header className="fixed top-0 inset-x-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="bg-blue-600 rounded-lg p-1.5">
-              <Truck className="h-5 w-5 text-white" />
-            </div>
-            <span className="text-xl font-bold text-slate-900">Covam</span>
-          </div>
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <a
-              href="#fonctionnalites"
-              className="hover:text-blue-600 transition-colors"
-            >
-              Fonctionnalités
-            </a>
-            <a
-              href="#comment-ca-marche"
-              className="hover:text-blue-600 transition-colors"
-            >
-              Comment ça marche
-            </a>
-            <a
-              href="#contact"
-              className="hover:text-blue-600 transition-colors"
-            >
-              Contact
-            </a>
-          </nav>
-          <div className="flex items-center gap-3">
-            <Button variant="ghost" asChild className="hidden sm:flex">
-              <Link href="/auth/login">Se connecter</Link>
-            </Button>
-            <Button
-              asChild
-              className="bg-blue-600 hover:bg-blue-700 text-white"
-            >
-              <Link href="/auth/register">
-                S&apos;inscrire <ArrowRight className="ml-1.5 h-4 w-4" />
-              </Link>
-            </Button>
-          </div>
-        </div>
-      </header>
+      <LandingNavbar />
 
       {/* ── Hero ── */}
       <section className="relative pt-16 min-h-[92vh] flex items-center overflow-hidden">
         {/* Background layers */}
-        <div className="absolute inset-0 bg-linear-to-br from-[#0f172a] via-[#0d2b5e] to-[#0c1a4e]" />
+        <div className="absolute inset-0 bg-linear-to-b from-slate-950 via-[#0a1628] to-[#0d1f3c]" />
         {/* Glow orbs */}
         <div className="absolute -top-10 left-1/4 w-150 h-150 bg-blue-600/25 rounded-full blur-[120px]" />
         <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-indigo-500/20 rounded-full blur-[100px]" />
