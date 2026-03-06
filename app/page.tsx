@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   Truck,
   Package,
@@ -15,6 +14,9 @@ import {
   ChevronRight,
   Phone,
   Mail,
+  Search,
+  CalendarDays,
+  Star,
 } from "lucide-react";
 
 const stats = [
@@ -154,85 +156,144 @@ export default function HomePage() {
       </header>
 
       {/* ── Hero ── */}
-      <section className="relative pt-16 overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-blue-950 to-indigo-950" />
+      <section className="relative pt-16 min-h-[92vh] flex items-center overflow-hidden">
+        {/* Background layers */}
+        <div className="absolute inset-0 bg-linear-to-br from-[#0f172a] via-[#0d2b5e] to-[#0c1a4e]" />
+        {/* Mesh grid */}
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.06]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-            backgroundSize: "60px 60px",
+              "linear-gradient(rgba(255,255,255,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.6) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
           }}
         />
-        <div className="absolute top-24 left-1/3 w-96 h-96 bg-blue-500/20 rounded-full blur-3xl" />
-        <div className="absolute bottom-10 right-1/4 w-72 h-72 bg-indigo-500/20 rounded-full blur-3xl" />
+        {/* Glow orbs */}
+        <div className="absolute -top-10 left-1/4 w-150 h-150 bg-blue-600/25 rounded-full blur-[120px]" />
+        <div className="absolute bottom-0 right-1/4 w-100 h-100 bg-indigo-500/20 rounded-full blur-[100px]" />
+        <div className="absolute top-40 right-10 w-70 h-70 bg-cyan-400/10 rounded-full blur-[80px]" />
 
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-32 text-center">
-          <Badge className="mb-6 bg-blue-500/20 text-blue-300 border-blue-500/30 hover:bg-blue-500/30 text-sm px-4 py-1">
+        <div className="relative w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-24 lg:py-32 text-center">
+          {/* Pill badge */}
+          <div className="inline-flex items-center gap-2 rounded-full bg-white/10 border border-white/20 px-4 py-1.5 text-sm text-blue-200 mb-8 backdrop-blur-sm">
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
             🇲🇬 Plateforme malgache de transport de marchandises
-          </Badge>
-          <h1 className="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-white leading-[1.1] mb-6">
-            Vous avez une
-            <span className="block text-transparent bg-clip-text bg-linear-to-r from-blue-400 to-cyan-300">
-              marchandise à envoyer ?
+          </div>
+
+          {/* Headline */}
+          <h1 className="text-5xl sm:text-6xl lg:text-[72px] font-extrabold text-white leading-[1.08] tracking-tight mb-6">
+            Envoyez votre marchandise
+            <span className="block mt-1 text-transparent bg-clip-text bg-linear-to-r from-blue-400 via-cyan-300 to-sky-400">
+              partout à Madagascar
             </span>
           </h1>
-          <p className="max-w-2xl mx-auto text-lg sm:text-xl text-slate-300 mb-10 leading-relaxed">
-            Covam met en relation des{" "}
-            <strong className="text-white">expéditeurs</strong> et des{" "}
-            <strong className="text-white">transporteurs</strong> à travers
-            Madagascar. Que ce soit une caisse, des sacs de riz ou du matériel,
-            trouvez le bon transport au bon prix.
+          <p className="max-w-2xl mx-auto text-lg text-slate-300/90 mb-12 leading-relaxed">
+            Trouvez un transporteur de confiance en quelques clics. Comparez les trajets, réservez et suivez votre colis en temps réel.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button
-              asChild
-              size="lg"
-              className="bg-blue-600 hover:bg-blue-500 text-white shadow-xl shadow-blue-500/30 px-8 text-base"
-            >
-              <Link href="/auth/register">
-                Commencer gratuitement <ArrowRight className="ml-2 h-5 w-5" />
-              </Link>
-            </Button>
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className="border-white/20 text-white bg-white/5 hover:bg-white/15 px-8 text-base"
-            >
-              <Link href="/auth/login">Se connecter</Link>
-            </Button>
+
+          {/* ── Search card ── */}
+          <div className="max-w-3xl mx-auto">
+            <div className="bg-white rounded-2xl shadow-[0_32px_80px_rgba(0,0,0,0.45)] p-2 sm:p-2.5">
+              <div className="flex flex-col sm:flex-row items-stretch gap-0 divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+                {/* Départ */}
+                <div className="flex-1 flex items-center gap-3 px-4 py-3.5 group">
+                  <MapPin className="h-5 w-5 text-blue-500 shrink-0" />
+                  <div className="flex flex-col items-start w-full">
+                    <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
+                      Départ
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="D'où partez-vous ?"
+                      className="w-full text-sm font-medium text-slate-800 placeholder:text-slate-400 bg-transparent outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Destination */}
+                <div className="flex-1 flex items-center gap-3 px-4 py-3.5 group">
+                  <MapPin className="h-5 w-5 text-indigo-500 shrink-0" />
+                  <div className="flex flex-col items-start w-full">
+                    <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
+                      Destination
+                    </label>
+                    <input
+                      type="text"
+                      placeholder="Où livrer ?"
+                      className="w-full text-sm font-medium text-slate-800 placeholder:text-slate-400 bg-transparent outline-none"
+                    />
+                  </div>
+                </div>
+
+                {/* Date */}
+                <div className="flex-1 flex items-center gap-3 px-4 py-3.5 group">
+                  <CalendarDays className="h-5 w-5 text-blue-400 shrink-0" />
+                  <div className="flex flex-col items-start w-full">
+                    <label className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest mb-0.5">
+                      Date
+                    </label>
+                    <input
+                      type="date"
+                      className="w-full text-sm font-medium text-slate-800 placeholder:text-slate-400 bg-transparent outline-none scheme-light"
+                    />
+                  </div>
+                </div>
+
+                {/* CTA */}
+                <div className="flex items-center justify-center p-2 sm:pl-2">
+                  <Button
+                    asChild
+                    size="lg"
+                    className="w-full sm:w-auto bg-blue-600 hover:bg-blue-500 active:bg-blue-700 text-white font-semibold px-7 py-6 rounded-xl shadow-lg shadow-blue-600/40 transition-all duration-200 hover:shadow-blue-500/50 hover:-translate-y-px"
+                  >
+                    <Link href="/auth/register" className="flex items-center gap-2">
+                      <Search className="h-5 w-5" />
+                      Rechercher
+                    </Link>
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Trust markers */}
+            <div className="mt-6 flex flex-wrap items-center justify-center gap-x-7 gap-y-2.5 text-slate-400 text-sm">
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                Inscription gratuite
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                Aucune commission cachée
+              </span>
+              <span className="flex items-center gap-1.5">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                Transporteurs vérifiés
+              </span>
+            </div>
           </div>
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-slate-400 text-sm">
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              Inscription gratuite
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              Aucune commission cachée
-            </span>
-            <span className="flex items-center gap-1.5">
-              <CheckCircle2 className="h-4 w-4 text-emerald-400" />
-              Réseau de transporteurs vérifiés
-            </span>
-          </div>
+        </div>
+
+        {/* Bottom wave */}
+        <div className="absolute bottom-0 inset-x-0">
+          <svg viewBox="0 0 1440 60" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
+            <path d="M0 60L60 50C120 40 240 20 360 15C480 10 600 20 720 25C840 30 960 30 1080 25C1200 20 1320 10 1380 5L1440 0V60H1380C1320 60 1200 60 1080 60C960 60 840 60 720 60C600 60 480 60 360 60C240 60 120 60 60 60H0Z" fill="white"/>
+          </svg>
         </div>
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-14 bg-white border-b border-slate-100">
+      <section className="py-16 bg-white border-b border-slate-100">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
             {stats.map(({ label, value, icon: Icon }) => (
-              <div key={label} className="text-center">
-                <div className="inline-flex items-center justify-center w-12 h-12 bg-blue-50 rounded-xl mb-3">
-                  <Icon className="h-6 w-6 text-blue-600" />
+              <div key={label} className="text-center group">
+                <div className="inline-flex items-center justify-center w-14 h-14 bg-blue-50 group-hover:bg-blue-100 rounded-2xl mb-3 transition-colors">
+                  <Icon className="h-7 w-7 text-blue-600" />
                 </div>
-                <div className="text-3xl font-extrabold text-slate-900 mb-1">
+                <div className="text-4xl font-extrabold text-slate-900 mb-1 tracking-tight">
                   {value}
                 </div>
-                <div className="text-sm text-slate-500">{label}</div>
+                <div className="text-sm text-slate-500 font-medium">{label}</div>
               </div>
             ))}
           </div>
@@ -240,33 +301,31 @@ export default function HomePage() {
       </section>
 
       {/* ── Features ── */}
-      <section id="fonctionnalites" className="py-24 bg-slate-50">
+      <section id="fonctionnalites" className="py-28 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200">
+            <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
               Ce que vous y trouvez
-            </Badge>
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
               Simple, pas compliqué
             </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              On a conçu Covam pour que quelqu&apos;un qui n&apos;a jamais
-              utilisé ce genre d&apos;application puisse s&apos;y retrouver dès
-              la première fois.
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+              On a conçu Covam pour que n&apos;importe qui puisse s&apos;y retrouver dès la première utilisation.
             </p>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {features.map(({ icon: Icon, title, description, color, bg }) => (
               <div
                 key={title}
-                className="bg-white rounded-2xl p-6 shadow-sm border border-slate-100 hover:shadow-lg hover:-translate-y-1 transition-all duration-200"
+                className="bg-white rounded-3xl p-7 shadow-sm border border-slate-100/80 hover:shadow-xl hover:-translate-y-1.5 transition-all duration-300 group"
               >
                 <div
-                  className={`inline-flex items-center justify-center w-12 h-12 ${bg} rounded-xl mb-4`}
+                  className={`inline-flex items-center justify-center w-13 h-13 ${bg} rounded-2xl mb-5 group-hover:scale-110 transition-transform duration-300`}
                 >
                   <Icon className={`h-6 w-6 ${color}`} />
                 </div>
-                <h3 className="text-base font-semibold text-slate-900 mb-2">
+                <h3 className="text-base font-bold text-slate-900 mb-2.5">
                   {title}
                 </h3>
                 <p className="text-sm text-slate-500 leading-relaxed">
@@ -279,46 +338,45 @@ export default function HomePage() {
       </section>
 
       {/* ── How it works ── */}
-      <section id="comment-ca-marche" className="py-24 bg-white">
+      <section id="comment-ca-marche" className="py-28 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <Badge className="mb-4 bg-blue-100 text-blue-700 border-blue-200">
+            <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
               Comment ça marche
-            </Badge>
-            <h2 className="text-4xl font-bold text-slate-900 mb-4">
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
               En quatre étapes chrono
             </h2>
-            <p className="text-lg text-slate-500 max-w-2xl mx-auto">
-              Que vous envoyiez un colis ou que vous proposiez vos services de
-              transport, le parcours est le même : court et clair.
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
+              Que vous envoyiez un colis ou que vous proposiez vos services, le parcours est court et clair.
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-16">
+          <div className="grid lg:grid-cols-2 gap-8">
             {/* Client steps */}
-            <div className="bg-slate-50 rounded-3xl p-8">
-              <div className="inline-flex items-center gap-2 bg-blue-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8">
+            <div className="bg-linear-to-br from-blue-50 to-indigo-50 rounded-3xl p-9">
+              <div className="inline-flex items-center gap-2 bg-blue-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8 shadow-md shadow-blue-500/30">
                 <Users className="h-4 w-4" />
                 Pour les clients
               </div>
-              <div className="space-y-6">
+              <div className="space-y-7">
                 {clientSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-700 font-bold text-xs">
+                  <div key={step} className="flex gap-5">
+                    <div className="shrink-0 w-11 h-11 bg-white border border-blue-100 rounded-full flex items-center justify-center text-blue-700 font-extrabold text-xs shadow-sm">
                       {step}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-slate-900 mb-1">
+                      <h4 className="font-bold text-slate-900 mb-1">
                         {title}
                       </h4>
-                      <p className="text-sm text-slate-500">{desc}</p>
+                      <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
               <Button
                 asChild
-                className="mt-8 bg-blue-600 hover:bg-blue-700 text-white"
+                className="mt-9 bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 rounded-xl px-6"
               >
                 <Link href="/auth/register">
                   Je suis client <ChevronRight className="ml-1 h-4 w-4" />
@@ -327,29 +385,29 @@ export default function HomePage() {
             </div>
 
             {/* Transporteur steps */}
-            <div className="bg-indigo-50 rounded-3xl p-8">
-              <div className="inline-flex items-center gap-2 bg-indigo-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8">
+            <div className="bg-linear-to-br from-indigo-50 to-violet-50 rounded-3xl p-9">
+              <div className="inline-flex items-center gap-2 bg-indigo-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8 shadow-md shadow-indigo-500/30">
                 <Truck className="h-4 w-4" />
                 Pour les transporteurs
               </div>
-              <div className="space-y-6">
+              <div className="space-y-7">
                 {transporteurSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-4">
-                    <div className="shrink-0 w-10 h-10 bg-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-bold text-xs">
+                  <div key={step} className="flex gap-5">
+                    <div className="shrink-0 w-11 h-11 bg-white border border-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-extrabold text-xs shadow-sm">
                       {step}
                     </div>
                     <div>
-                      <h4 className="font-semibold text-slate-900 mb-1">
+                      <h4 className="font-bold text-slate-900 mb-1">
                         {title}
                       </h4>
-                      <p className="text-sm text-slate-500">{desc}</p>
+                      <p className="text-sm text-slate-500 leading-relaxed">{desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
               <Button
                 asChild
-                className="mt-8 bg-indigo-600 hover:bg-indigo-700 text-white"
+                className="mt-9 bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 rounded-xl px-6"
               >
                 <Link href="/auth/register">
                   Je suis transporteur <ChevronRight className="ml-1 h-4 w-4" />
@@ -360,31 +418,87 @@ export default function HomePage() {
         </div>
       </section>
 
+      {/* ── Testimonials ── */}
+      <section className="py-28 bg-slate-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-16">
+            <span className="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
+              Ils nous font confiance
+            </span>
+            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 tracking-tight">
+              Ce qu&apos;ils en disent
+            </h2>
+          </div>
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                name: "Harisoa R.",
+                role: "Commerçante, Antananarivo",
+                quote: "J'envoie des marchandises chaque semaine à Toamasina. Avant Covam, je passais des heures à trouver un camion. Maintenant c'est réglé en 5 minutes.",
+                stars: 5,
+              },
+              {
+                name: "Jean-Pierre M.",
+                role: "Transporteur, Fianarantsoa",
+                quote: "La plateforme m'a permis de remplir mes camions même pour les petits trajets. Mon chiffre d'affaires a grimpé de 40% en trois mois.",
+                stars: 5,
+              },
+              {
+                name: "Voahangy T.",
+                role: "Importatrice, Mahajanga",
+                quote: "Le suivi des réservations et le paiement sécurisé, c'est exactement ce dont on avait besoin. Je ne peux plus m'en passer.",
+                stars: 5,
+              },
+            ].map(({ name, role, quote, stars }) => (
+              <div
+                key={name}
+                className="bg-white rounded-3xl p-7 border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300"
+              >
+                <div className="flex gap-0.5 mb-4">
+                  {Array.from({ length: stars }).map((_, i) => (
+                    <Star key={i} className="h-4 w-4 fill-amber-400 text-amber-400" />
+                  ))}
+                </div>
+                <p className="text-slate-700 text-sm leading-relaxed mb-6">&ldquo;{quote}&rdquo;</p>
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-linear-to-br from-blue-400 to-indigo-500 flex items-center justify-center text-white font-bold text-sm">
+                    {name.charAt(0)}
+                  </div>
+                  <div>
+                    <div className="text-sm font-bold text-slate-900">{name}</div>
+                    <div className="text-xs text-slate-500">{role}</div>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── CTA ── */}
-      <section className="py-24 relative overflow-hidden">
+      <section className="py-28 relative overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-blue-700 to-indigo-800" />
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-[0.08]"
           style={{
-            backgroundImage:
-              "radial-gradient(circle at 25% 50%, white 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+            backgroundImage: "radial-gradient(circle, white 1.5px, transparent 1.5px)",
+            backgroundSize: "36px 36px",
           }}
         />
-        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-bold text-white mb-6">
+        <div className="absolute -top-20 left-1/4 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute -bottom-10 right-1/3 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
+        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 tracking-tight">
             Prêt à essayer ?
           </h2>
-          <p className="text-lg text-blue-100 mb-10 max-w-2xl mx-auto">
-            L&apos;inscription ne prend pas plus de deux minutes. Pas de carte
-            bancaire, pas d&apos;engagement — vous pouvez supprimer votre compte
-            à tout moment.
+          <p className="text-lg text-blue-100 mb-10 max-w-xl mx-auto leading-relaxed">
+            L&apos;inscription ne prend pas plus de deux minutes. Pas de carte bancaire, pas d&apos;engagement.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Button
               asChild
               size="lg"
-              className="bg-white text-blue-700 hover:bg-blue-50 shadow-xl font-semibold px-8 text-base"
+              className="bg-white text-blue-700 hover:bg-blue-50 shadow-2xl font-bold px-9 text-base rounded-xl"
             >
               <Link href="/auth/register">Créer un compte gratuit</Link>
             </Button>
@@ -392,7 +506,7 @@ export default function HomePage() {
               asChild
               size="lg"
               variant="outline"
-              className="border-white/30 text-white bg-white/10 hover:bg-white/20 px-8 text-base"
+              className="border-white/30 text-white bg-white/10 hover:bg-white/20 px-9 text-base rounded-xl backdrop-blur-sm"
             >
               <Link href="/auth/login">Se connecter</Link>
             </Button>
