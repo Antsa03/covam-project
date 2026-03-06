@@ -55,7 +55,7 @@ export function LandingNavbar() {
           </Button>
           <Button
             asChild
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-500/25"
+            className="bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-500/25 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] transition-all duration-300"
           >
             <Link href="/auth/register">
               S&apos;inscrire <ArrowRight className="ml-1.5 h-4 w-4" />
