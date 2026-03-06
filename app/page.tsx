@@ -295,14 +295,18 @@ export default function LandingPage() {
       </section>
 
       {/* ── How it works ── */}
-      <section id="comment-ca-marche" className="py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section id="comment-ca-marche" className="py-24 bg-white relative overflow-hidden">
+        {/* Subtle background decoration */}
+        <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-blue-50/50 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-0 -mb-32 -ml-32 w-96 h-96 bg-indigo-50/50 rounded-full blur-3xl pointer-events-none" />
+
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="text-center mb-16">
-            <span className="inline-block rounded-full bg-blue-100 text-blue-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
+            <span className="inline-block rounded-full bg-blue-50/80 text-blue-600 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4 shadow-xs border border-blue-100/50">
               Comment ça marche
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-slate-900 mb-5 tracking-tight">
-              En quatre étapes chrono
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-5 tracking-tight">
+              En quatre étapes <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-600 to-indigo-600">chrono</span>
             </h2>
             <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
               Que vous envoyiez un colis ou que vous proposiez vos services, le
@@ -312,63 +316,79 @@ export default function LandingPage() {
 
           <div className="grid lg:grid-cols-2 gap-8">
             {/* Client steps */}
-            <div className="bg-linear-to-br from-blue-50 to-indigo-50 rounded-3xl p-9">
-              <div className="inline-flex items-center gap-2 bg-blue-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8 shadow-md shadow-blue-500/30">
-                <Users className="h-4 w-4" />
+            <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_60px_-15px_rgba(59,130,246,0.1)] transition-all duration-500 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-blue-50 to-transparent rounded-full blur-3xl opacity-50 -z-10 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="inline-flex items-center gap-2.5 bg-blue-50 text-blue-700 rounded-2xl px-5 py-2.5 text-sm font-bold mb-10 border border-blue-100/50">
+                <Users className="h-4.5 w-4.5" />
                 Pour les clients
               </div>
-              <div className="space-y-7">
-                {clientSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-5">
-                    <div className="shrink-0 w-11 h-11 bg-white border border-blue-100 rounded-full flex items-center justify-center text-blue-700 font-extrabold text-xs shadow-sm">
+              
+              <div className="space-y-8 relative">
+                {/* Connecting line */}
+                <div className="absolute left-[1.35rem] top-8 bottom-8 w-px bg-linear-to-b from-blue-100 via-blue-100/50 to-transparent -z-10" />
+                
+                {clientSteps.map(({ step, title, desc }, idx) => (
+                  <div key={step} className="flex gap-6 relative group/step">
+                    <div className="shrink-0 w-11 h-11 bg-white border-2 border-blue-100 rounded-2xl flex items-center justify-center text-blue-600 font-extrabold text-sm shadow-sm group-hover/step:border-blue-500 group-hover/step:bg-blue-50 transition-colors duration-300">
                       {step}
                     </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-1">{title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed">
+                    <div className="pt-2">
+                      <h4 className="text-base font-bold text-slate-900 mb-2 group-hover/step:text-blue-600 transition-colors duration-300">{title}</h4>
+                      <p className="text-sm text-slate-500 leading-relaxed font-medium">
                         {desc}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
+              
               <Button
                 asChild
-                className="mt-9 bg-blue-600 hover:bg-blue-500 text-white shadow-lg shadow-blue-600/30 rounded-xl px-6"
+                size="lg"
+                className="mt-12 bg-slate-950 hover:bg-black text-white hover:text-white shadow-xl shadow-slate-900/10 rounded-2xl px-8 w-full sm:w-auto font-semibold hover:shadow-[0_0_30px_-5px_rgba(59,130,246,0.4)] transition-all duration-300"
               >
                 <Link href="/auth/register">
-                  Je suis client <ChevronRight className="ml-1 h-4 w-4" />
+                  Je suis client <ChevronRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
 
             {/* Transporteur steps */}
-            <div className="bg-linear-to-br from-indigo-50 to-violet-50 rounded-3xl p-9">
-              <div className="inline-flex items-center gap-2 bg-indigo-600 text-white rounded-xl px-4 py-2 text-sm font-semibold mb-8 shadow-md shadow-indigo-500/30">
-                <Truck className="h-4 w-4" />
+            <div className="bg-white rounded-[2rem] p-10 border border-slate-100 shadow-[0_8px_40px_-12px_rgba(0,0,0,0.05)] hover:shadow-[0_16px_60px_-15px_rgba(79,70,229,0.1)] transition-all duration-500 relative overflow-hidden group">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-linear-to-br from-indigo-50 to-transparent rounded-full blur-3xl opacity-50 -z-10 group-hover:opacity-100 transition-opacity duration-500" />
+              
+              <div className="inline-flex items-center gap-2.5 bg-indigo-50 text-indigo-700 rounded-2xl px-5 py-2.5 text-sm font-bold mb-10 border border-indigo-100/50">
+                <Truck className="h-4.5 w-4.5" />
                 Pour les transporteurs
               </div>
-              <div className="space-y-7">
-                {transporteurSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="flex gap-5">
-                    <div className="shrink-0 w-11 h-11 bg-white border border-indigo-100 rounded-full flex items-center justify-center text-indigo-700 font-extrabold text-xs shadow-sm">
+              
+              <div className="space-y-8 relative">
+                {/* Connecting line */}
+                <div className="absolute left-[1.35rem] top-8 bottom-8 w-px bg-linear-to-b from-indigo-100 via-indigo-100/50 to-transparent -z-10" />
+                
+                {transporteurSteps.map(({ step, title, desc }, idx) => (
+                  <div key={step} className="flex gap-6 relative group/step">
+                    <div className="shrink-0 w-11 h-11 bg-white border-2 border-indigo-100 rounded-2xl flex items-center justify-center text-indigo-600 font-extrabold text-sm shadow-sm group-hover/step:border-indigo-500 group-hover/step:bg-indigo-50 transition-colors duration-300">
                       {step}
                     </div>
-                    <div>
-                      <h4 className="font-bold text-slate-900 mb-1">{title}</h4>
-                      <p className="text-sm text-slate-500 leading-relaxed">
+                    <div className="pt-2">
+                      <h4 className="text-base font-bold text-slate-900 mb-2 group-hover/step:text-indigo-600 transition-colors duration-300">{title}</h4>
+                      <p className="text-sm text-slate-500 leading-relaxed font-medium">
                         {desc}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
+              
               <Button
                 asChild
-                className="mt-9 bg-indigo-600 hover:bg-indigo-500 text-white shadow-lg shadow-indigo-600/30 rounded-xl px-6"
+                size="lg"
+                className="mt-12 bg-slate-950 hover:bg-black text-white hover:text-white shadow-xl shadow-slate-900/10 rounded-2xl px-8 w-full sm:w-auto font-semibold hover:shadow-[0_0_30px_-5px_rgba(79,70,229,0.4)] transition-all duration-300"
               >
                 <Link href="/auth/register">
-                  Je suis transporteur <ChevronRight className="ml-1 h-4 w-4" />
+                  Je suis transporteur <ChevronRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
@@ -377,7 +397,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── Testimonials ── */}
-      <section className="py-28 bg-slate-50">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <span className="inline-block rounded-full bg-amber-100 text-amber-700 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-4">
@@ -442,7 +462,7 @@ export default function LandingPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-28 relative overflow-hidden">
+      <section className="py-24 relative overflow-hidden">
         <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-blue-700 to-indigo-800" />
         <div
           className="absolute inset-0 opacity-[0.08]"
