@@ -421,48 +421,76 @@ export default function LandingPage() {
       </section>
 
       {/* ── Footer ── */}
-      <footer id="contact" className="bg-[#0D1B3E] text-white/70">
-        <div className="h-1 w-full bg-linear-to-r from-blue-500/80 via-blue-500 to-blue-500/40" />
+      <footer id="contact" className="bg-zinc-950 text-white/70">
 
-        <div className="max-w-5xl mx-auto px-4 pt-14 pb-8">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-12 pb-12 border-b border-white/10">
-            {/* Brand */}
+        {/* top accent line */}
+        <div className="h-px w-full bg-white/[0.06]" />
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+
+          {/* Brand + tagline */}
+          <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-10">
             <div>
-              <p className="text-2xl font-extrabold text-white mb-3 tracking-tight">
+              <p className="text-3xl font-extrabold text-white tracking-tight leading-none mb-2">
                 COVAM
               </p>
-              <p className="text-sm leading-relaxed text-white/55 max-w-xs">
-                COVAM est né d&apos;un constat simple : trouver un transporteur
-                fiable à Madagascar prend trop de temps. On a voulu changer ça.
+              <p className="text-sm text-white/40 max-w-xs leading-relaxed">
+                La plateforme qui connecte les expéditeurs et les transporteurs
+                sur tous les grands axes de Madagascar.
               </p>
-              <div className="mt-6 flex items-center gap-2">
-                <span className="inline-block w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
-                <span className="text-xs text-white/40 uppercase tracking-widest">
-                  Madagascar
-                </span>
-              </div>
             </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs text-white/30 uppercase tracking-widest">Actif · Madagascar</span>
+            </div>
+          </div>
 
-            {/* Liens */}
+          {/* separator */}
+          <div className="h-px bg-white/[0.06] mb-10" />
+
+          {/* 3-col links */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-10 pb-10">
+
+            {/* Plateforme */}
             <div>
-              <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-6">
-                Liens rapides
+              <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-5">
+                Plateforme
               </h4>
               <ul className="space-y-3 text-sm">
                 {[
-                  { href: "/auth/register", label: "S\u2019inscrire" },
+                  { href: "/auth/register", label: "Créer un compte" },
                   { href: "/auth/login", label: "Se connecter" },
-                  {
-                    href: "#comment-ca-marche",
-                    label: "Comment \u00e7a marche",
-                  },
+                  { href: "#comment-ca-marche", label: "Comment ça marche" },
+                  { href: "#fonctionnalites", label: "Fonctionnalités" },
                 ].map(({ href, label }) => (
                   <li key={href}>
                     <a
                       href={href}
-                      className="flex items-center gap-2 text-white/55 hover:text-white hover:translate-x-1 transition-all duration-200 group"
+                      className="text-white/45 hover:text-white transition-colors duration-200"
                     >
-                      <span className="w-1.5 h-1.5 rounded-full bg-blue-400/60 group-hover:bg-blue-400 transition-colors shrink-0" />
+                      {label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* Utilisateurs */}
+            <div>
+              <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-5">
+                Utilisateurs
+              </h4>
+              <ul className="space-y-3 text-sm">
+                {[
+                  { href: "/client/dashboard", label: "Espace client" },
+                  { href: "/transporteur/dashboard", label: "Espace transporteur" },
+                  { href: "/auth/register", label: "Inscription gratuite" },
+                ].map(({ href, label }) => (
+                  <li key={href}>
+                    <a
+                      href={href}
+                      className="text-white/45 hover:text-white transition-colors duration-200"
+                    >
                       {label}
                     </a>
                   </li>
@@ -472,35 +500,35 @@ export default function LandingPage() {
 
             {/* Contact */}
             <div>
-              <h4 className="text-white font-bold text-xs uppercase tracking-widest mb-6">
-                Nous contacter
+              <h4 className="text-[10px] font-bold text-white/30 uppercase tracking-widest mb-5">
+                Contact
               </h4>
               <ul className="space-y-4 text-sm">
                 <li className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
-                    <Mail className="h-3.5 w-3.5 text-white/80" />
+                  <div className="w-8 h-8 rounded-xl bg-white/[0.05] border border-white/[0.07] flex items-center justify-center shrink-0">
+                    <Mail className="h-3.5 w-3.5 text-white/50" />
                   </div>
-                  <span className="text-white/60">contact@covam.mg</span>
+                  <span className="text-white/45">contact@covam.mg</span>
                 </li>
                 <li className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center shrink-0">
-                    <Phone className="h-3.5 w-3.5 text-white/80" />
+                  <div className="w-8 h-8 rounded-xl bg-white/[0.05] border border-white/[0.07] flex items-center justify-center shrink-0">
+                    <Phone className="h-3.5 w-3.5 text-white/50" />
                   </div>
-                  <span className="text-white/60">+261 XX XX XXX XX</span>
+                  <span className="text-white/45">+261 XX XX XXX XX</span>
                 </li>
               </ul>
             </div>
           </div>
 
+          {/* separator */}
+          <div className="h-px bg-white/[0.06] mb-6" />
+
           {/* Bottom bar */}
-          <div className="pt-6 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/35">
-            <span>
-              © {new Date().getFullYear()} Covam. Tous droits réservés.
-            </span>
-            <span className="uppercase tracking-widest">
-              Plateforme de transport · Madagascar
-            </span>
+          <div className="flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/25">
+            <span>© {new Date().getFullYear()} Covam — Tous droits réservés.</span>
+            <span className="uppercase tracking-widest">Plateforme de transport · Madagascar</span>
           </div>
+
         </div>
       </footer>
     </div>
