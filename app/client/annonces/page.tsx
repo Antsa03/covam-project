@@ -175,7 +175,7 @@ export default function ClientAnnoncesPage() {
 
 function ClientAnnoncesContent() {
   const searchParams = useSearchParams();
-  const bookIdParam = searchParams.get("book");
+  const bookIdParam = searchParams?.get("book") ?? null;
   const bookId = bookIdParam ? parseInt(bookIdParam, 10) : null;
 
   const [page, setPage] = useState(1);

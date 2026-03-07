@@ -429,8 +429,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
               </span>
             </div>
             {/* Quota pill – Particulier only (disabled) */}
-            {false && isParticulier && quotaData && (() => {
-              const used = quotaData.data?.postsThisMonth ?? 0;
+            {/* {false && isParticulier && quotaData && quotaData.data ? (() => {
+              const used = quotaData.data.postsThisMonth ?? 0;
               const total = quotaData.data?.monthlyLimit ?? 4;
               const remaining = Math.max(0, total - used);
               const pct = Math.min(100, Math.round((used / total) * 100));
@@ -455,7 +455,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   </span>
                 </div>
               );
-            })()}
+            })()} */}
             {/* Avatar shortcut top-right */}
             <div className="relative shrink-0">
               <Avatar className="h-8 w-8 cursor-default">

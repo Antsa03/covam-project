@@ -63,7 +63,7 @@ export default function RegisterPage() {
 function RegisterForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
+  const callbackUrl = searchParams?.get("callbackUrl");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 

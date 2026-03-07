@@ -40,7 +40,7 @@ const InputField = "h-12 px-0 text-base bg-transparent border-0 border-b-2 borde
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const callbackUrl = searchParams.get("callbackUrl");
+  const callbackUrl = searchParams?.get("callbackUrl") ?? null;
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
