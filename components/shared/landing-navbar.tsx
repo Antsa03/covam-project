@@ -25,7 +25,7 @@ export function LandingNavbar() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <div className="flex items-center gap-2">
-          <div className="bg-blue-600 rounded-lg p-1.5">
+          <div className="bg-primary rounded-lg p-1.5">
             <Truck className="h-5 w-5 text-white" />
           </div>
           <span className="text-xl font-bold text-slate-900">
