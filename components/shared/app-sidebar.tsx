@@ -183,6 +183,53 @@ const NAV: Record<string, NavGroup[]> = {
       ],
     },
   ],
+  PARTICULIER: [
+    {
+      title: "Principal",
+      items: [
+        {
+          label: "Tableau de bord",
+          href: "/client/dashboard",
+          icon: <LayoutDashboard className="h-4 w-4" />,
+        },
+        {
+          label: "Mon compte",
+          href: "/client/compte",
+          icon: <UserCircle className="h-4 w-4" />,
+        },
+      ],
+    },
+    {
+      title: "Mes services",
+      items: [
+        {
+          label: "Annonces",
+          href: "/client/annonces",
+          icon: <Megaphone className="h-4 w-4" />,
+        },
+        {
+          label: "Mes réservations",
+          href: "/client/reservations",
+          icon: <CalendarCheck className="h-4 w-4" />,
+        },
+        {
+          label: "Mes marchandises",
+          href: "/client/marchandise",
+          icon: <Package className="h-4 w-4" />,
+        },
+        {
+          label: "Mes paiements",
+          href: "/client/paiements",
+          icon: <CreditCard className="h-4 w-4" />,
+        },
+        {
+          label: "Cargo",
+          href: "/client/cargo",
+          icon: <BoxIcon className="h-4 w-4" />,
+        },
+      ],
+    },
+  ],
 };
 
 const ROLE_META: Record<string, { label: string; color: string }> = {
@@ -197,6 +244,10 @@ const ROLE_META: Record<string, { label: string; color: string }> = {
   CLIENT: {
     label: "Client",
     color: "bg-emerald-50 text-emerald-700 border-emerald-200",
+  },
+  PARTICULIER: {
+    label: "Particulier",
+    color: "bg-violet-50 text-violet-700 border-violet-200",
   },
 };
 
