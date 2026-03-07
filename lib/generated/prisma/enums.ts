@@ -51,7 +51,8 @@ export type CargoCategory = (typeof CargoCategory)[keyof typeof CargoCategory]
 
 export const RoleUtilisateur = {
   CLIENT: 'CLIENT',
-  TRANSPORTEUR: 'TRANSPORTEUR'
+  TRANSPORTEUR: 'TRANSPORTEUR',
+  PARTICULIER: 'PARTICULIER'
 } as const
 
 export type RoleUtilisateur = (typeof RoleUtilisateur)[keyof typeof RoleUtilisateur]
