@@ -410,7 +410,9 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   ? "Administration"
                   : role === "TRANSPORTEUR"
                     ? "Espace Transporteur"
-                    : "Espace Client"}
+                    : role === "PARTICULIER"
+                      ? "Espace Particulier"
+                      : "Espace Client"}
               </span>
             </div>
             {/* Quota pill – Particulier only */}
