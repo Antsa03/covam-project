@@ -13,7 +13,7 @@ export type CargoCategory =
   | "PERISHABLE"
   | "HAZARDOUS"
   | "OVERSIZED";
-export type RoleUtilisateur = "CLIENT" | "TRANSPORTEUR";
+export type RoleUtilisateur = "CLIENT" | "TRANSPORTEUR" | "PARTICULIER";
 
 // ─── Entities ─────────────────────────────────────────────────────────────────
 
