@@ -290,9 +290,9 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
               <Button
                 asChild
                 size="sm"
-                className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl py-5 text-xs font-semibold shadow-sm shadow-primary/20 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300"
+                className="w-full bg-primary hover:bg-primary/90 text-white rounded-none py-6 h-12 text-[11px] uppercase tracking-widest font-semibold shadow-none transition-all duration-300"
               >
-                <Link href="/auth/register">Réserver</Link>
+                <Link href="/auth/login">Réserver</Link>
               </Button>
             </div>
           </div>
@@ -305,9 +305,9 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
         <Button
           asChild
           size="sm"
-          className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl text-xs font-semibold shadow-sm shadow-primary/20 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300"
+          className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-12 text-[11px] uppercase tracking-widest font-semibold shadow-none transition-all duration-300"
         >
-          <Link href="/auth/register">Réserver ce trajet</Link>
+          <Link href="/auth/login">Réserver ce trajet</Link>
         </Button>
       </div>
     </div>
