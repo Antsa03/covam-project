@@ -16,6 +16,36 @@ export default async function handler(
   const auth = await requireAuth(req, res, ["TRANSPORTEUR", "CLIENT"]);
   if (!auth) return;
 
+  // Single-transport lookup by ID (used after redirect from landing page)
+  if (req.query.id) {
+    const id = Number(req.query.id);
+    const annonce = await prisma.pbTransport.findUnique({
+      where: { id_pb_transport: id, status: "ACTIVE" },
+      include: {
+        transport: {
+          select: {
+            marque: true,
+            type: true,
+            immatriculation: true,
+            images: true,
+            transporteur: {
+              select: {
+                utilisateur: {
+                  select: { nom: true, prenom: true, phone: true },
+                },
+              },
+            },
+          },
+        },
+        _count: { select: { reservations: true } },
+      },
+    });
+    if (!annonce) {
+      return res.status(404).json({ error: "Annonce introuvable." });
+    }
+    return res.status(200).json({ data: annonce });
+  }
+
   const page = Math.max(1, Number(req.query.page) || 1);
   const limit = Math.min(100, Math.max(1, Number(req.query.limit) || 20));
   const skip = (page - 1) * limit;
