@@ -34,13 +34,13 @@ export function LandingNavbar() {
         </div>
 
         <nav className="hidden md:flex items-center gap-8 text-[0.92rem] font-semibold text-slate-800 tracking-tight">
-          <a href="#fonctionnalites" className="hover:text-blue-600 transition-colors">
+          <a href="#fonctionnalites" className="hover:text-primary transition-colors">
             Fonctionnalités
           </a>
-          <a href="#comment-ca-marche" className="hover:text-blue-600 transition-colors">
+          <a href="#comment-ca-marche" className="hover:text-primary transition-colors">
             Comment ça marche
           </a>
-          <a href="#contact" className="hover:text-blue-600 transition-colors">
+          <a href="#contact" className="hover:text-primary transition-colors">
             Contact
           </a>
         </nav>
@@ -49,13 +49,13 @@ export function LandingNavbar() {
           <Button
             variant="ghost"
             asChild
-            className="hidden sm:flex text-slate-800 font-semibold tracking-tight hover:text-blue-600 hover:bg-blue-50/50"
+            className="hidden sm:flex text-slate-800 font-semibold tracking-tight hover:text-primary hover:bg-primary/5"
           >
             <Link href="/auth/login">Se connecter</Link>
           </Button>
           <Button
             asChild
-            className="bg-blue-600 hover:bg-blue-500 text-white shadow-md shadow-blue-500/25 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] transition-all duration-300"
+            className="bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/25 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300"
           >
             <Link href="/auth/register">
               S&apos;inscrire <ArrowRight className="ml-1.5 h-4 w-4" />
