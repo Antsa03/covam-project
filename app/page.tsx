@@ -175,17 +175,17 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-20 bg-zinc-950">
+      <section className="py-20 bg-slate-900">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/5 rounded-3xl overflow-hidden border border-white/[0.06] shadow-xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.03] rounded-3xl overflow-hidden border border-white/[0.04] shadow-2xl">
             {stats.map(({ label, value, icon: Icon, desc }) => (
               <div
                 key={label}
-                className="group flex flex-col items-center text-center px-6 py-10 bg-zinc-950 hover:bg-zinc-900 transition-colors duration-300"
+                className="group flex flex-col items-center text-center px-6 py-10 bg-slate-900/90 hover:bg-slate-800 transition-colors duration-300 backdrop-blur-sm"
               >
                 {/* icon */}
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 bg-white/[0.04] border border-white/[0.07] transition-all duration-300">
-                  <Icon className="h-5 w-5 text-indigo-400" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 bg-white/[0.04] border border-white/[0.07] transition-all duration-300 shadow-inner">
+                  <Icon className="h-5 w-5 text-blue-400 group-hover:text-blue-300 group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.5)] transition-all" />
                 </div>
 
                 {/* value */}
@@ -194,10 +194,10 @@ export default function LandingPage() {
                 </div>
 
                 {/* label */}
-                <p className="text-sm font-semibold text-zinc-300 mb-1">{label}</p>
+                <p className="text-sm font-semibold text-slate-300 mb-1">{label}</p>
 
                 {/* desc */}
-                <p className="text-xs text-zinc-600">{desc}</p>
+                <p className="text-xs text-slate-500">{desc}</p>
               </div>
             ))}
           </div>
@@ -205,25 +205,25 @@ export default function LandingPage() {
       </section>
 
       {/* ── Features ── */}
-      <section id="fonctionnalites" className="py-28 bg-zinc-950 relative overflow-hidden">
+      <section id="fonctionnalites" className="py-24 bg-slate-900 relative overflow-hidden">
         {/* Ambient background glows */}
         <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
-          <div className="absolute -top-32 left-1/4 w-130 h-105 rounded-full bg-blue-700/10 blur-[110px]" />
-          <div className="absolute bottom-0 right-1/4 w-120 h-100 rounded-full bg-violet-700/10 blur-[110px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-225 h-75 bg-indigo-900/10 blur-[120px]" />
+          <div className="absolute -top-32 left-1/4 w-130 h-105 rounded-full bg-blue-600/10 blur-[110px]" />
+          <div className="absolute bottom-0 right-1/4 w-120 h-100 rounded-full bg-indigo-600/10 blur-[110px]" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-225 h-75 bg-blue-900/15 blur-[120px]" />
         </div>
 
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section header */}
           <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/25 bg-blue-500/10 text-blue-400 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-5">
+            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-300 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-5">
               <Sparkles className="h-3 w-3" />
               Ce que vous y trouvez
             </span>
-            <h2 className="text-4xl sm:text-5xl font-bold text-white mb-5 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 tracking-tight">
               Simple, pas compliqué
             </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
               On a conçu Covam pour que n&apos;importe qui puisse s&apos;y
               retrouver dès la première utilisation.
             </p>
@@ -234,7 +234,7 @@ export default function LandingPage() {
             {features.map(({ icon: Icon, title, description, color, iconBg, iconBorder, lineGradient, cornerGlow, bottomEdge }, idx) => (
               <div
                 key={title}
-                className="group relative flex flex-col rounded-2xl overflow-hidden transition-all duration-500 bg-white/[2.5] hover:bg-white/[4.5] border border-white/7 hover:border-white/[11]"
+                className="group relative flex flex-col rounded-[1.5rem] overflow-hidden transition-all duration-500 bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700 hover:border-slate-600 backdrop-blur-sm"
               >
                 {/* Corner glow on hover */}
                 <div
@@ -248,23 +248,23 @@ export default function LandingPage() {
                   {/* Top: icon + index number */}
                   <div className="flex items-center justify-between mb-7">
                     <div
-                      className="flex items-center justify-center w-12 h-12 rounded-xl transition-transform duration-300 group-hover:scale-110"
+                      className="flex items-center justify-center w-12 h-12 rounded-[1rem] transition-transform duration-300 group-hover:scale-110 shadow-inner"
                       style={{ background: iconBg, border: `1px solid ${iconBorder}` }}
                     >
                       <Icon className={`h-5 w-5 ${color}`} />
                     </div>
                     <span
                       className="text-5xl font-black leading-none tabular-nums select-none"
-                      style={{ color: "rgba(255,255,255,0.05)" }}
+                      style={{ color: "rgba(255,255,255,0.03)" }}
                     >
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
 
                   {/* ── Separator line with animated light sweep ── */}
-                  <div className="relative h-px mb-7 overflow-hidden">
+                  <div className="relative h-px mb-7 overflow-hidden rounded-full">
                     {/* Base line */}
-                    <div className="absolute inset-0" style={{ background: "rgba(255,255,255,0.07)" }} />
+                    <div className="absolute inset-0 bg-slate-700/50" />
                     {/* Animated glow sweep */}
                     <div
                       className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700 ease-out"
@@ -274,10 +274,10 @@ export default function LandingPage() {
 
                   {/* Text content */}
                   <div className="flex-1">
-                    <h3 className="text-[15px] font-bold text-white mb-3 leading-snug">
+                    <h3 className="text-base font-bold text-white mb-3 leading-snug">
                       {title}
                     </h3>
-                    <p className="text-sm text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-slate-400 leading-relaxed font-medium">
                       {description}
                     </p>
                   </div>
