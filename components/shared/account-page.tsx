@@ -176,7 +176,7 @@ function PostsQuotaWidget() {
         </div>
         <span className={`text-sm font-extrabold ${palette.text}`}>
           {used}
-          <span className="text-xs font-normal opacity-50">/{total}</span>
+          <span className="text-xs font-normal">/{total}</span>
         </span>
       </div>
 
