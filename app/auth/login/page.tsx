@@ -35,6 +35,8 @@ const schema = z.object({
 
 type FormData = z.infer<typeof schema>;
 
+const InputField = "h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-slate-900 focus-visible:shadow-none hover:border-slate-400 transition-all placeholder:text-slate-300"
+
 export default function LoginPage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -93,14 +95,14 @@ export default function LoginPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-slate-700">
+                  <FormLabel className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
                     Email / Nom d&apos;utilisateur{" "}
                     <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="exemple@covam.com"
-                      className="h-12 text-base bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -113,7 +115,7 @@ export default function LoginPage() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-sm font-semibold text-slate-700">
+                  <FormLabel className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
                     Mot de passe <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
@@ -121,7 +123,7 @@ export default function LoginPage() {
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
-                        className="h-12 text-base bg-slate-50 border-slate-200 focus:bg-white transition-colors pr-10"
+                        className="h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300 pr-10"
                         {...field}
                       />
                       <button
