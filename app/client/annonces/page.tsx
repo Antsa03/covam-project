@@ -219,7 +219,7 @@ function ClientAnnoncesContent() {
       />
 
       {/* Filtres */}
-      <div className="flex flex-wrap gap-3 items-end">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:items-end">
         <div className="flex flex-col gap-1">
           <span className="text-xs text-muted-foreground font-medium">
             Départ
@@ -228,7 +228,7 @@ function ClientAnnoncesContent() {
             value={depart || ALL}
             onValueChange={(v) => setDepart(v === ALL ? "" : v)}
           >
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-full sm:w-48">
               <SelectValue placeholder="Toutes les villes" />
             </SelectTrigger>
             <SelectContent>
@@ -250,7 +250,7 @@ function ClientAnnoncesContent() {
             value={destination || ALL}
             onValueChange={(v) => setDestination(v === ALL ? "" : v)}
           >
-            <SelectTrigger className="w-48">
+            <SelectTrigger className="w-full sm:w-48">
               <SelectValue placeholder="Toutes les villes" />
             </SelectTrigger>
             <SelectContent>
@@ -264,28 +264,32 @@ function ClientAnnoncesContent() {
           </Select>
         </div>
 
-        <Button
-          onClick={() => {
-            setSearch({
-              depart: depart || undefined,
-              destination: destination || undefined,
-            });
-            setPage(1);
-          }}
-        >
-          Rechercher
-        </Button>
-        <Button
-          variant="outline"
-          onClick={() => {
-            setDepart("");
-            setDestination("");
-            setSearch({});
-            setPage(1);
-          }}
-        >
-          Réinitialiser
-        </Button>
+        <div className="flex gap-2">
+          <Button
+            className="flex-1 sm:flex-none"
+            onClick={() => {
+              setSearch({
+                depart: depart || undefined,
+                destination: destination || undefined,
+              });
+              setPage(1);
+            }}
+          >
+            Rechercher
+          </Button>
+          <Button
+            variant="outline"
+            className="flex-1 sm:flex-none"
+            onClick={() => {
+              setDepart("");
+              setDestination("");
+              setSearch({});
+              setPage(1);
+            }}
+          >
+            Réinitialiser
+          </Button>
+        </div>
       </div>
 
       {/* Grille */}
