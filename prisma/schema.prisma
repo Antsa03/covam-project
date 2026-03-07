@@ -46,6 +46,7 @@ enum CargoCategory {
 enum RoleUtilisateur {
   CLIENT
   TRANSPORTEUR
+  PARTICULIER
 }
 
 // ─── Modèle de base ──────────────────────────────────────
