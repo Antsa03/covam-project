@@ -60,7 +60,31 @@ export default async function handler(
 
       if (!utilisateur)
         return res.status(404).json({ error: "Utilisateur introuvable." });
-      return res.status(200).json({ data: utilisateur });
+
+      // For PARTICULIER, compute monthly post count
+      let postsThisMonth: number | undefined;
+      if (utilisateur.role === "PARTICULIER") {
+        const now = new Date();
+        const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+        const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+        const clientRecord = utilisateur.client;
+        if (clientRecord) {
+          postsThisMonth = await prisma.pbMarchandise.count({
+            where: {
+              client_id: clientRecord.id_client,
+              date_creation: { gte: startOfMonth, lte: endOfMonth },
+            },
+          });
+        } else {
+          postsThisMonth = 0;
+        }
+      }
+
+      return res.status(200).json({
+        data: postsThisMonth !== undefined
+          ? { ...utilisateur, postsThisMonth }
+          : utilisateur,
+      });
     }
 
     // ── PUT ──────────────────────────────────────────────────────────────────
@@ -116,7 +140,7 @@ export default async function handler(
       if (city) updateData.city = city;
 
       // Update client profile image
-      if (auth.role === "CLIENT" && req.body?.image !== undefined) {
+      if ((auth.role === "CLIENT" || auth.role === "PARTICULIER") && req.body?.image !== undefined) {
         await prisma.client.updateMany({
           where: { utilisateur_id: Number(auth.id) },
           data: { image: req.body.image },
