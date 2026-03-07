@@ -144,7 +144,7 @@ export default function LandingPage() {
         </span>
         <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-center tracking-tight leading-tight mb-6 max-w-3xl text-slate-800">
           Expédiez vos marchandises en toute{" "}
-          <span className="text-blue-600">simplicité</span>
+          <span className="text-primary">simplicité</span>
         </h1>
         <p className="text-slate-500 text-center max-w-xl mb-14 text-base leading-relaxed">
           Trouvez un transporteur fiable sur les grands axes malgaches. Comparez
@@ -188,8 +188,8 @@ export default function LandingPage() {
                   className="group relative flex flex-col items-start p-8 bg-white hover:bg-slate-50 transition-all duration-300"
                 >
                   {/* Square icon outline */}
-                  <div className="mb-8 inline-flex items-center justify-center w-12 h-12 bg-white border border-slate-300 transition-all duration-300 group-hover:border-blue-600 group-hover:-translate-y-1 group-hover:shadow-[4px_4px_0px_0px_rgba(37,99,235,0.1)]">
-                    <Icon className="h-5 w-5 text-slate-700 group-hover:text-blue-600 transition-colors" />
+                  <div className="mb-8 inline-flex items-center justify-center w-12 h-12 bg-white border border-slate-300 transition-all duration-300 group-hover:border-primary group-hover:-translate-y-1 group-hover:shadow-[4px_4px_0px_0px_rgba(33,71,170,0.1)]">
+                    <Icon className="h-5 w-5 text-slate-700 group-hover:text-primary transition-colors" />
                   </div>
 
                   {/* value */}
@@ -204,7 +204,7 @@ export default function LandingPage() {
                   <p className="text-sm text-slate-500 font-medium">{desc}</p>
 
                   {/* Subtle accent hover line on the left side */}
-                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-blue-600 scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
+                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-primary scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
                 </div>
               ))}
             </div>
@@ -241,9 +241,9 @@ export default function LandingPage() {
                   {/* Top: icon + index number */}
                   <div className="flex items-center justify-between mb-8">
                     <div
-                      className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 transition-all duration-300 shadow-xs group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-600"
+                      className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 transition-all duration-300 shadow-xs group-hover:border-primary/30 group-hover:bg-primary/5 group-hover:text-primary"
                     >
-                      <Icon className="h-5 w-5 text-slate-600 group-hover:text-blue-600 transition-colors" />
+                      <Icon className="h-5 w-5 text-slate-600 group-hover:text-primary transition-colors" />
                     </div>
                     <span
                       className="text-5xl font-black leading-none tabular-nums select-none text-slate-100 group-hover:text-slate-200 transition-colors"
@@ -254,7 +254,7 @@ export default function LandingPage() {
 
                   {/* Text content */}
                   <div className="flex-1 mt-2">
-                    <h3 className="text-lg font-bold text-slate-900 mb-3 leading-snug group-hover:text-blue-600 transition-colors">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3 leading-snug group-hover:text-primary transition-colors">
                       {title}
                     </h3>
                     <p className="text-sm text-slate-500 leading-relaxed font-medium">
@@ -288,9 +288,9 @@ export default function LandingPage() {
           <div className="grid lg:grid-cols-2 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
             {/* Client Section */}
             <div className="bg-white hover:bg-slate-50/50 transition-colors duration-500 flex flex-col">
-              <div className="p-8 sm:p-10 bg-blue-50/30 border-b border-slate-200 flex items-center justify-between">
+              <div className="p-8 sm:p-10 bg-primary/5 border-b border-slate-200 flex items-center justify-between">
                 <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3">
-                  <span className="p-2.5 bg-blue-600 text-white rounded-xl shadow-xs"><Users className="h-5 w-5" /></span>
+                  <span className="p-2.5 bg-primary text-white rounded-xl shadow-xs"><Users className="h-5 w-5" /></span>
                   Pour les clients
                 </h3>
                 <span className="text-xs font-bold tracking-widest text-slate-400 uppercase hidden sm:block">Envoyer</span>
@@ -298,11 +298,11 @@ export default function LandingPage() {
               
               <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-200">
                 {clientSteps.map(({ step, title, desc }, idx) => (
-                  <div key={step} className="bg-white p-8 flex flex-col hover:bg-blue-50/30 transition-colors duration-300 group">
-                    <div className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-extrabold text-xs mb-6 shadow-sm group-hover:border-blue-300 group-hover:text-blue-600 group-hover:shadow-blue-100 transition-all">
+                  <div key={step} className="bg-white p-8 flex flex-col hover:bg-primary/5 transition-colors duration-300 group">
+                    <div className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-extrabold text-xs mb-6 shadow-sm group-hover:border-primary/30 group-hover:text-primary group-hover:shadow-primary/20 transition-all">
                       {step}
                     </div>
-                    <h4 className="text-base font-bold text-slate-900 mb-3 group-hover:text-blue-600 transition-colors">{title}</h4>
+                    <h4 className="text-base font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">{title}</h4>
                     <p className="text-sm text-slate-500 leading-relaxed font-medium">
                       {desc}
                     </p>
@@ -314,7 +314,7 @@ export default function LandingPage() {
                 <Button
                   asChild
                   size="lg"
-                  className="w-full bg-slate-900 hover:bg-blue-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-blue-600/20 rounded-xl transition-all duration-300"
+                  className="w-full bg-slate-900 hover:bg-primary text-white shadow-xl shadow-slate-900/10 hover:shadow-primary/20 rounded-xl transition-all duration-300"
                 >
                   <Link href="/auth/register" className="group/btn">
                     Je suis client <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
@@ -327,7 +327,7 @@ export default function LandingPage() {
             <div className="bg-white hover:bg-slate-50/50 transition-colors duration-500 flex flex-col">
               <div className="p-8 sm:p-10 bg-indigo-50/30 border-b border-slate-200 flex items-center justify-between">
                 <h3 className="text-xl font-bold text-slate-900 flex items-center gap-3">
-                  <span className="p-2.5 bg-indigo-600 text-white rounded-xl shadow-xs"><Truck className="h-5 w-5" /></span>
+                  <span className="p-2.5 bg-primary text-white rounded-xl shadow-xs"><Truck className="h-5 w-5" /></span>
                   Pour les transporteurs
                 </h3>
                 <span className="text-xs font-bold tracking-widest text-slate-400 uppercase hidden sm:block">Transporter</span>
@@ -335,11 +335,11 @@ export default function LandingPage() {
               
               <div className="flex-1 grid grid-cols-1 sm:grid-cols-2 gap-px bg-slate-200">
                 {transporteurSteps.map(({ step, title, desc }) => (
-                  <div key={step} className="bg-white p-8 flex flex-col hover:bg-indigo-50/30 transition-colors duration-300 group">
-                    <div className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-extrabold text-xs mb-6 shadow-sm group-hover:border-indigo-300 group-hover:text-indigo-600 group-hover:shadow-indigo-100 transition-all">
+                  <div key={step} className="bg-white p-8 flex flex-col hover:bg-primary/5 transition-colors duration-300 group">
+                    <div className="w-10 h-10 border border-slate-200 rounded-xl flex items-center justify-center text-slate-700 font-extrabold text-xs mb-6 shadow-sm group-hover:border-primary/30 group-hover:text-primary group-hover:shadow-primary/20 transition-all">
                       {step}
                     </div>
-                    <h4 className="text-base font-bold text-slate-900 mb-3 group-hover:text-indigo-600 transition-colors">{title}</h4>
+                    <h4 className="text-base font-bold text-slate-900 mb-3 group-hover:text-primary transition-colors">{title}</h4>
                     <p className="text-sm text-slate-500 leading-relaxed font-medium">
                       {desc}
                     </p>
@@ -351,7 +351,7 @@ export default function LandingPage() {
                 <Button
                   asChild
                   size="lg"
-                  className="w-full bg-slate-900 hover:bg-blue-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-blue-600/20 rounded-xl transition-all duration-300"
+                  className="w-full bg-slate-900 hover:bg-primary text-white shadow-xl shadow-slate-900/10 hover:shadow-primary/20 rounded-xl transition-all duration-300"
                 >
                   <Link href="/auth/register" className="group/btn">
                     Je suis transporteur <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
