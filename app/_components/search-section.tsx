@@ -540,7 +540,7 @@ export function SearchSection() {
           </div>
 
           {/* Date */}
-          <div className="flex items-center gap-3 px-7 py-5 sm:border-r border-slate-100 sm:w-52 shrink-0">
+          <div className="flex-1 flex items-center gap-3 px-7 py-5 sm:border-r border-slate-100">
             <CalendarDays className="h-4 w-4 text-slate-400 shrink-0" />
             <div className="flex flex-col w-full">
               <label
