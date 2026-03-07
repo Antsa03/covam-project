@@ -197,11 +197,11 @@ function ReservationCardSkeleton() {
     <Card className="w-full">
       <CardContent className="flex items-center gap-4 p-4">
         <Skeleton className="h-16 w-16 rounded-full shrink-0" />
-        <div className="space-y-1.5 w-44 shrink-0">
+        <div className="space-y-1.5 w-44 shrink-0 hidden sm:block">
           <Skeleton className="h-4 w-28" />
           <Skeleton className="h-3 w-36" />
         </div>
-        <div className="flex-1 grid grid-cols-4 gap-4">
+        <div className="flex-1 grid grid-cols-2 sm:grid-cols-4 gap-4">
           {Array.from({ length: 4 }).map((_, i) => (
             <div key={i} className="space-y-1">
               <Skeleton className="h-3 w-16" />
@@ -242,7 +242,7 @@ export default function ClientReservationsPage() {
           setPage(1);
         }}
       >
-        <SelectTrigger className="w-48">
+        <SelectTrigger className="w-full sm:w-48">
           <SelectValue placeholder="Tous les statuts" />
         </SelectTrigger>
         <SelectContent>
