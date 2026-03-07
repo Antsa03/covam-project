@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import { getToken } from "next-auth/jwt";
 
-type Role = "CLIENT" | "TRANSPORTEUR" | "ADMIN";
+type Role = "CLIENT" | "TRANSPORTEUR" | "ADMIN" | "PARTICULIER";
 
 /**
  * Vérifie que la requête est authentifiée.
