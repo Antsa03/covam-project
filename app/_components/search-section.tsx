@@ -290,7 +290,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
               <Button
                 asChild
                 size="sm"
-                className="w-full bg-primary hover:bg-primary/90 text-white rounded-none py-6 h-12 text-[11px] uppercase tracking-widest font-semibold shadow-none transition-all duration-300"
+                className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-12 text-[11px] tracking-[0.2em] uppercase font-semibold shadow-none transition-all duration-300"
               >
                 <Link href="/auth/login">Réserver</Link>
               </Button>
@@ -305,7 +305,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
         <Button
           asChild
           size="sm"
-          className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-12 text-[11px] uppercase tracking-widest font-semibold shadow-none transition-all duration-300"
+          className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-12 text-[11px] tracking-[0.2em] uppercase font-semibold shadow-none transition-all duration-300"
         >
           <Link href="/auth/login">Réserver ce trajet</Link>
         </Button>
