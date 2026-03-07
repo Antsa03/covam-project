@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardFooter } from "@/components/ui/card";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { PageHeader } from "@/components/shared/page-header";
 import { BookModal } from "./_components/book-modal";
-import { usePublicPbTransports } from "@/hooks/use-pb-transports";
+import { usePublicPbTransports, usePbTransportById } from "@/hooks/use-pb-transports";
 import { useCreateReservation } from "@/hooks/use-reservations";
 import type { PbTransport } from "@/types";
 import {
@@ -166,6 +166,18 @@ function AnnonceCardSkeleton() {
 }
 
 export default function ClientAnnoncesPage() {
+  return (
+    <Suspense fallback={<div className="space-y-6"><div className="h-10 w-64 bg-muted animate-pulse rounded" /></div>}>
+      <ClientAnnoncesContent />
+    </Suspense>
+  );
+}
+
+function ClientAnnoncesContent() {
+  const searchParams = useSearchParams();
+  const bookIdParam = searchParams.get("book");
+  const bookId = bookIdParam ? parseInt(bookIdParam, 10) : null;
+
   const [page, setPage] = useState(1);
   const [depart, setDepart] = useState("");
   const [destination, setDestination] = useState("");
@@ -174,10 +186,30 @@ export default function ClientAnnoncesPage() {
     destination?: string;
   }>({});
   const [selected, setSelected] = useState<PbTransport | null>(null);
+  const [autoOpened, setAutoOpened] = useState(false);
 
   const { data, isLoading } = usePublicPbTransports({ page, ...search });
+  const { data: bookTarget } = usePbTransportById(autoOpened ? null : bookId);
   const create = useCreateReservation();
   const totalPages = data?.meta.totalPages ?? 1;
+
+  // Auto-open modal when coming from landing page "Réserver" button
+  useEffect(() => {
+    if (autoOpened || !bookId) return;
+    if (bookTarget) {
+      setSelected(bookTarget);
+      setAutoOpened(true);
+      return;
+    }
+    // Fallback: search in current page data
+    if (data) {
+      const found = data.data.find((a) => a.id_pb_transport === bookId);
+      if (found) {
+        setSelected(found);
+        setAutoOpened(true);
+      }
+    }
+  }, [bookTarget, data, bookId, autoOpened]);
 
   return (
     <div className="space-y-6">
@@ -311,7 +343,11 @@ export default function ClientAnnoncesPage() {
           onOpenChange={(o) => !o && setSelected(null)}
           annonce={selected}
           onSubmit={async (d) => {
-            await create.mutateAsync(d);
+            await create.mutateAsync({
+              ...d,
+              depart: selected.depart,
+              destination: selected.destination,
+            });
             setSelected(null);
           }}
           isLoading={create.isPending}
