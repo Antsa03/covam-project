@@ -290,7 +290,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
               <Button
                 asChild
                 size="sm"
-                className="w-full bg-blue-600 hover:bg-blue-500 text-white rounded-xl py-5 text-xs font-semibold shadow-sm shadow-blue-500/20 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] transition-all duration-300"
+                className="w-full bg-primary hover:bg-primary/90 text-white rounded-xl py-5 text-xs font-semibold shadow-sm shadow-primary/20 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300"
               >
                 <Link href="/auth/register">Réserver</Link>
               </Button>
