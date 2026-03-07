@@ -149,7 +149,7 @@ export default function LoginPage() {
             />
             <Button
               type="submit"
-              className="w-full h-14 mt-8 rounded-none bg-slate-900 text-white hover:bg-slate-800 text-sm tracking-[0.2em] font-medium uppercase transition-colors"
+              className="w-full h-14 mt-8 rounded-none bg-primary text-white hover:bg-primary/90 text-sm tracking-[0.2em] font-medium uppercase transition-colors"
               disabled={loading}
             >
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
