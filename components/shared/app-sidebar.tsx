@@ -424,7 +424,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   ? { ring: "ring-red-300", bar: "bg-red-500", text: "text-red-600", bg: "bg-red-50" }
                   : remaining === 1
                   ? { ring: "ring-amber-300", bar: "bg-amber-500", text: "text-amber-700", bg: "bg-amber-50" }
-                  : { ring: "ring-violet-300", bar: "bg-violet-500", text: "text-violet-700", bg: "bg-violet-50" };
+                  : { ring: "ring-blue-300", bar: "bg-blue-500", text: "text-blue-700", bg: "bg-blue-50" };
               return (
                 <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 border ring-1 ${color.ring} ${color.bg} shrink-0`}>
                   <div className="flex flex-col items-end gap-0.5">
