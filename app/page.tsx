@@ -484,7 +484,7 @@ export default function LandingPage() {
         {/* top accent line */}
         <div className="h-px w-full bg-white/[0.06]" />
 
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10">
 
           {/* Brand + tagline */}
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 pb-10">
