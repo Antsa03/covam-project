@@ -42,9 +42,9 @@ export default async function handler(
       .json({ error: "Tous les champs sont obligatoires." });
   }
 
-  if (!["CLIENT", "TRANSPORTEUR"].includes(role)) {
+  if (!["CLIENT", "TRANSPORTEUR", "PARTICULIER"].includes(role)) {
     return res.status(400).json({
-      error: "Rôle invalide. Valeurs acceptées : CLIENT, TRANSPORTEUR.",
+      error: "Rôle invalide. Valeurs acceptées : CLIENT, TRANSPORTEUR, PARTICULIER.",
     });
   }
 
@@ -103,7 +103,7 @@ export default async function handler(
       await prisma.transporteur.create({
         data: { utilisateur_id: utilisateur.id_utilisateur },
       });
-    } else if (role === "CLIENT") {
+    } else if (role === "CLIENT" || role === "PARTICULIER") {
       const image =
         typeof req.body.image === "string" && req.body.image
           ? req.body.image
