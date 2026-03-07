@@ -427,19 +427,16 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   : { ring: "ring-blue-300", bar: "bg-blue-500", text: "text-blue-700", bg: "bg-blue-50" };
               return (
                 <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 border ring-1 ${color.ring} ${color.bg} shrink-0`}>
-                  <div className="flex flex-col items-end gap-0.5">
-                    <span className={`text-[11px] font-bold leading-none ${color.text}`}>
-                      {used}<span className="font-normal opacity-60">/{total}</span>
-                    </span>
-                    <div className="w-16 h-1 rounded-full bg-black/10 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full ${color.bar} transition-all`}
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
+                  <div className="w-14 h-1.5 rounded-full bg-black/10 overflow-hidden">
+                    <div
+                      className={`h-full rounded-full ${color.bar} transition-all`}
+                      style={{ width: `${pct}%` }}
+                    />
                   </div>
-                  <span className={`hidden sm:block text-[10px] font-medium leading-none ${color.text} whitespace-nowrap`}>
-                    {remaining === 0 ? "Limite atteinte" : `${remaining} restante${remaining > 1 ? "s" : ""}`}
+                  <span className={`text-[11px] font-semibold leading-none ${color.text} whitespace-nowrap`}>
+                    {remaining === 0
+                      ? "0 annonce restante ce mois"
+                      : `${remaining} annonce${remaining > 1 ? "s" : ""} restante${remaining > 1 ? "s" : ""} ce mois`}
                   </span>
                 </div>
               );
