@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -37,8 +37,10 @@ type FormData = z.infer<typeof schema>;
 
 const InputField = "h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-slate-900 focus-visible:shadow-none hover:border-slate-400 transition-all placeholder:text-slate-300"
 
-export default function LoginPage() {
+function LoginForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -71,9 +73,15 @@ export default function LoginPage() {
     const json = await res.json().catch(() => null);
     const role = json?.data?.role ?? "CLIENT";
 
-    if (role === "ADMIN") router.push("/admin/users");
-    else if (role === "TRANSPORTEUR") router.push("/transporteur/dashboard");
-    else router.push("/client/dashboard");
+    if (callbackUrl) {
+      router.push(callbackUrl);
+    } else if (role === "ADMIN") {
+      router.push("/admin/users");
+    } else if (role === "TRANSPORTEUR") {
+      router.push("/transporteur/dashboard");
+    } else {
+      router.push("/client/dashboard");
+    }
   }
 
   return (
@@ -162,7 +170,7 @@ export default function LoginPage() {
         <p className="text-sm text-slate-500 tracking-wide">
           Pas encore de compte ?{" "}
           <Link
-            href="/auth/register"
+            href={callbackUrl ? `/auth/register?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/auth/register"}
             className="text-slate-900 font-semibold hover:underline underline-offset-4 decoration-1 transition-all"
           >
             Créer un compte
@@ -170,5 +178,13 @@ export default function LoginPage() {
         </p>
       </CardFooter>
     </Card>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense fallback={<div className="flex justify-center p-8"><Loader2 className="h-8 w-8 animate-spin text-primary" /></div>}>
+      <LoginForm />
+    </Suspense>
   );
 }
