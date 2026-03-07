@@ -316,8 +316,8 @@ export default function LandingPage() {
                   size="lg"
                   className="w-full bg-slate-900 hover:bg-blue-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-blue-600/20 rounded-xl transition-all duration-300"
                 >
-                  <Link href="/auth/register">
-                    Je suis client <ChevronRight className="ml-2 h-4 w-4" />
+                  <Link href="/auth/register" className="group/btn">
+                    Je suis client <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                   </Link>
                 </Button>
               </div>
@@ -351,10 +351,10 @@ export default function LandingPage() {
                 <Button
                   asChild
                   size="lg"
-                  className="w-full bg-slate-900 hover:bg-indigo-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-indigo-600/20 rounded-xl transition-all duration-300"
+                  className="w-full bg-slate-900 hover:bg-blue-600 text-white shadow-xl shadow-slate-900/10 hover:shadow-blue-600/20 rounded-xl transition-all duration-300"
                 >
-                  <Link href="/auth/register">
-                    Je suis transporteur <ChevronRight className="ml-2 h-4 w-4" />
+                  <Link href="/auth/register" className="group/btn">
+                    Je suis transporteur <ChevronRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
                   </Link>
                 </Button>
               </div>
