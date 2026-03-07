@@ -430,16 +430,16 @@ export default function LandingPage() {
         {/* Subtle patterned background instead of a solid blue block */}
         <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none">
           {/* Abstract illustrations / floating elements left */}
-          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-white border border-slate-200 rounded-full shadow-[0_0_100px_rgba(59,130,246,0.1)] flex items-center justify-center -rotate-12 opacity-80 backdrop-blur-sm">
-            <div className="w-72 h-72 border-2 border-dashed border-slate-100 rounded-full flex items-center justify-center">
-              <Package className="w-24 h-24 text-slate-200/80" strokeWidth={1} />
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/4 w-80 h-80 bg-white border border-slate-200 rounded-full shadow-[0_0_100px_rgba(59,130,246,0.1)] flex items-center justify-center -rotate-12 opacity-80 backdrop-blur-sm">
+            <div className="w-60 h-60 border-2 border-dashed border-slate-100 rounded-full flex items-center justify-center">
+              <Package className="w-20 h-20 text-slate-200/80" strokeWidth={1} />
             </div>
           </div>
           
           {/* Abstract illustrations / floating elements right */}
-          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-[30rem] h-[30rem] bg-white border border-slate-200 rounded-full shadow-[0_0_100px_rgba(79,70,229,0.1)] flex items-center justify-center rotate-45 opacity-80 backdrop-blur-sm">
-            <div className="w-[22rem] h-[22rem] border-2 border-dashed border-slate-100 rounded-full flex items-center justify-center">
-               <Truck className="w-32 h-32 text-slate-200/80" strokeWidth={1} />
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-[26rem] h-[26rem] bg-white border border-slate-200 rounded-full shadow-[0_0_100px_rgba(79,70,229,0.1)] flex items-center justify-center rotate-45 opacity-80 backdrop-blur-sm">
+            <div className="w-[18rem] h-[18rem] border-2 border-dashed border-slate-100 rounded-full flex items-center justify-center">
+               <Truck className="w-24 h-24 text-slate-200/80" strokeWidth={1} />
             </div>
           </div>
         </div>
