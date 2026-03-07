@@ -173,31 +173,41 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-24 bg-slate-50">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
-            {stats.map(({ label, value, icon: Icon, desc }) => (
-              <div
-                key={label}
-                className="group flex flex-col items-center text-center px-6 py-10 bg-white hover:bg-slate-50/50 transition-colors duration-300"
-              >
-                {/* icon */}
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 bg-blue-50/50 border border-slate-100 transition-all duration-300 shadow-xs group-hover:border-blue-200 group-hover:bg-blue-50">
-                  <Icon className="h-5 w-5 text-blue-600 transition-all" />
+      <section className="py-24 bg-white relative">
+        {/* Subtle background grid pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:24px_24px]"></div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Outer dashed border frame for extra 'square' architecture styling */}
+          <div className="relative before:absolute before:-inset-3 before:border before:border-slate-200 before:border-dashed before:-z-10">
+            {/* The actual grid container with 1px internal borders */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 shadow-sm">
+              {stats.map(({ label, value, icon: Icon, desc }) => (
+                <div
+                  key={label}
+                  className="group relative flex flex-col items-start p-8 bg-white hover:bg-slate-50 transition-all duration-300"
+                >
+                  {/* Square icon outline */}
+                  <div className="mb-8 inline-flex items-center justify-center w-12 h-12 bg-white border border-slate-300 transition-all duration-300 group-hover:border-blue-600 group-hover:-translate-y-1 group-hover:shadow-[4px_4px_0px_0px_rgba(37,99,235,0.1)]">
+                    <Icon className="h-5 w-5 text-slate-700 group-hover:text-blue-600 transition-colors" />
+                  </div>
+
+                  {/* value */}
+                  <div className="text-4xl font-black tracking-tight text-slate-900 mb-2">
+                    {value}
+                  </div>
+
+                  {/* label */}
+                  <h3 className="text-[0.8rem] font-bold text-slate-800 uppercase tracking-widest mx-0 mb-1">{label}</h3>
+
+                  {/* desc */}
+                  <p className="text-sm text-slate-500 font-medium">{desc}</p>
+
+                  {/* Subtle accent hover line on the left side */}
+                  <div className="absolute left-0 top-0 bottom-0 w-[3px] bg-blue-600 scale-y-0 group-hover:scale-y-100 transition-transform origin-bottom duration-300"></div>
                 </div>
-
-                {/* value */}
-                <div className="text-4xl font-extrabold tracking-tight mb-1 text-slate-900">
-                  {value}
-                </div>
-
-                {/* label */}
-                <p className="text-sm font-bold text-slate-800 mb-1">{label}</p>
-
-                {/* desc */}
-                <p className="text-xs font-medium text-slate-500">{desc}</p>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
       </section>
