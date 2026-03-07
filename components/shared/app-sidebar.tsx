@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
+import { usePostsQuota } from "@/hooks/use-account";
 import { cn } from "@/lib/utils";
 import {
   Sidebar,
@@ -259,6 +260,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
   const { data: session } = useSession();
   const pathname = usePathname() ?? "";
   const role = session?.user?.role ?? "CLIENT";
+  const isParticulier = role === "PARTICULIER";
+  const { data: quotaData } = usePostsQuota();
   const groups = NAV[role] ?? [];
   const roleMeta = ROLE_META[role];
   const initials =
@@ -410,6 +413,37 @@ export function AppSidebar({ children }: AppSidebarProps) {
                     : "Espace Client"}
               </span>
             </div>
+            {/* Quota pill – Particulier only */}
+            {isParticulier && quotaData && (() => {
+              const used = quotaData.data?.postsThisMonth ?? 0;
+              const total = quotaData.data?.monthlyLimit ?? 4;
+              const remaining = Math.max(0, total - used);
+              const pct = Math.min(100, Math.round((used / total) * 100));
+              const color =
+                remaining === 0
+                  ? { ring: "ring-red-300", bar: "bg-red-500", text: "text-red-600", bg: "bg-red-50" }
+                  : remaining === 1
+                  ? { ring: "ring-amber-300", bar: "bg-amber-500", text: "text-amber-700", bg: "bg-amber-50" }
+                  : { ring: "ring-violet-300", bar: "bg-violet-500", text: "text-violet-700", bg: "bg-violet-50" };
+              return (
+                <div className={`flex items-center gap-2 rounded-full px-3 py-1.5 border ring-1 ${color.ring} ${color.bg} shrink-0`}>
+                  <div className="flex flex-col items-end gap-0.5">
+                    <span className={`text-[11px] font-bold leading-none ${color.text}`}>
+                      {used}<span className="font-normal opacity-60">/{total}</span>
+                    </span>
+                    <div className="w-16 h-1 rounded-full bg-black/10 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full ${color.bar} transition-all`}
+                        style={{ width: `${pct}%` }}
+                      />
+                    </div>
+                  </div>
+                  <span className={`hidden sm:block text-[10px] font-medium leading-none ${color.text} whitespace-nowrap`}>
+                    {remaining === 0 ? "Limite atteinte" : `${remaining} restante${remaining > 1 ? "s" : ""}`}
+                  </span>
+                </div>
+              );
+            })()}
             {/* Avatar shortcut top-right */}
             <div className="relative shrink-0">
               <Avatar className="h-8 w-8 cursor-default">
