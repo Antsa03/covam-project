@@ -76,6 +76,10 @@ export default async function handler(
         .json({ error: "Annonce introuvable ou inactive." });
     }
 
+    // Use values from DB as authoritative source for depart/destination
+    const departFinal = (depart as string) || pbTransport.depart;
+    const destinationFinal = (destination as string) || pbTransport.destination;
+
     const reservation = await prisma.transportReservation.create({
       data: {
         category,
@@ -83,8 +87,8 @@ export default async function handler(
         poids: Number(poids),
         dimension: Number(dimension),
         date_depart: new Date(date_depart),
-        depart,
-        destination,
+        depart: departFinal,
+        destination: destinationFinal,
         nom_recepteur,
         tel_recepteur,
         label,
