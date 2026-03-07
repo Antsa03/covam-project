@@ -345,7 +345,7 @@ export default function RegisterPage() {
             )}
             <Button
               type="submit"
-              className="w-full h-14 mt-6 rounded-none bg-slate-900 text-white hover:bg-slate-800 text-sm tracking-[0.2em] font-medium uppercase transition-colors md:col-span-2 shadow-none"
+              className="w-full h-14 mt-6 rounded-none bg-primary text-white hover:bg-primary/90 text-sm tracking-[0.2em] font-medium uppercase transition-colors md:col-span-2 shadow-none"
               disabled={loading}
             >
               {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
