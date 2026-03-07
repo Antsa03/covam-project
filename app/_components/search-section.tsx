@@ -182,10 +182,12 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
 
   return (
     <div className="bg-white rounded-2xl border border-slate-200 hover:border-slate-300 hover:shadow-md transition-all duration-200 overflow-hidden">
-      <div className="flex items-stretch gap-0">
+      {/* ── Layout: stack on mobile, row on desktop ── */}
+      <div className="flex flex-col sm:flex-row sm:items-stretch">
 
         {/* ── Vehicle thumbnail ── */}
-        <div className="relative w-24 shrink-0 bg-slate-100 flex items-center justify-center">
+        {/* Mobile: full-width banner (h-40). Desktop: narrow side panel (w-24) */}
+        <div className="relative h-40 sm:h-auto sm:w-24 sm:shrink-0 bg-slate-100 flex items-center justify-center">
           {!imgError ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -195,29 +197,28 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
               onError={() => setImgError(true)}
             />
           ) : null}
-          {/* Fallback icon — always mounted, visible only when image absent */}
           <Truck className="h-8 w-8 text-slate-300" />
         </div>
 
         {/* ── Main content ── */}
-        <div className="flex flex-1 flex-col sm:flex-row items-stretch divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
+        <div className="flex flex-1 flex-col sm:flex-row sm:items-stretch divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
 
           {/* Route + poster */}
-          <div className="flex-1 flex flex-col justify-between px-6 py-5 gap-4">
+          <div className="flex-1 flex flex-col justify-between px-5 py-4 gap-4">
             {/* Route */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
+            <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5 min-w-0">
                 <MapPin className="h-4 w-4 text-slate-400 shrink-0" />
-                <span className="text-sm font-bold text-slate-800 leading-tight">
+                <span className="text-sm font-bold text-slate-800 leading-tight truncate">
                   {annonce.depart}
                 </span>
               </div>
-              <div className="flex-1 h-px bg-slate-200 min-w-4" />
+              <div className="flex-1 h-px bg-slate-200 min-w-2" />
               <ArrowRight className="h-4 w-4 text-slate-400 shrink-0" />
-              <div className="flex-1 h-px bg-slate-200 min-w-4" />
-              <div className="flex items-center gap-2">
+              <div className="flex-1 h-px bg-slate-200 min-w-2" />
+              <div className="flex items-center gap-1.5 min-w-0">
                 <MapPin className="h-4 w-4 text-blue-500 shrink-0" />
-                <span className="text-sm font-bold text-blue-700 leading-tight">
+                <span className="text-sm font-bold text-blue-700 leading-tight truncate">
                   {annonce.destination}
                 </span>
               </div>
@@ -226,7 +227,6 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
             {/* Transporteur profile */}
             {user ? (
               <div className="flex items-center gap-3">
-                {/* Avatar */}
                 <div
                   className="w-8 h-8 rounded-full flex items-center justify-center text-white text-xs font-bold shrink-0 select-none"
                   style={{ background: `hsl(${hue} 55% 48%)` }}
@@ -237,7 +237,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
                   <p className="text-sm font-semibold text-slate-800 leading-tight truncate">
                     {user.prenom} {user.nom}
                   </p>
-                  <div className="flex items-center gap-1.5 mt-0.5">
+                  <div className="flex items-center gap-1.5 mt-0.5 flex-wrap">
                     <Truck className="h-3 w-3 text-slate-400 shrink-0" />
                     <span className="text-xs text-slate-400 truncate">
                       {annonce.transport.marque} · {annonce.transport.type}
@@ -263,11 +263,11 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
           </div>
 
           {/* Stats + CTA */}
-          <div className="flex sm:flex-col items-center sm:items-stretch justify-between sm:justify-center gap-0 sm:gap-0 px-6 py-5 sm:w-48 shrink-0">
-            {/* Stats */}
-            <div className="flex sm:flex-col gap-5 sm:gap-4">
+          <div className="px-5 py-4 sm:w-48 sm:shrink-0 flex flex-row sm:flex-col items-center sm:items-stretch justify-between sm:justify-center gap-4 sm:gap-4">
+            {/* Stats: row on mobile, column on desktop */}
+            <div className="flex flex-row sm:flex-col gap-4 sm:gap-4 flex-1 sm:flex-none">
               <div>
-                <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-2">
+                <span className="text-[10px] font-semibold text-slate-400 uppercase tracking-widest flex items-center gap-1 mb-1.5">
                   <Scale className="h-3 w-3" /> Poids dispo
                 </span>
                 <span className="inline-flex items-center gap-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-full px-3 py-1 text-sm font-bold">
@@ -285,30 +285,22 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
               </div>
             </div>
 
-            {/* CTA */}
-            <div className="hidden sm:block mt-6">
+            {/* CTA: icon button on mobile, full button on desktop */}
+            <div className="sm:mt-6 shrink-0">
               <Button
                 asChild
                 size="sm"
-                className="w-full bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/25 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300 font-semibold"
+                className="bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/25 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300 font-semibold sm:w-full"
               >
-                <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces?book=' + annonce.id_pb_transport)}`}>Réserver</Link>
+                <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces?book=' + annonce.id_pb_transport)}`}>
+                  <span className="hidden sm:inline">Réserver</span>
+                  <ArrowRight className="sm:hidden h-4 w-4" />
+                </Link>
               </Button>
             </div>
           </div>
 
         </div>
-      </div>
-
-      {/* Mobile CTA */}
-      <div className="sm:hidden px-6 pb-5">
-        <Button
-          asChild
-          size="sm"
-          className="w-full bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/25 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300 font-semibold"
-        >
-          <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces?book=' + annonce.id_pb_transport)}`}>Réserver ce trajet</Link>
-        </Button>
       </div>
     </div>
   );
@@ -319,10 +311,11 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
 function SkeletonCard() {
   return (
     <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden animate-pulse">
-      <div className="flex items-stretch">
-        <div className="w-24 shrink-0 bg-slate-100" style={{ minHeight: 112 }} />
+      <div className="flex flex-col sm:flex-row sm:items-stretch">
+        {/* Image: full-width on mobile, narrow on desktop */}
+        <div className="h-40 sm:h-auto sm:w-24 sm:shrink-0 bg-slate-100" />
         <div className="flex flex-1 flex-col sm:flex-row divide-y sm:divide-y-0 sm:divide-x divide-slate-100">
-          <div className="flex-1 px-6 py-5 flex flex-col justify-between gap-4">
+          <div className="flex-1 px-5 py-4 flex flex-col justify-between gap-4">
             <div className="flex items-center gap-3">
               <div className="h-4 w-24 bg-slate-100 rounded" />
               <div className="flex-1 h-px bg-slate-100" />
@@ -336,10 +329,10 @@ function SkeletonCard() {
               </div>
             </div>
           </div>
-          <div className="px-6 py-5 sm:w-48 shrink-0 flex sm:flex-col gap-5 sm:gap-4">
-            <div className="h-10 w-16 bg-slate-100 rounded" />
-            <div className="h-10 w-16 bg-slate-100 rounded" />
-            <div className="hidden sm:block mt-auto h-9 w-full bg-slate-100 rounded-xl" />
+          <div className="px-5 py-4 sm:w-48 sm:shrink-0 flex flex-row sm:flex-col gap-4 sm:gap-4">
+            <div className="h-10 w-20 bg-slate-100 rounded" />
+            <div className="h-10 w-20 bg-slate-100 rounded" />
+            <div className="hidden sm:block sm:mt-auto h-9 w-full bg-slate-100 rounded-xl" />
           </div>
         </div>
       </div>
