@@ -142,9 +142,7 @@ export default function LandingPage() {
             Plateforme de transport <span className="text-blue-300 font-black px-1">·</span> Madagascar
           </span>
         </span>
-        <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-center tracking-tight leading-tight mb-6 max-w-3xl"
-          style={{ color: "#2d3748" }}
-        >
+        <h1 className="text-4xl sm:text-5xl lg:text-[3rem] font-extrabold text-center tracking-tight leading-tight mb-6 max-w-3xl text-slate-800">
           Expédiez vos marchandises en toute{" "}
           <span className="text-blue-600">simplicité</span>
         </h1>
@@ -447,24 +445,24 @@ export default function LandingPage() {
         </div>
 
         <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
-          <div className="inline-flex items-center justify-center w-20 h-20 rounded-[1.5rem] bg-white border border-slate-200 mb-8 shadow-sm">
-            <div className="w-16 h-16 rounded-[1rem] bg-slate-100 flex items-center justify-center">
-              <Zap className="h-8 w-8 text-blue-600 fill-blue-600/20" />
+          <div className="inline-flex items-center justify-center w-16 h-16 rounded-[1.25rem] bg-white border border-slate-200 mb-6 shadow-sm">
+            <div className="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center">
+              <Zap className="h-6 w-6 text-blue-600 fill-blue-600/20" />
             </div>
           </div>
 
-          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">
+          <h2 className="text-3xl sm:text-5xl font-black text-slate-800 mb-4 tracking-tight">
             Prêt à essayer ?
           </h2>
-          <p className="text-lg sm:text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
+          <p className="text-base sm:text-lg text-slate-500 mb-10 max-w-xl mx-auto leading-relaxed font-medium">
             L&apos;inscription ne prend pas plus de deux minutes. Pas de carte
             bancaire, pas d&apos;engagement.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+          <div className="flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Button
               asChild
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white shadow-xl shadow-blue-600/30 font-bold px-10 py-7 text-base rounded-2xl w-full sm:w-auto transition-all hover:scale-105"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-xl shadow-blue-600/30 font-bold px-8 py-6 text-[0.95rem] rounded-2xl w-full sm:w-auto transition-all hover:scale-105"
             >
               <Link href="/auth/register">Je démarre maintenant</Link>
             </Button>
@@ -472,7 +470,7 @@ export default function LandingPage() {
               asChild
               variant="outline"
               size="lg"
-              className="bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-bold px-10 py-7 text-base rounded-2xl w-full sm:w-auto shadow-sm transition-all"
+              className="bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-bold px-8 py-6 text-[0.95rem] rounded-2xl w-full sm:w-auto shadow-sm transition-all"
             >
               <Link href="/auth/login">Se connecter</Link>
             </Button>
