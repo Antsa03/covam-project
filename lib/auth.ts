@@ -72,7 +72,7 @@ export const authOptions: NextAuthOptions = {
 
         // Fetch profile image for CLIENT
         let image: string | null = null;
-        if (utilisateur.role === "CLIENT") {
+        if (utilisateur.role === "CLIENT" || utilisateur.role === "PARTICULIER") {
           const client = await prisma.client.findUnique({
             where: { utilisateur_id: utilisateur.id_utilisateur },
             select: { image: true },
@@ -95,7 +95,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.role = (
-          user as { role: "CLIENT" | "TRANSPORTEUR" | "ADMIN" }
+          user as { role: "CLIENT" | "TRANSPORTEUR" | "ADMIN" | "PARTICULIER" }
         ).role;
         token.image = (user as { image?: string | null }).image ?? null;
       }
@@ -108,7 +108,7 @@ export const authOptions: NextAuthOptions = {
     async session({ session, token }) {
       if (session.user) {
         session.user.id = token.id as string;
-        session.user.role = token.role as "CLIENT" | "TRANSPORTEUR" | "ADMIN";
+        session.user.role = token.role as "CLIENT" | "TRANSPORTEUR" | "ADMIN" | "PARTICULIER";
         session.user.image = (token.image as string | null) ?? null;
       }
       return session;
