@@ -565,7 +565,7 @@ export function SearchSection() {
               type="submit"
               disabled={loading}
               size="default"
-              className="bg-blue-600 hover:bg-blue-500 text-white font-semibold px-5 py-5 rounded-xl disabled:opacity-70 gap-2 hover:shadow-[0_0_40px_-10px_rgba(59,130,246,0.6)] transition-all duration-300"
+              className="bg-primary hover:bg-primary/90 text-white font-semibold px-5 py-5 rounded-xl disabled:opacity-70 gap-2 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300"
             >
               {loading ? (
                 <Loader2 className="h-4 w-4 animate-spin" />
