@@ -13,6 +13,18 @@ interface ListParams {
   role?: "transporteur" | "public";
 }
 
+/** Fetch a single active PbTransport by ID (used after landing-page redirect) */
+export function usePbTransportById(id: number | null) {
+  return useQuery({
+    queryKey: ["pb-transport-by-id", id],
+    queryFn: () =>
+      api.get<{ data: PbTransport }>(
+        `/api/transporteur/pb-transport?id=${id}`,
+      ).then((r) => r.data),
+    enabled: id !== null,
+  });
+}
+
 /** Used by transporteur (own announcements) */
 export function usePbTransports(params: ListParams = {}) {
   const { page = 1, limit = 20, depart, destination } = params;
