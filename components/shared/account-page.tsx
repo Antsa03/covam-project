@@ -30,6 +30,7 @@ import {
   CheckCircle2,
   Camera,
   Loader2,
+  FileText,
 } from "lucide-react";
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
@@ -70,6 +71,10 @@ const ROLE_CONFIG: Record<string, { label: string; color: string }> = {
   CLIENT: {
     label: "Client",
     color: "bg-emerald-100 text-emerald-700 border-emerald-200",
+  },
+  PARTICULIER: {
+    label: "Particulier",
+    color: "bg-violet-100 text-violet-700 border-violet-200",
   },
 };
 
@@ -149,7 +154,8 @@ export function AccountPage() {
   const role = session?.user?.role ?? "CLIENT";
   const roleMeta = ROLE_CONFIG[role] ?? ROLE_CONFIG.CLIENT;
   const isAdmin = role === "ADMIN";
-  const isClient = role === "CLIENT";
+  const isClient = role === "CLIENT" || role === "PARTICULIER";
+  const isParticulier = role === "PARTICULIER";
 
   const profile = profileRes?.data as Record<string, unknown> | undefined;
 
@@ -341,11 +347,62 @@ export function AccountPage() {
               )}
             </div>
             {/* Role badge */}
-            <div
-              className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold shrink-0 ${roleMeta.color}`}
-            >
-              <Shield className="h-3 w-3" />
-              {roleMeta.label}
+            <div className="flex flex-col items-end gap-2 shrink-0">
+              <div
+                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${roleMeta.color}`}
+              >
+                <Shield className="h-3 w-3" />
+                {roleMeta.label}
+              </div>
+              {/* Monthly posts counter for PARTICULIER */}
+              {isParticulier && (() => {
+                const used = typeof (profile as Record<string, unknown>)?.postsThisMonth === "number"
+                  ? (profile as Record<string, unknown>).postsThisMonth as number
+                  : 0;
+                const total = 4;
+                const remaining = total - used;
+                const pct = Math.round((used / total) * 100);
+                const barColor =
+                  remaining === 0
+                    ? "bg-red-500"
+                    : remaining === 1
+                    ? "bg-amber-500"
+                    : "bg-violet-500";
+                const textColor =
+                  remaining === 0
+                    ? "text-red-600 bg-red-50 border-red-200"
+                    : remaining === 1
+                    ? "text-amber-700 bg-amber-50 border-amber-200"
+                    : "text-violet-700 bg-violet-50 border-violet-200";
+                return isLoading ? (
+                  <div className="w-44 h-14 rounded-xl bg-slate-100 animate-pulse" />
+                ) : (
+                  <div className={`rounded-xl border px-3 py-2 w-44 ${textColor}`}>
+                    <div className="flex items-center justify-between mb-1.5">
+                      <div className="flex items-center gap-1.5">
+                        <FileText className="h-3.5 w-3.5 shrink-0" />
+                        <span className="text-[11px] font-semibold uppercase tracking-widest">
+                          Publications
+                        </span>
+                      </div>
+                      <span className="text-xs font-bold">
+                        {used}<span className="font-normal opacity-60">/{total}</span>
+                      </span>
+                    </div>
+                    <div className="w-full h-1.5 rounded-full bg-current/20 overflow-hidden">
+                      <div
+                        className={`h-full rounded-full transition-all duration-500 ${barColor}`}
+                        style={{ width: `${pct}%` }}
+                      />
+                    </div>
+                    <p className="text-[10px] mt-1 opacity-70">
+                      {remaining === 0
+                        ? "Limite atteinte ce mois"
+                        : `${remaining} restante${remaining > 1 ? "s" : ""} ce mois`}
+                    </p>
+                  </div>
+                );
+              })()}
             </div>
           </div>
 
