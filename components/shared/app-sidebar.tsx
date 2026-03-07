@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
@@ -18,6 +19,7 @@ import {
   SidebarMenuItem,
   SidebarProvider,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
@@ -252,6 +254,16 @@ const ROLE_META: Record<string, { label: string; color: string }> = {
   },
 };
 
+// Ferme automatiquement la sidebar mobile lors d'un changement de route
+function NavAutoClose() {
+  const { setOpenMobile } = useSidebar();
+  const pathname = usePathname();
+  useEffect(() => {
+    setOpenMobile(false);
+  }, [pathname, setOpenMobile]);
+  return null;
+}
+
 interface AppSidebarProps {
   children: React.ReactNode;
 }
@@ -274,6 +286,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
 
   return (
     <SidebarProvider>
+      <NavAutoClose />
       <div className="flex min-h-screen w-full">
         <Sidebar collapsible="icon">
           {/* ── Header ─────────────────────────────── */}
