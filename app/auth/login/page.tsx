@@ -77,36 +77,34 @@ export default function LoginPage() {
   }
 
   return (
-    <Card className="w-full max-w-lg shadow-xl border-0 bg-white">
-      <CardHeader className="pb-5 pt-8 px-8">
-        <CardTitle className="text-3xl font-bold text-slate-900">
-          Bon retour !
+    <Card className="w-full max-w-lg shadow-[0_8px_30px_rgb(0,0,0,0.04)] border border-slate-100 rounded-none bg-white">
+      <CardHeader className="pb-8 pt-10 px-10 text-center">
+        <CardTitle className="text-3xl font-light tracking-tight text-slate-900">
+          Bon retour
         </CardTitle>
-        <CardDescription className="text-base text-slate-500 mt-1">
-          Entrez votre email (ou nom d&apos;utilisateur admin) pour vous
-          connecter.
+        <CardDescription className="text-sm text-slate-500 mt-2 tracking-wide uppercase font-medium">
+          CONNECTEZ-VOUS À VOTRE COMPTE
         </CardDescription>
       </CardHeader>
-      <CardContent className="px-8">
+      <CardContent className="px-10">
         <Form {...form}>
-          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+          <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
               control={form.control}
               name="email"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
-                    Email / Nom d&apos;utilisateur{" "}
-                    <span className="text-red-500 ml-0.5">*</span>
+                <FormItem className="relative pt-4">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-widest absolute top-0 left-0 transition-all">
+                    Identifiant
                   </FormLabel>
                   <FormControl>
                     <Input
                       placeholder="exemple@covam.com"
-                      className="h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
+                      className="peer h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-slate-900 focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300 placeholder:font-light"
                       {...field}
                     />
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs pt-1" />
                 </FormItem>
               )}
             />
@@ -114,22 +112,22 @@ export default function LoginPage() {
               control={form.control}
               name="password"
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="text-sm font-semibold text-slate-500 uppercase tracking-wider">
-                    Mot de passe <span className="text-red-500 ml-0.5">*</span>
+                <FormItem className="relative pt-4">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-widest absolute top-0 left-0 transition-all">
+                    Mot de passe
                   </FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="••••••••"
-                        className="h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300 pr-10"
+                        className="peer h-12 px-0 text-base bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-slate-900 focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300 placeholder:font-light pr-10"
                         {...field}
                       />
                       <button
                         type="button"
                         onClick={() => setShowPassword((v) => !v)}
-                        className="absolute inset-y-0 right-0 flex items-center px-3 text-slate-400 hover:text-slate-600 transition-colors"
+                        className="absolute inset-y-0 right-0 flex items-center px-2 text-slate-400 hover:text-slate-900 transition-colors"
                         tabIndex={-1}
                         aria-label={
                           showPassword
@@ -138,36 +136,38 @@ export default function LoginPage() {
                         }
                       >
                         {showPassword ? (
-                          <EyeOff className="h-4 w-4" />
+                          <EyeOff className="h-5 w-5 stroke-1" />
                         ) : (
-                          <Eye className="h-4 w-4" />
+                          <Eye className="h-5 w-5 stroke-1" />
                         )}
                       </button>
                     </div>
                   </FormControl>
-                  <FormMessage />
+                  <FormMessage className="text-xs pt-1" />
                 </FormItem>
               )}
             />
             <Button
               type="submit"
-              className="w-full h-12 text-base bg-primary hover:bg-primary/90 text-white font-semibold mt-2"
+              className="w-full h-14 mt-8 rounded-none bg-slate-900 text-white hover:bg-slate-800 text-sm tracking-[0.2em] font-medium uppercase transition-colors"
               disabled={loading}
             >
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+              {loading && <Loader2 className="mr-2 h-5 w-5 animate-spin" />}
               Se connecter
             </Button>
           </form>
         </Form>
       </CardContent>
-      <CardFooter className="justify-center text-sm pt-2 pb-8 px-8">
-        <span className="text-slate-500">Pas encore de compte ?&nbsp;</span>
-        <Link
-          href="/auth/register"
-          className="font-semibold text-primary hover:text-primary/80 underline-offset-4 hover:underline"
-        >
-          Créer un compte
-        </Link>
+      <CardFooter className="flex flex-col gap-4 pb-10 pt-6 px-10 text-center border-t border-slate-50 mt-4">
+        <p className="text-sm text-slate-500 tracking-wide">
+          Pas encore de compte ?{" "}
+          <Link
+            href="/auth/register"
+            className="text-slate-900 font-semibold hover:underline underline-offset-4 decoration-1 transition-all"
+          >
+            Créer un compte
+          </Link>
+        </p>
       </CardFooter>
     </Card>
   );
