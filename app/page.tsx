@@ -175,29 +175,29 @@ export default function LandingPage() {
       </section>
 
       {/* ── Stats ── */}
-      <section className="py-20 bg-slate-900">
+      <section className="py-24 bg-slate-50">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-white/[0.03] rounded-3xl overflow-hidden border border-white/[0.04] shadow-2xl">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 rounded-3xl overflow-hidden border border-slate-200 shadow-sm">
             {stats.map(({ label, value, icon: Icon, desc }) => (
               <div
                 key={label}
-                className="group flex flex-col items-center text-center px-6 py-10 bg-slate-900/90 hover:bg-slate-800 transition-colors duration-300 backdrop-blur-sm"
+                className="group flex flex-col items-center text-center px-6 py-10 bg-white hover:bg-slate-50/50 transition-colors duration-300"
               >
                 {/* icon */}
-                <div className="inline-flex items-center justify-center w-12 h-12 rounded-2xl mb-5 bg-white/[0.04] border border-white/[0.07] transition-all duration-300 shadow-inner">
-                  <Icon className="h-5 w-5 text-blue-400 group-hover:text-blue-300 group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.5)] transition-all" />
+                <div className="inline-flex items-center justify-center w-12 h-12 rounded-xl mb-5 bg-blue-50/50 border border-slate-100 transition-all duration-300 shadow-xs group-hover:border-blue-200 group-hover:bg-blue-50">
+                  <Icon className="h-5 w-5 text-blue-600 transition-all" />
                 </div>
 
                 {/* value */}
-                <div className="text-4xl font-extrabold tracking-tight mb-1 text-white">
+                <div className="text-4xl font-extrabold tracking-tight mb-1 text-slate-900">
                   {value}
                 </div>
 
                 {/* label */}
-                <p className="text-sm font-semibold text-slate-300 mb-1">{label}</p>
+                <p className="text-sm font-bold text-slate-800 mb-1">{label}</p>
 
                 {/* desc */}
-                <p className="text-xs text-slate-500">{desc}</p>
+                <p className="text-xs font-medium text-slate-500">{desc}</p>
               </div>
             ))}
           </div>
@@ -205,89 +205,55 @@ export default function LandingPage() {
       </section>
 
       {/* ── Features ── */}
-      <section id="fonctionnalites" className="py-24 bg-slate-900 relative overflow-hidden">
-        {/* Ambient background glows */}
-        <div aria-hidden className="absolute inset-0 pointer-events-none select-none">
-          <div className="absolute -top-32 left-1/4 w-130 h-105 rounded-full bg-blue-600/10 blur-[110px]" />
-          <div className="absolute bottom-0 right-1/4 w-120 h-100 rounded-full bg-indigo-600/10 blur-[110px]" />
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-225 h-75 bg-blue-900/15 blur-[120px]" />
-        </div>
-
+      <section id="fonctionnalites" className="py-24 bg-slate-50 relative overflow-hidden">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Section header */}
           <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-blue-500/20 bg-blue-500/10 text-blue-300 text-xs font-semibold px-4 py-1.5 tracking-widest uppercase mb-5">
-              <Sparkles className="h-3 w-3" />
+            <span className="inline-block border border-slate-200 text-slate-600 text-xs font-bold px-4 py-1.5 tracking-[0.2em] uppercase mb-4 shadow-sm bg-white">
               Ce que vous y trouvez
             </span>
-            <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 tracking-tight">
+            <h2 className="text-4xl sm:text-5xl font-extrabold text-slate-900 mb-5 tracking-tight">
               Simple, pas compliqué
             </h2>
-            <p className="text-lg text-slate-400 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-lg text-slate-500 max-w-2xl mx-auto leading-relaxed">
               On a conçu Covam pour que n&apos;importe qui puisse s&apos;y
               retrouver dès la première utilisation.
             </p>
           </div>
 
           {/* Cards */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
-            {features.map(({ icon: Icon, title, description, color, iconBg, iconBorder, lineGradient, cornerGlow, bottomEdge }, idx) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-px bg-slate-200 border border-slate-200 rounded-3xl overflow-hidden shadow-sm">
+            {features.map(({ icon: Icon, title, description }, idx) => (
               <div
                 key={title}
-                className="group relative flex flex-col rounded-[1.5rem] overflow-hidden transition-all duration-500 bg-slate-800/40 hover:bg-slate-800/60 border border-slate-700 hover:border-slate-600 backdrop-blur-sm"
+                className="group relative flex flex-col bg-white hover:bg-slate-50/50 transition-colors duration-500"
               >
-                {/* Corner glow on hover */}
-                <div
-                  aria-hidden
-                  className="absolute -top-12 -left-12 w-40 h-40 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none"
-                  style={{ background: cornerGlow }}
-                />
-
                 {/* Inner content */}
-                <div className="relative flex flex-col flex-1 p-7">
+                <div className="relative flex flex-col flex-1 p-8 sm:p-10">
                   {/* Top: icon + index number */}
-                  <div className="flex items-center justify-between mb-7">
+                  <div className="flex items-center justify-between mb-8">
                     <div
-                      className="flex items-center justify-center w-12 h-12 rounded-[1rem] transition-transform duration-300 group-hover:scale-110 shadow-inner"
-                      style={{ background: iconBg, border: `1px solid ${iconBorder}` }}
+                      className="flex items-center justify-center w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 transition-all duration-300 shadow-xs group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:text-blue-600"
                     >
-                      <Icon className={`h-5 w-5 ${color}`} />
+                      <Icon className="h-5 w-5 text-slate-600 group-hover:text-blue-600 transition-colors" />
                     </div>
                     <span
-                      className="text-5xl font-black leading-none tabular-nums select-none"
-                      style={{ color: "rgba(255,255,255,0.03)" }}
+                      className="text-5xl font-black leading-none tabular-nums select-none text-slate-100 group-hover:text-slate-200 transition-colors"
                     >
                       {String(idx + 1).padStart(2, "0")}
                     </span>
                   </div>
 
-                  {/* ── Separator line with animated light sweep ── */}
-                  <div className="relative h-px mb-7 overflow-hidden rounded-full">
-                    {/* Base line */}
-                    <div className="absolute inset-0 bg-slate-700/50" />
-                    {/* Animated glow sweep */}
-                    <div
-                      className="absolute top-0 left-0 h-px w-0 group-hover:w-full transition-all duration-700 ease-out"
-                      style={{ background: lineGradient }}
-                    />
-                  </div>
-
                   {/* Text content */}
-                  <div className="flex-1">
-                    <h3 className="text-base font-bold text-white mb-3 leading-snug">
+                  <div className="flex-1 mt-2">
+                    <h3 className="text-lg font-bold text-slate-900 mb-3 leading-snug group-hover:text-blue-600 transition-colors">
                       {title}
                     </h3>
-                    <p className="text-sm text-slate-400 leading-relaxed font-medium">
+                    <p className="text-sm text-slate-500 leading-relaxed font-medium">
                       {description}
                     </p>
                   </div>
                 </div>
-
-                {/* Bottom edge glow on hover */}
-                <div
-                  className="absolute bottom-0 left-0 right-0 h-px opacity-0 group-hover:opacity-100 transition-opacity duration-500"
-                  style={{ background: bottomEdge }}
-                />
               </div>
             ))}
           </div>
