@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, Suspense } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -53,7 +53,17 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 export default function RegisterPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegisterForm />
+    </Suspense>
+  );
+}
+
+function RegisterForm() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const callbackUrl = searchParams.get("callbackUrl");
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -80,7 +90,7 @@ export default function RegisterPage() {
     try {
       await api.post("/api/auth/register", values);
       toast.success("Compte créé ! Vous pouvez maintenant vous connecter.");
-      router.push("/auth/login");
+      router.push(callbackUrl ? `/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/auth/login");
     } catch (e) {
       toast.error((e as Error).message);
     } finally {
@@ -358,7 +368,7 @@ export default function RegisterPage() {
         <p className="text-sm text-slate-500 tracking-wide">
           Déjà inscrit ?{" "}
           <Link
-            href="/auth/login"
+            href={callbackUrl ? `/auth/login?callbackUrl=${encodeURIComponent(callbackUrl)}` : "/auth/login"}
             className="text-slate-900 font-semibold hover:underline underline-offset-4 decoration-1 transition-all"
           >
             Se connecter
