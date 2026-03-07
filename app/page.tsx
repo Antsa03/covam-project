@@ -428,38 +428,51 @@ export default function LandingPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-linear-to-br from-blue-600 via-blue-700 to-indigo-800" />
-        <div
-          className="absolute inset-0 opacity-[0.08]"
-          style={{
-            backgroundImage:
-              "radial-gradient(circle, white 1.5px, transparent 1.5px)",
-            backgroundSize: "36px 36px",
-          }}
-        />
-        <div className="absolute -top-20 left-1/4 w-72 h-72 bg-white/10 rounded-full blur-3xl" />
-        <div className="absolute -bottom-10 right-1/3 w-96 h-96 bg-indigo-400/20 rounded-full blur-3xl" />
-        <div className="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-4xl sm:text-5xl font-extrabold text-white mb-5 tracking-tight">
+      <section className="py-24 bg-slate-50 relative overflow-hidden">
+        {/* Subtle patterned background instead of a solid blue block */}
+        <div className="absolute inset-0 max-w-7xl mx-auto pointer-events-none">
+          {/* Abstract illustrations / floating elements left */}
+          <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/4 w-96 h-96 bg-white border border-slate-200 rounded-full shadow-[0_0_100px_rgba(59,130,246,0.1)] flex items-center justify-center -rotate-12 opacity-80 backdrop-blur-sm">
+            <div className="w-72 h-72 border-2 border-dashed border-slate-100 rounded-full flex items-center justify-center">
+              <Package className="w-24 h-24 text-slate-200/80" strokeWidth={1} />
+            </div>
+          </div>
+          
+          {/* Abstract illustrations / floating elements right */}
+          <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/3 w-[30rem] h-[30rem] bg-white border border-slate-200 rounded-full shadow-[0_0_100px_rgba(79,70,229,0.1)] flex items-center justify-center rotate-45 opacity-80 backdrop-blur-sm">
+            <div className="w-[22rem] h-[22rem] border-2 border-dashed border-slate-100 rounded-full flex items-center justify-center">
+               <Truck className="w-32 h-32 text-slate-200/80" strokeWidth={1} />
+            </div>
+          </div>
+        </div>
+
+        <div className="relative max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center z-10">
+          <div className="inline-flex items-center justify-center w-20 h-20 rounded-[1.5rem] bg-white border border-slate-200 mb-8 shadow-sm">
+            <div className="w-16 h-16 rounded-[1rem] bg-slate-100 flex items-center justify-center">
+              <Zap className="h-8 w-8 text-blue-600 fill-blue-600/20" />
+            </div>
+          </div>
+
+          <h2 className="text-4xl sm:text-6xl font-black text-slate-900 mb-6 tracking-tight">
             Prêt à essayer ?
           </h2>
-          <p className="text-lg text-blue-100 mb-10 max-w-xl mx-auto leading-relaxed">
+          <p className="text-lg sm:text-xl text-slate-500 mb-12 max-w-2xl mx-auto leading-relaxed font-medium">
             L&apos;inscription ne prend pas plus de deux minutes. Pas de carte
             bancaire, pas d&apos;engagement.
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Button
               asChild
               size="lg"
-              className="bg-white text-blue-700 hover:bg-blue-50 shadow-2xl font-bold px-9 text-base rounded-xl"
+              className="bg-blue-600 hover:bg-blue-700 text-white shadow-xl shadow-blue-600/30 font-bold px-10 py-7 text-base rounded-2xl w-full sm:w-auto transition-all hover:scale-105"
             >
               <Link href="/auth/register">Je démarre maintenant</Link>
             </Button>
             <Button
               asChild
               variant="outline"
-              className="border-white/30 text-white bg-white/10 hover:bg-white/20 px-9 text-base rounded-xl backdrop-blur-sm"
+              size="lg"
+              className="bg-white border-slate-200 text-slate-700 hover:bg-slate-50 hover:text-slate-900 font-bold px-10 py-7 text-base rounded-2xl w-full sm:w-auto shadow-sm transition-all"
             >
               <Link href="/auth/login">Se connecter</Link>
             </Button>
