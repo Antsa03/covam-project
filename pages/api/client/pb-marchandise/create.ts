@@ -11,7 +11,7 @@ export default async function handler(
     return res.status(405).json({ error: "Méthode non autorisée." });
   }
 
-  const auth = await requireAuth(req, res, ["CLIENT"]);
+  const auth = await requireAuth(req, res, ["CLIENT", "PARTICULIER"]);
   if (!auth) return;
 
   const {
@@ -63,6 +63,24 @@ export default async function handler(
 
     if (!client) {
       return res.status(404).json({ error: "Profil client introuvable." });
+    }
+
+    // Monthly limit for PARTICULIER (max 4 posts per calendar month)
+    if (auth.role === "PARTICULIER") {
+      const now = new Date();
+      const startOfMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+      const endOfMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0, 23, 59, 59, 999);
+      const countThisMonth = await prisma.pbMarchandise.count({
+        where: {
+          client_id: client.id_client,
+          date_creation: { gte: startOfMonth, lte: endOfMonth },
+        },
+      });
+      if (countThisMonth >= 4) {
+        return res.status(429).json({
+          error: "Limite atteinte. Un particulier peut publier au maximum 4 annonces par mois.",
+        });
+      }
     }
 
     const pbMarchandise = await prisma.pbMarchandise.create({
