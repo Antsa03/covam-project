@@ -374,40 +374,42 @@ export function AccountPage() {
                 />
               )}
             </div>
-            {/* Name + role */}
-            <div className="flex-1 min-w-0 sm:pb-1">
-              {isLoading ? (
-                <div className="space-y-2">
-                  <Skeleton className="h-6 w-40" />
-                  <Skeleton className="h-4 w-56" />
-                </div>
-              ) : (
-                <>
-                  <h2 className="text-xl font-bold text-slate-900 truncate">
-                    {isAdmin
-                      ? String(
-                          profile?.nom_utilisateur ??
-                            session?.user?.name ??
-                            "—",
-                        )
-                      : `${profile?.prenom ?? ""} ${profile?.nom ?? ""}`.trim() ||
-                        session?.user?.name}
-                  </h2>
-                  <p className="text-sm text-slate-500 truncate">
-                    {session?.user?.email ?? "—"}
-                  </p>
-                </>
-              )}
-            </div>
-            {/* Role badge + quota */}
-            <div className="flex flex-col items-end gap-3 shrink-0">
-              <div
-                className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${roleMeta.color}`}
-              >
-                <Shield className="h-3 w-3" />
-                {roleMeta.label}
+            {/* Name + role — on mobile: side by side; on desktop: separate flex items */}
+            <div className="flex-1 flex items-start justify-between gap-3 sm:contents">
+              <div className="min-w-0 sm:flex-1 sm:pb-1">
+                {isLoading ? (
+                  <div className="space-y-2">
+                    <Skeleton className="h-6 w-40" />
+                    <Skeleton className="h-4 w-56" />
+                  </div>
+                ) : (
+                  <>
+                    <h2 className="text-xl font-bold text-slate-900 truncate">
+                      {isAdmin
+                        ? String(
+                            profile?.nom_utilisateur ??
+                              session?.user?.name ??
+                              "—",
+                          )
+                        : `${profile?.prenom ?? ""} ${profile?.nom ?? ""}`.trim() ||
+                          session?.user?.name}
+                    </h2>
+                    <p className="text-sm text-slate-500 truncate">
+                      {session?.user?.email ?? "—"}
+                    </p>
+                  </>
+                )}
               </div>
-              {false && <PostsQuotaWidget />}
+              {/* Role badge + quota */}
+              <div className="flex flex-col items-end gap-3 shrink-0">
+                <div
+                  className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${roleMeta.color}`}
+                >
+                  <Shield className="h-3 w-3" />
+                  {roleMeta.label}
+                </div>
+                {false && <PostsQuotaWidget />}
+              </div>
             </div>
           </div>
 
