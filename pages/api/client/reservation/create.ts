@@ -35,8 +35,6 @@ export default async function handler(
     !poids ||
     !dimension ||
     !date_depart ||
-    !depart ||
-    !destination ||
     !nom_recepteur ||
     !tel_recepteur ||
     !label
