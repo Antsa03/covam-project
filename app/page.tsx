@@ -472,7 +472,7 @@ export default function LandingPage() {
             <Button
               asChild
               size="lg"
-              className="bg-blue-600 hover:bg-blue-700 text-white shadow-xl shadow-blue-600/30 font-bold px-8 py-6 text-[0.95rem] rounded-2xl w-full sm:w-auto transition-all hover:scale-105"
+              className="bg-primary hover:bg-primary/90 text-white shadow-xl shadow-primary/30 font-bold px-8 py-6 text-[0.95rem] rounded-2xl w-full sm:w-auto transition-all hover:scale-105"
             >
               <Link href="/auth/register">Je démarre maintenant</Link>
             </Button>
