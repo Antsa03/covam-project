@@ -46,7 +46,7 @@ const schema = z.object({
   date_naissance: z.string().min(1, "Date de naissance requise"),
   email: z.string().email("Email invalide"),
   mot_de_passe: z.string().min(8, "8 caractères minimum"),
-  role: z.enum(["CLIENT", "TRANSPORTEUR"], { required_error: "Rôle requis" }),
+  role: z.enum(["CLIENT", "TRANSPORTEUR", "PARTICULIER"], { required_error: "Rôle requis" }),
   image: z.string().optional(),
 });
 
@@ -322,13 +322,14 @@ function RegisterForm() {
                     <SelectContent>
                       <SelectItem value="CLIENT">Client</SelectItem>
                       <SelectItem value="TRANSPORTEUR">Transporteur</SelectItem>
+                      <SelectItem value="PARTICULIER">Particulier</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage className="text-xs" />
                 </FormItem>
               )}
             />
-            {watchedRole === "CLIENT" && (
+            {(watchedRole === "CLIENT" || watchedRole === "PARTICULIER") && (
               <FormField
                 control={form.control}
                 name="image"
