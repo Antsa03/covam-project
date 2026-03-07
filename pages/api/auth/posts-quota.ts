@@ -47,8 +47,8 @@ export default async function handler(
     return res.status(200).json({
       data: {
         postsThisMonth,
-        monthlyLimit: 4,
-        remaining: Math.max(0, 4 - postsThisMonth),
+        monthlyLimit: null,
+        remaining: null,
       },
     });
   } catch (error) {
