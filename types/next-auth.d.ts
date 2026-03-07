@@ -4,7 +4,7 @@ import "next-auth/jwt";
 declare module "next-auth" {
   interface User {
     id: string;
-    role: "CLIENT" | "TRANSPORTEUR" | "ADMIN";
+    role: "CLIENT" | "TRANSPORTEUR" | "ADMIN" | "PARTICULIER";
   }
 
   interface Session {
@@ -13,7 +13,7 @@ declare module "next-auth" {
       name?: string | null;
       email?: string | null;
       image?: string | null;
-      role: "CLIENT" | "TRANSPORTEUR" | "ADMIN";
+      role: "CLIENT" | "TRANSPORTEUR" | "ADMIN" | "PARTICULIER";
     };
   }
 }
@@ -21,14 +21,7 @@ declare module "next-auth" {
 declare module "next-auth/jwt" {
   interface JWT {
     id: string;
-    role: "CLIENT" | "TRANSPORTEUR" | "ADMIN";
+    role: "CLIENT" | "TRANSPORTEUR" | "ADMIN" | "PARTICULIER";
     image?: string | null;
-  }
-}
-
-declare module "next-auth/jwt" {
-  interface JWT {
-    id: string;
-    role: "CLIENT" | "TRANSPORTEUR";
   }
 }
