@@ -17,18 +17,18 @@ export default function AuthLayout({
   return (
     <div className="min-h-screen flex">
       {/* Left — branding panel (hidden on mobile) */}
-      <div className="hidden lg:flex lg:w-[45%] relative overflow-hidden flex-col justify-between p-12">
-        <div className="absolute inset-0 bg-linear-to-br from-primary via-primary/90 to-primary/70" />
+      <div className="hidden lg:flex lg:w-[45%] relative overflow-hidden flex-col justify-between p-12 bg-slate-950">
+        <div className="absolute inset-0 bg-linear-to-br from-slate-900 via-slate-900 to-slate-950 opacity-90" />
         <div
-          className="absolute inset-0 opacity-[0.07]"
+          className="absolute inset-0 opacity-[0.03]"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
+              "linear-gradient(rgba(255,255,255,1) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,1) 1px, transparent 1px)",
             backgroundSize: "60px 60px",
           }}
         />
-        <div className="absolute top-20 right-0 w-72 h-72 bg-white/15 rounded-full blur-3xl" />
-        <div className="absolute bottom-20 left-10 w-56 h-56 bg-white/10 rounded-full blur-3xl" />
+        <div className="absolute top-20 right-0 w-72 h-72 bg-blue-600/10 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-10 w-56 h-56 bg-indigo-600/10 rounded-full blur-3xl" />
 
         {/* Logo */}
         <Link href="/" className="relative w-fit">
