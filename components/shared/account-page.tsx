@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useProfile, useUpdateProfile } from "@/hooks/use-account";
+import { useProfile, useUpdateProfile, usePostsQuota } from "@/hooks/use-account";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -143,7 +143,60 @@ function PasswordInput({
     </div>
   );
 }
+// ─── Posts Quota Widget (Particulier) ──────────────────────────────────────────────
 
+function PostsQuotaWidget() {
+  const { data, isLoading } = usePostsQuota();
+
+  if (isLoading) {
+    return <div className="w-48 h-18 rounded-2xl bg-slate-100 animate-pulse" />;
+  }
+
+  const used = data?.data?.postsThisMonth ?? 0;
+  const total = data?.data?.monthlyLimit ?? 4;
+  const remaining = Math.max(0, total - used);
+  const pct = Math.min(100, Math.round((used / total) * 100));
+
+  const palette =
+    remaining === 0
+      ? { bar: "bg-red-500", wrap: "bg-red-50 border-red-200", text: "text-red-700", sub: "text-red-500" }
+      : remaining === 1
+      ? { bar: "bg-amber-500", wrap: "bg-amber-50 border-amber-200", text: "text-amber-800", sub: "text-amber-600" }
+      : { bar: "bg-violet-500", wrap: "bg-violet-50 border-violet-200", text: "text-violet-800", sub: "text-violet-500" };
+
+  return (
+    <div className={`rounded-2xl border px-4 py-3 w-52 shrink-0 ${palette.wrap}`}>
+      {/* Header row */}
+      <div className="flex items-center justify-between mb-2">
+        <div className="flex items-center gap-1.5">
+          <FileText className={`h-3.5 w-3.5 ${palette.text}`} />
+          <span className={`text-[11px] font-bold uppercase tracking-widest ${palette.text}`}>
+            Publications
+          </span>
+        </div>
+        <span className={`text-sm font-extrabold ${palette.text}`}>
+          {used}
+          <span className="text-xs font-normal opacity-50">/{total}</span>
+        </span>
+      </div>
+
+      {/* Progress bar */}
+      <div className="w-full h-2 rounded-full bg-black/10 overflow-hidden">
+        <div
+          className={`h-full rounded-full transition-all duration-500 ${palette.bar}`}
+          style={{ width: `${pct}%` }}
+        />
+      </div>
+
+      {/* Sub-label */}
+      <p className={`text-[10px] mt-1.5 font-medium ${palette.sub}`}>
+        {remaining === 0
+          ? "Limite atteinte ce mois"
+          : `${remaining} publication${remaining > 1 ? "s" : ""} restante${remaining > 1 ? "s" : ""} ce mois`}
+      </p>
+    </div>
+  );
+}
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function AccountPage() {
@@ -346,63 +399,15 @@ export function AccountPage() {
                 </>
               )}
             </div>
-            {/* Role badge */}
-            <div className="flex flex-col items-end gap-2 shrink-0">
+            {/* Role badge + quota */}
+            <div className="flex flex-col items-end gap-3 shrink-0">
               <div
                 className={`inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs font-semibold ${roleMeta.color}`}
               >
                 <Shield className="h-3 w-3" />
                 {roleMeta.label}
               </div>
-              {/* Monthly posts counter for PARTICULIER */}
-              {isParticulier && (() => {
-                const used = typeof (profile as Record<string, unknown>)?.postsThisMonth === "number"
-                  ? (profile as Record<string, unknown>).postsThisMonth as number
-                  : 0;
-                const total = 4;
-                const remaining = total - used;
-                const pct = Math.round((used / total) * 100);
-                const barColor =
-                  remaining === 0
-                    ? "bg-red-500"
-                    : remaining === 1
-                    ? "bg-amber-500"
-                    : "bg-violet-500";
-                const textColor =
-                  remaining === 0
-                    ? "text-red-600 bg-red-50 border-red-200"
-                    : remaining === 1
-                    ? "text-amber-700 bg-amber-50 border-amber-200"
-                    : "text-violet-700 bg-violet-50 border-violet-200";
-                return isLoading ? (
-                  <div className="w-44 h-14 rounded-xl bg-slate-100 animate-pulse" />
-                ) : (
-                  <div className={`rounded-xl border px-3 py-2 w-44 ${textColor}`}>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <div className="flex items-center gap-1.5">
-                        <FileText className="h-3.5 w-3.5 shrink-0" />
-                        <span className="text-[11px] font-semibold uppercase tracking-widest">
-                          Publications
-                        </span>
-                      </div>
-                      <span className="text-xs font-bold">
-                        {used}<span className="font-normal opacity-60">/{total}</span>
-                      </span>
-                    </div>
-                    <div className="w-full h-1.5 rounded-full bg-current/20 overflow-hidden">
-                      <div
-                        className={`h-full rounded-full transition-all duration-500 ${barColor}`}
-                        style={{ width: `${pct}%` }}
-                      />
-                    </div>
-                    <p className="text-[10px] mt-1 opacity-70">
-                      {remaining === 0
-                        ? "Limite atteinte ce mois"
-                        : `${remaining} restante${remaining > 1 ? "s" : ""} ce mois`}
-                    </p>
-                  </div>
-                );
-              })()}
+              {isParticulier && <PostsQuotaWidget />}
             </div>
           </div>
 
@@ -587,7 +592,7 @@ export function AccountPage() {
                       />
                     </div>
                     <p className="text-[11px] text-slate-400">
-                      L'email ne peut pas être modifié.
+                      L&apos;email ne peut pas être modifié.
                     </p>
                   </div>
 
