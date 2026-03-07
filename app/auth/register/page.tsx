@@ -109,12 +109,12 @@ export default function RegisterPage() {
               name="nom"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Nom <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -127,12 +127,12 @@ export default function RegisterPage() {
               name="prenom"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Prénom <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -145,12 +145,12 @@ export default function RegisterPage() {
               name="cin"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     CIN <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -163,12 +163,12 @@ export default function RegisterPage() {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Téléphone <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -181,13 +181,13 @@ export default function RegisterPage() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Email <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
                       type="email"
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -200,7 +200,7 @@ export default function RegisterPage() {
               name="mot_de_passe"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Mot de passe <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
@@ -208,7 +208,7 @@ export default function RegisterPage() {
                       <Input
                         type={showPassword ? "text" : "password"}
                         placeholder="8 caractères minimum"
-                        className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors pr-10"
+                        className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300 pr-10"
                         {...field}
                       />
                       <button
@@ -235,12 +235,12 @@ export default function RegisterPage() {
               name="city"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Ville <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -253,14 +253,14 @@ export default function RegisterPage() {
               name="date_naissance"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Date de naissance{" "}
                     <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
                       type="date"
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -273,12 +273,12 @@ export default function RegisterPage() {
               name="adresse"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Adresse <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <FormControl>
                     <Input
-                      className="h-9 bg-slate-50 border-slate-200 focus:bg-white transition-colors"
+                      className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus-visible:ring-0 focus-visible:border-primary focus-visible:shadow-none hover:border-slate-300 transition-all placeholder:text-slate-300"
                       {...field}
                     />
                   </FormControl>
@@ -291,7 +291,7 @@ export default function RegisterPage() {
               name="role"
               render={({ field }) => (
                 <FormItem className="md:col-span-2">
-                  <FormLabel className="text-slate-700">
+                  <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                     Je suis <span className="text-red-500 ml-0.5">*</span>
                   </FormLabel>
                   <Select
@@ -299,7 +299,7 @@ export default function RegisterPage() {
                     defaultValue={field.value}
                   >
                     <FormControl>
-                      <SelectTrigger className="h-9 bg-slate-50 border-slate-200">
+                      <SelectTrigger className="h-10 px-0 bg-transparent border-0 border-b-2 border-slate-200 rounded-none focus:ring-0 focus:border-primary focus:shadow-none hover:border-slate-300 transition-all">
                         <SelectValue placeholder="Choisissez un rôle" />
                       </SelectTrigger>
                     </FormControl>
@@ -318,7 +318,7 @@ export default function RegisterPage() {
                 name="image"
                 render={({ field }) => (
                   <FormItem className="md:col-span-2">
-                    <FormLabel className="text-slate-700">
+                    <FormLabel className="text-xs font-semibold text-slate-500 uppercase tracking-wider">
                       Photo de profil{" "}
                       <span className="text-slate-400 text-xs">
                         (optionnelle)
