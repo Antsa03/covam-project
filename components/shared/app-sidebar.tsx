@@ -415,8 +415,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
                       : "Espace Client"}
               </span>
             </div>
-            {/* Quota pill – Particulier only */}
-            {isParticulier && quotaData && (() => {
+            {/* Quota pill – Particulier only (disabled) */}
+            {false && isParticulier && quotaData && (() => {
               const used = quotaData.data?.postsThisMonth ?? 0;
               const total = quotaData.data?.monthlyLimit ?? 4;
               const remaining = Math.max(0, total - used);
