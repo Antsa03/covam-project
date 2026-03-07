@@ -292,7 +292,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
                 size="sm"
                 className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-12 text-[11px] tracking-[0.2em] uppercase font-semibold shadow-none transition-all duration-300"
               >
-                <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces')}`}>Réserver</Link>
+                <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces?book=' + annonce.id_pb_transport)}`}>Réserver</Link>
               </Button>
             </div>
           </div>
@@ -307,7 +307,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
           size="sm"
           className="w-full bg-primary hover:bg-primary/90 text-white rounded-none h-12 text-[11px] tracking-[0.2em] uppercase font-semibold shadow-none transition-all duration-300"
         >
-          <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces')}`}>Réserver ce trajet</Link>
+          <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces?book=' + annonce.id_pb_transport)}`}>Réserver ce trajet</Link>
         </Button>
       </div>
     </div>
