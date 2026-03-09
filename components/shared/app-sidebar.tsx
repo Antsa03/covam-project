@@ -405,7 +405,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </p>
               </div>
             </Link>
-            {/* Logout */
+            {/* Logout */}
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="mt-1.5 flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs font-medium text-sidebar-foreground/50 hover:text-rose-500 hover:bg-rose-50 transition-colors group-data-[collapsible=icon]:justify-center"
@@ -475,7 +475,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
                 </AvatarFallback>
               </Avatar>
               <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-emerald-400 ring-2 ring-background" />
-            </div>
+            </Link>
           </header>
           <main className="flex-1 p-4 sm:p-6 overflow-auto">{children}</main>
         </div>
