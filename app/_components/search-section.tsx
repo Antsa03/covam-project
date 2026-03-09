@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useCallback, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import {
@@ -174,7 +175,7 @@ function VilleCombobox({
 
 // ─── Result Card ──────────────────────────────────────────────────────────────
 
-function AnnonceCard({ annonce }: { annonce: SearchResult }) {
+function AnnonceCard({ annonce, reserveHref }: { annonce: SearchResult; reserveHref: string }) {
   const user = annonce.transport?.transporteur?.utilisateur;
   const vehicleImage = firstImage(annonce.transport.images);
   const hue = user ? avatarHue(user.prenom + user.nom) : 220;
@@ -292,7 +293,7 @@ function AnnonceCard({ annonce }: { annonce: SearchResult }) {
                 size="sm"
                 className="bg-primary hover:bg-primary/90 text-white shadow-md shadow-primary/25 hover:shadow-[0_0_40px_-10px_rgba(33,71,170,0.6)] transition-all duration-300 font-semibold sm:w-full"
               >
-                <Link href={`/auth/login?callbackUrl=${encodeURIComponent('/client/annonces?book=' + annonce.id_pb_transport)}`}>
+                <Link href={reserveHref}>
                   <span className="hidden sm:inline">Réserver</span>
                   <ArrowRight className="sm:hidden h-4 w-4" />
                 </Link>
@@ -420,6 +421,16 @@ function PaginationBar({
 // ─── Main Component ───────────────────────────────────────────────────────────
 
 export function SearchSection() {
+  const { data: session } = useSession();
+  const role = session?.user?.role;
+
+  function makeReserveHref(id: number): string {
+    if (role === "CLIENT" || role === "PARTICULIER") {
+      return `/client/annonces?book=${id}`;
+    }
+    return `/auth/login?callbackUrl=${encodeURIComponent("/client/annonces?book=" + id)}`;
+  }
+
   const [depart, setDepart] = useState("");
   const [destination, setDestination] = useState("");
   const [date, setDate] = useState("");
@@ -589,7 +600,7 @@ export function SearchSection() {
               ? [...Array(PREVIEW_LIMIT)].map((_, i) => <SkeletonCard key={i} />)
               : preview.length > 0
                 ? preview.map((a) => (
-                    <AnnonceCard key={a.id_pb_transport} annonce={a} />
+                    <AnnonceCard key={a.id_pb_transport} annonce={a} reserveHref={makeReserveHref(a.id_pb_transport)} />
                   ))
                 : null}
           </div>
@@ -660,7 +671,7 @@ export function SearchSection() {
           {!loading && results.length > 0 && (
             <div className="flex flex-col gap-4">
               {results.map((a) => (
-                <AnnonceCard key={a.id_pb_transport} annonce={a} />
+                <AnnonceCard key={a.id_pb_transport} annonce={a} reserveHref={makeReserveHref(a.id_pb_transport)} />
               ))}
             </div>
           )}
