@@ -44,11 +44,12 @@ export default async function handler(
       },
     });
 
+    const MONTHLY_LIMIT = 4;
     return res.status(200).json({
       data: {
         postsThisMonth,
-        monthlyLimit: null,
-        remaining: null,
+        monthlyLimit: MONTHLY_LIMIT,
+        remaining: Math.max(0, MONTHLY_LIMIT - postsThisMonth),
       },
     });
   } catch (error) {
