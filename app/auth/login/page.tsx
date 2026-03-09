@@ -73,14 +73,14 @@ function LoginForm() {
     const json = await res.json().catch(() => null);
     const role = json?.data?.role ?? "CLIENT";
 
-    if (callbackUrl && role === "CLIENT") {
+    if (callbackUrl && (role === "CLIENT" || role === "PARTICULIER")) {
       router.push(callbackUrl);
     } else if (role === "ADMIN") {
       router.push("/admin/users");
     } else if (role === "TRANSPORTEUR") {
       router.push("/transporteur/dashboard");
     } else {
-      router.push(callbackUrl && role === "CLIENT" ? callbackUrl : "/client/dashboard");
+      router.push("/client/dashboard");
     }
   }
 
