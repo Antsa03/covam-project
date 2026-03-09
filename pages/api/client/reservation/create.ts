@@ -11,7 +11,7 @@ export default async function handler(
     return res.status(405).json({ error: "Méthode non autorisée." });
   }
 
-  const auth = await requireAuth(req, res, ["CLIENT"]);
+  const auth = await requireAuth(req, res, ["CLIENT", "PARTICULIER"]);
   if (!auth) return;
 
   const {
