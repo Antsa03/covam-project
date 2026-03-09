@@ -275,6 +275,12 @@ export function AppSidebar({ children }: AppSidebarProps) {
   const isParticulier = role === "PARTICULIER";
   const { data: quotaData } = usePostsQuota();
   const groups = NAV[role] ?? [];
+  const compteHref =
+    role === "ADMIN"
+      ? "/admin/compte"
+      : role === "TRANSPORTEUR"
+        ? "/transporteur/compte"
+        : "/client/compte";
   const roleMeta = ROLE_META[role];
   const initials =
     session?.user?.name
@@ -376,7 +382,7 @@ export function AppSidebar({ children }: AppSidebarProps) {
           {/* ── Footer ──────────────────────────────── */}
           <SidebarFooter className="p-3 border-t border-sidebar-border">
             {/* Profile card */}
-            <div className="flex items-center gap-2.5 rounded-xl bg-sidebar-accent/60 border border-sidebar-border px-3 py-2.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2">
+            <Link href={compteHref} className="flex items-center gap-2.5 rounded-xl bg-sidebar-accent/60 border border-sidebar-border px-3 py-2.5 group-data-[collapsible=icon]:justify-center group-data-[collapsible=icon]:p-2 hover:bg-sidebar-accent transition-colors">
               <div className="relative shrink-0">
                 <Avatar className="h-8 w-8">
                   <AvatarImage
@@ -398,8 +404,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
                   {session?.user?.email}
                 </p>
               </div>
-            </div>
-            {/* Logout */}
+            </Link>
+            {/* Logout */
             <button
               onClick={() => signOut({ callbackUrl: "/" })}
               className="mt-1.5 flex items-center gap-2 w-full rounded-lg px-3 py-2 text-xs font-medium text-sidebar-foreground/50 hover:text-rose-500 hover:bg-rose-50 transition-colors group-data-[collapsible=icon]:justify-center"
@@ -457,8 +463,8 @@ export function AppSidebar({ children }: AppSidebarProps) {
               );
             })()} */}
             {/* Avatar shortcut top-right */}
-            <div className="relative shrink-0">
-              <Avatar className="h-8 w-8 cursor-default">
+            <Link href={compteHref} className="relative shrink-0">
+              <Avatar className="h-8 w-8">
                 <AvatarImage
                   src={session?.user?.image ?? undefined}
                   alt={session?.user?.name ?? ""}
