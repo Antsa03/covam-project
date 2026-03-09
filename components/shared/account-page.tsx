@@ -408,7 +408,7 @@ export function AccountPage() {
                   <Shield className="h-3 w-3" />
                   {roleMeta.label}
                 </div>
-                {false && <PostsQuotaWidget />}
+                {isParticulier && <PostsQuotaWidget />}
               </div>
             </div>
           </div>
