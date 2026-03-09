@@ -5,7 +5,7 @@ import { useSession } from "next-auth/react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
-import { useProfile, useUpdateProfile, usePostsQuota } from "@/hooks/use-account";
+import { useProfile, useUpdateProfile } from "@/hooks/use-account";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -30,7 +30,6 @@ import {
   CheckCircle2,
   Camera,
   Loader2,
-  FileText,
 } from "lucide-react";
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
@@ -143,60 +142,6 @@ function PasswordInput({
     </div>
   );
 }
-// ─── Posts Quota Widget (Particulier) ──────────────────────────────────────────────
-
-function PostsQuotaWidget() {
-  const { data, isLoading } = usePostsQuota();
-
-  if (isLoading) {
-    return <div className="w-48 h-18 rounded-2xl bg-slate-100 animate-pulse" />;
-  }
-
-  const used = data?.data?.postsThisMonth ?? 0;
-  const total = data?.data?.monthlyLimit ?? 4;
-  const remaining = Math.max(0, total - used);
-  const pct = Math.min(100, Math.round((used / total) * 100));
-
-  const palette =
-    remaining === 0
-      ? { bar: "bg-red-500", wrap: "bg-red-50 border-red-200", text: "text-red-700", sub: "text-red-500" }
-      : remaining === 1
-      ? { bar: "bg-amber-500", wrap: "bg-amber-50 border-amber-200", text: "text-amber-800", sub: "text-amber-600" }
-      : { bar: "bg-violet-500", wrap: "bg-violet-50 border-violet-200", text: "text-violet-800", sub: "text-violet-500" };
-
-  return (
-    <div className={`rounded-2xl border px-4 py-3 w-52 shrink-0 ${palette.wrap}`}>
-      {/* Header row */}
-      <div className="flex items-center justify-between mb-2">
-        <div className="flex items-center gap-1.5">
-          <FileText className={`h-3.5 w-3.5 ${palette.text}`} />
-          <span className={`text-[11px] font-bold uppercase tracking-widest ${palette.text}`}>
-            Publications
-          </span>
-        </div>
-        <span className={`text-sm font-extrabold ${palette.text}`}>
-          {used}
-          <span className="text-xs font-normal">/{total}</span>
-        </span>
-      </div>
-
-      {/* Progress bar */}
-      <div className="w-full h-2 rounded-full bg-black/10 overflow-hidden">
-        <div
-          className={`h-full rounded-full transition-all duration-500 ${palette.bar}`}
-          style={{ width: `${pct}%` }}
-        />
-      </div>
-
-      {/* Sub-label */}
-      <p className={`text-[10px] mt-1.5 font-medium ${palette.sub}`}>
-        {remaining === 0
-          ? "Limite atteinte ce mois"
-          : `${remaining} publication${remaining > 1 ? "s" : ""} restante${remaining > 1 ? "s" : ""} ce mois`}
-      </p>
-    </div>
-  );
-}
 // ─── Main component ───────────────────────────────────────────────────────────
 
 export function AccountPage() {
@@ -208,7 +153,6 @@ export function AccountPage() {
   const roleMeta = ROLE_CONFIG[role] ?? ROLE_CONFIG.CLIENT;
   const isAdmin = role === "ADMIN";
   const isClient = role === "CLIENT" || role === "PARTICULIER";
-  const isParticulier = role === "PARTICULIER";
 
   const profile = profileRes?.data as Record<string, unknown> | undefined;
 
@@ -408,7 +352,7 @@ export function AccountPage() {
                   <Shield className="h-3 w-3" />
                   {roleMeta.label}
                 </div>
-                {isParticulier && <PostsQuotaWidget />}
+
               </div>
             </div>
           </div>
