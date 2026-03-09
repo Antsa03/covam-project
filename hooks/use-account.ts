@@ -38,17 +38,6 @@ export function useProfile() {
   });
 }
 
-export function usePostsQuota() {
-  return useQuery({
-    queryKey: ["posts-quota"],
-    queryFn: () =>
-      api.get<{ data: { postsThisMonth: number; monthlyLimit: number; remaining: number } }>(
-        "/api/auth/posts-quota",
-      ),
-    retry: false,
-  });
-}
-
 export function useUpdateProfile() {
   const qc = useQueryClient();
   return useMutation({
