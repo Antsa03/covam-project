@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { signOut, useSession } from "next-auth/react";
-import { usePostsQuota } from "@/hooks/use-account";
+
 import { cn } from "@/lib/utils";
 import {
   Sidebar,
@@ -272,8 +272,6 @@ export function AppSidebar({ children }: AppSidebarProps) {
   const { data: session } = useSession();
   const pathname = usePathname() ?? "";
   const role = session?.user?.role ?? "CLIENT";
-  const isParticulier = role === "PARTICULIER";
-  const { data: quotaData } = usePostsQuota();
   const groups = NAV[role] ?? [];
   const compteHref =
     role === "ADMIN"
